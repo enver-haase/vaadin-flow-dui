@@ -1,0 +1,11 @@
+fieldset {
+  border-width: 1px;
+  border-radius: var(--lumo-border-radius-m);
+  border-color: var(--lumo-contrast-10pct);
+}
+
+fieldset legend {
+  color: var(--lumo-secondary-text-color);
+  padding-left: var(--lumo-space-s);
+  padding-right: var(--lumo-space-s);
+}

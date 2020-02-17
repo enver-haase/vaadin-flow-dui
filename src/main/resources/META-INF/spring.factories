@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+de.codecamp.vaadin.flowdui.spring.autoconfigure.TemplateAutoConfiguration

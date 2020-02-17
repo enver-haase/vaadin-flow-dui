@@ -1,0 +1,49 @@
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository --show-version"
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml"
+
+cache:
+  paths:
+    - .m2/repository
+
+image: adoptopenjdk:11-jdk-hotspot
+
+stages:
+  - build
+  - pages
+
+
+snapshot:
+  stage: build
+  script:
+    - './mvnw clean deploy "-DREPO_SNAPSHOT_URL=file:${CI_PROJECT_DIR}/target/m2/" $MAVEN_CLI_OPTS'
+    - mv target/m2/ m2/
+  artifacts:
+    paths:
+      - m2
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+
+pages:
+  stage: pages
+  dependencies:
+    - snapshot
+  script:
+    - mv m2/ public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+
+release:
+  stage: build
+  script:
+    - './mvnw clean deploy $MAVEN_CLI_OPTS'
+  artifacts:
+    paths:
+      - target/*.jar
+      - target/*.zip
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^release-/'
