@@ -27,7 +27,7 @@ public class DuiView
   /**
    * Created here and mapped into the template.
    */
-  @Slotable("localeGrid")
+  @Slotted("localeGrid")
   private Grid<Locale> localeGrid = new Grid<>(Locale.class);
 
 
@@ -100,7 +100,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |-----------------------------------------------------|------------------------------|---------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 |  |  |  |  |
 |  |  |  |  |
-| slot | - | name | If you need to create a Component manually, you can add a slot tag, like for a Web Component, and annotate the field with your component with @Slotable("slotName"). The component will be inserted into the slot. |
+| slot | - | name | If you need to create a Component manually, you can add a slot tag, like for a Web Component, and annotate the field with your component with @Slotted("slotName"). The component will be inserted into the slot. |
 | style | - |  | Copied verbatim. |
 | custom-style | - |  | Copied verbatim. |
 |  |  |  |  |

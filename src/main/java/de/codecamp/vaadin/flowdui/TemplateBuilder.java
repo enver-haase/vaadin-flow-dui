@@ -6,11 +6,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -24,6 +24,7 @@ import com.vaadin.flow.component.polymertemplate.Id;
 import com.vaadin.flow.internal.ReflectTools;
 import com.vaadin.flow.server.VaadinService;
 
+import de.codecamp.vaadin.flowdui.components.Slot;
 import de.codecamp.vaadin.flowdui.factories.BasicFlowPostProcessor;
 import de.codecamp.vaadin.flowdui.factories.CustomElementsFactory;
 import de.codecamp.vaadin.flowdui.factories.FocusablePostProcessor;
@@ -230,14 +231,10 @@ public class TemplateBuilder
    * @return the parsed template
    * @throws TemplateException
    *           if the template could not be successfully parsed
-   * @see #getSlotables(Object)
    */
   public Component readTemplate(Object hostComponent, String templateResourceName)
     throws TemplateException
   {
-    Map<String, List<Component>> slotables = getSlotables(hostComponent);
-
-
     String effectiveTemplateResourceName =
         (templateResourceName == null || templateResourceName.isEmpty())
             ? hostComponent.getClass().getSimpleName() + ".html"
@@ -282,22 +279,18 @@ public class TemplateBuilder
       document = loadDocument(hostComponent.getClass(), effectiveTemplateResourceName);
     }
 
+    ParsedTemplate parsedTemplate = readTemplate(document);
 
-    ParsedTemplate template = readTemplate(document, slotables::get);
+    mapComponents(hostComponent, parsedTemplate);
+    slotComponents(hostComponent, parsedTemplate);
 
-    mapComponents(hostComponent, template);
-
-    return template.getRootComponent();
+    return parsedTemplate.getRootComponent();
   }
 
-  public ParsedTemplate readTemplate(Document templateDoc, SlotablesProvider slotablesProvider)
+  public ParsedTemplate readTemplate(Document templateDoc)
     throws TemplateException
   {
-    TemplateContext context = new TemplateContext(factories, processors);
-
-    context.setSlotablesProvider(slotablesProvider);
-
-    return readTemplate(templateDoc, context);
+    return readTemplate(templateDoc, new TemplateContext(factories, processors));
   }
 
   private ParsedTemplate readTemplate(Document templateDoc, TemplateContext context)
@@ -316,7 +309,8 @@ public class TemplateBuilder
       return true;
     }, null);
 
-    return new ParsedTemplate(context.getRootComponent(), context.getComponentsById());
+    return new ParsedTemplate(context.getRootComponent(), context.getComponentsById(),
+        context.getSlotsByName());
   }
 
   private Document loadDocument(Class<?> componentClass, String templateResourceName)
@@ -344,8 +338,8 @@ public class TemplateBuilder
 
 
   /**
-   * Maps components from the given {@link TemplateContext} to the {@link Mapped}-annotated fields
-   * of the given host object.
+   * Maps components from the given {@link ParsedTemplate} to the {@link Mapped}-annotated fields of
+   * the given host object.
    *
    * @param host
    *          the host object
@@ -390,26 +384,55 @@ public class TemplateBuilder
   }
 
   /**
-   * Retrieves a mapping of all {@link Slotable} components in the given host object.
+   * Slots in components from the {@link Slotted}-annotated fields of the given host object into the
+   * slots of the {@link ParsedTemplate}.
    *
    * @param host
    *          the host object
-   * @return a mapping of all {@link Slotable} components
-   * @see Slotable
+   * @param template
+   *          the parsed template
+   * @see Slotted
    */
-  public static Map<String, List<Component>> getSlotables(Object host)
+  public static void slotComponents(Object host, ParsedTemplate template)
   {
-    Map<String, List<Component>> slotables = new HashMap<>();
+    Set<String> encounteredSlots = new HashSet<>();
 
     for (Field field : host.getClass().getDeclaredFields())
     {
-      Slotable annotation = field.getAnnotation(Slotable.class);
-      if (annotation == null)
+      String slotName = "";
+
+      boolean slotted = false;
+
+      Slotted slottedAt = field.getAnnotation(Slotted.class);
+      if (slottedAt != null)
+      {
+        slotName = slottedAt.value();
+        slotted = true;
+      }
+
+      if (!slotted)
         continue;
 
-      String slotName = annotation.value();
       if (slotName.isEmpty())
         slotName = field.getName();
+
+
+      Slot slot = template.getSlotByName(slotName);
+      if (slot == null)
+      {
+        String msg = "Could not slot in component. Slot not found: %s";
+        msg = String.format(msg, slotName);
+        throw new TemplateException(msg);
+      }
+      /*
+       * The child elements of the slot from the template are the default content. If a
+       * matching @Slottable has been found, remove them completely. This should match the behavior
+       * of the real Web Compoenent <slot>.
+       */
+      if (encounteredSlots.add(slotName))
+      {
+        slot.removeAll();
+      }
 
       Component component;
       try
@@ -428,12 +451,8 @@ public class TemplateBuilder
         throw new TemplateException(msg);
       }
 
-      component.getElement().setAttribute("slot", slotName);
-
-      slotables.computeIfAbsent(slotName, sn -> new ArrayList<>()).add(component);
+      slot.add(component);
     }
-
-    return slotables;
   }
 
 
@@ -453,14 +472,6 @@ public class TemplateBuilder
      * Cache loaded templates when in production mode, otherwise don't.
      */
     AUTO
-  }
-
-  @FunctionalInterface
-  public interface SlotablesProvider
-  {
-
-    List<Component> getSlotables(String slotName);
-
   }
 
 }

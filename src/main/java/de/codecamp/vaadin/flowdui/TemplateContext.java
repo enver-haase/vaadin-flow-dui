@@ -6,12 +6,10 @@ import static java.util.stream.Collectors.toSet;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
@@ -27,7 +25,6 @@ import org.slf4j.LoggerFactory;
 
 import com.vaadin.flow.component.Component;
 
-import de.codecamp.vaadin.flowdui.TemplateBuilder.SlotablesProvider;
 import de.codecamp.vaadin.flowdui.components.Slot;
 
 
@@ -51,9 +48,7 @@ public class TemplateContext
 
   private Map<String, Component> idToComponent = new HashMap<>();
 
-  private SlotablesProvider slotablesProvider;
-
-  private Map<String, Slot> slots = new HashMap<>();
+  private Map<String, Slot> nameToSlot = new HashMap<>();
 
 
   public TemplateContext(List<ComponentFactory> factories, List<ComponentPostProcessor> processors)
@@ -317,35 +312,20 @@ public class TemplateContext
     if (component instanceof Slot)
     {
       Slot slot = (Slot) component;
-      if (slots.containsKey(slot.getName()))
+      if (nameToSlot.containsKey(slot.getName()))
       {
         String msg = "The slot name '%s' is already used.";
         msg = String.format(msg, slot.getName());
         throw new TemplateException(msg);
       }
 
-      slots.put(slot.getName(), slot);
+      nameToSlot.put(slot.getName(), slot);
     }
   }
 
-  public void setSlotablesProvider(SlotablesProvider slotablesProvider)
+  public Map<String, Slot> getSlotsByName()
   {
-    this.slotablesProvider = slotablesProvider;
-  }
-
-  /**
-   * Returns the slotables for the given slot name.
-   *
-   * @param slotName
-   *          the slot name
-   * @return the slotables for the given slot name; list may be empty, but never null
-   */
-  public List<Component> getSlotablesForSlot(String slotName)
-  {
-    if (slotablesProvider == null)
-      return Collections.emptyList();
-    return Optional.ofNullable(slotablesProvider.getSlotables(slotName))
-        .orElse(Collections.emptyList());
+    return nameToSlot;
   }
 
 }
