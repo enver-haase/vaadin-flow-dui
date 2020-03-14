@@ -18,7 +18,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     <vaadin.version>14.1.17</vaadin.version>
-    <jsoup.version>1.12.1</jsoup.version>
     <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
 
     <m2e.apt.activation>jdt_apt</m2e.apt.activation>
@@ -125,12 +124,6 @@
           <artifactId>*</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jsoup</groupId>
-      <artifactId>jsoup</artifactId>
-      <version>${jsoup.version}</version>
     </dependency>
 
     <dependency>
