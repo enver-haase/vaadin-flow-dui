@@ -31,7 +31,8 @@ public class UploadFactory
         context.readIntegerAttribute(element, "max-files", upload::setMaxFiles, consumedAttributes);
         context.readIntegerAttribute(element, "max-file-size", upload::setMaxFileSize,
             consumedAttributes);
-        // TODO "capture" attribute not available in Java API
+        context.readStringAttribute(element, "capture",
+            v -> upload.getElement().setAttribute("capture", v), consumedAttributes);
 
         context.readChildren(element, (slotName, childElement) -> {
           if (slotName == null)

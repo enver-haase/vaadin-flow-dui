@@ -247,6 +247,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | accept |  |
 |  |  | max-files |  |
 |  |  | max-file-size |  |
+|  |  | capture |  |
 |  |  |  |  |
 | vaadin-accordion | [Accordion](https://vaadin.com/components/vaadin-accordion) |  | Only vaadin-accordion-panel as child elements. |
 |  |  | ! closed |  |
