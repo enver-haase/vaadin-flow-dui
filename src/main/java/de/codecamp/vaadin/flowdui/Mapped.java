@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 
 /**
- * Used to mark fields to which components from DUI template should be mapped.
+ * Used to mark fields to which components from the DUI template should be mapped.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

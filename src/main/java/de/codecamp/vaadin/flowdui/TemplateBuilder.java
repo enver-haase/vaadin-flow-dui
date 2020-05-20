@@ -384,8 +384,8 @@ public class TemplateBuilder
   }
 
   /**
-   * Slots in components from the {@link Slotted}-annotated fields of the given host object into the
-   * slots of the {@link ParsedTemplate}.
+   * Inserts components from the {@link Slotted}-annotated fields of the given host object into the
+   * slots of the {@link ParsedTemplate template}.
    *
    * @param host
    *          the host object

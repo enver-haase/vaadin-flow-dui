@@ -28,8 +28,8 @@ public class ButtonFactory
         context.readBooleanAttribute(element, "autofocus", button::setAutofocus,
             consumedAttributes);
         context.readBooleanAttribute(element,
-            TemplateContext.CUSTOM_ATTR_PREFIX + "disable-on-click",
-            button::setDisableOnClick, consumedAttributes);
+            TemplateContext.CUSTOM_ATTR_PREFIX + "disable-on-click", button::setDisableOnClick,
+            consumedAttributes);
 
         AtomicBoolean iconFound = new AtomicBoolean(false);
         context.readChildren(element, (slotName, childElement) -> {

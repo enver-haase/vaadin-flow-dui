@@ -8,6 +8,10 @@ import com.vaadin.flow.component.Component;
 import de.codecamp.vaadin.flowdui.components.Slot;
 
 
+/**
+ * Contains the end result of a parsed template, including the root component and information about
+ * the encountered component IDs and slots.
+ */
 public class ParsedTemplate
 {
 

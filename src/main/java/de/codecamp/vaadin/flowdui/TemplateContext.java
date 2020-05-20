@@ -28,6 +28,10 @@ import com.vaadin.flow.component.Component;
 import de.codecamp.vaadin.flowdui.components.Slot;
 
 
+/**
+ * Contains the state during processing of a template.
+ */
+// TODO rename to TemplateParseContext
 public class TemplateContext
 {
 
