@@ -10,12 +10,14 @@
 
   <name>Declarative UI for Vaadin Flow</name>
   <description>Declarative UI in the style of Vaadin 8 implemented for Vaadin Flow.</description>
-  <url>https://gitlab.com/codecamp-de/${project.artifactId}</url>
+  <url>https://gitlab.com/codecamp-de/${projectId}</url>
 
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <projectId>vaadin-flow-dui</projectId>
+
+    <maven.compiler.release>8</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <vaadin.version>14.1.17</vaadin.version>
     <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
@@ -44,15 +46,15 @@
   </developers>
 
   <scm>
-    <url>https://gitlab.com/codecamp-de/${project.artifactId}</url>
-    <connection>scm:git:https://gitlab.com/codecamp-de/${project.artifactId}.git</connection>
-    <developerConnection>scm:git:https://gitlab.com/codecamp-de/${project.artifactId}.git</developerConnection>
+    <url>https://gitlab.com/codecamp-de/${projectId}</url>
+    <connection>scm:git:https://gitlab.com/codecamp-de/${projectId}.git</connection>
+    <developerConnection>scm:git:https://gitlab.com/codecamp-de/${projectId}.git</developerConnection>
   </scm>
 
   <distributionManagement>
     <repository>
       <id>bintray</id>
-      <url>https://api.bintray.com/maven/frettman/m2/${project.artifactId}/</url>
+      <url>https://api.bintray.com/maven/frettman/m2/${projectId}/</url>
     </repository>
     <snapshotRepository>
       <id>filesystem</id>
@@ -193,9 +195,24 @@
       <plugins>
 
         <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+        </plugin>
+
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.1.2</version>
+          <version>3.2.0</version>
           <configuration>
             <archive>
               <index>true</index>
@@ -232,7 +249,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>3.2.0</version>
           <executions>
             <execution>
               <id>attach-javadocs</id>
@@ -242,15 +259,15 @@
             </execution>
           </executions>
           <configuration>
+            <doclint>none</doclint>
             <quiet>true</quiet>
-            <additionalparam>-Xdoclint:none</additionalparam>
           </configuration>
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>3.3.0</version>
           <configuration>
             <appendAssemblyId>false</appendAssemblyId>
             <attach>false</attach>
