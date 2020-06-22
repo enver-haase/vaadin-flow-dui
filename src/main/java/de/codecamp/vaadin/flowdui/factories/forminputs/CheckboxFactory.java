@@ -9,7 +9,7 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
 
 
@@ -18,7 +18,7 @@ public class CheckboxFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())

@@ -8,7 +8,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
 
 
@@ -17,7 +17,7 @@ public class RadioButtonFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())

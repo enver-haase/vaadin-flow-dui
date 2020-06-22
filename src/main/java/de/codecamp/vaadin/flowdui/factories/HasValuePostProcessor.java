@@ -3,6 +3,7 @@ package de.codecamp.vaadin.flowdui.factories;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
 
@@ -13,7 +14,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasValue;
 
 import de.codecamp.vaadin.flowdui.ComponentPostProcessor;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 
 
 public class HasValuePostProcessor
@@ -22,7 +23,7 @@ public class HasValuePostProcessor
 
   @Override
   @SuppressWarnings("unchecked")
-  public void postProcessComponent(Element element, Component component, TemplateContext context,
+  public void postProcessComponent(Element element, Component component, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     if (component instanceof HasValue)
@@ -68,6 +69,11 @@ public class HasValuePostProcessor
       {
         context.readLocalTimeAttribute(element, "value",
             ((HasValue<?, LocalTime>) hasValue)::setValue, consumedAttributes);
+      }
+      else if (valueType == LocalDateTime.class)
+      {
+        context.readLocalDateTimeAttribute(element, "value",
+            ((HasValue<?, LocalDateTime>) hasValue)::setValue, consumedAttributes);
       }
     }
   }

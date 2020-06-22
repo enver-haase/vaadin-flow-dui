@@ -8,7 +8,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
 
 import de.codecamp.vaadin.flowdui.ComponentPostProcessor;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 
 
 public class HasStylePostProcessor
@@ -16,7 +16,7 @@ public class HasStylePostProcessor
 {
 
   @Override
-  public void postProcessComponent(Element element, Component component, TemplateContext context,
+  public void postProcessComponent(Element element, Component component, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     if (component instanceof HasStyle)

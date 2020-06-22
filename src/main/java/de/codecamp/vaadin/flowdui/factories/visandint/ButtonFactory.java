@@ -9,7 +9,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
 
 
@@ -18,7 +18,7 @@ public class ButtonFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -28,7 +28,7 @@ public class ButtonFactory
         context.readBooleanAttribute(element, "autofocus", button::setAutofocus,
             consumedAttributes);
         context.readBooleanAttribute(element,
-            TemplateContext.CUSTOM_ATTR_PREFIX + "disable-on-click", button::setDisableOnClick,
+            TemplateParseContext.CUSTOM_ATTR_PREFIX + "disable-on-click", button::setDisableOnClick,
             consumedAttributes);
 
         AtomicBoolean iconFound = new AtomicBoolean(false);

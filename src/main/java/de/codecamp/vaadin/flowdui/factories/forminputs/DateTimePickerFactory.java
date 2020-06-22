@@ -1,17 +1,18 @@
 package de.codecamp.vaadin.flowdui.factories.forminputs;
 
+import java.time.Duration;
 import java.util.Set;
 
 import org.jsoup.nodes.Element;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
 import de.codecamp.vaadin.flowdui.TemplateParseContext;
 
 
-public class DatePickerFactory
+public class DateTimePickerFactory
   implements ComponentFactory
 {
 
@@ -21,19 +22,19 @@ public class DatePickerFactory
   {
     switch (element.tagName())
     {
-      case "vaadin-date-picker":
-        DatePicker datePicker = new DatePicker();
+      case "vaadin-date-time-picker":
+        DateTimePicker datePicker = new DateTimePicker();
         context.readStringAttribute(element, "label", datePicker::setLabel, consumedAttributes);
-        context.readStringAttribute(element, "placeholder", datePicker::setPlaceholder,
+        context.readStringAttribute(element, "date-placeholder", datePicker::setDatePlaceholder,
+            consumedAttributes);
+        context.readStringAttribute(element, "time-placeholder", datePicker::setTimePlaceholder,
             consumedAttributes);
         context.readBooleanAttribute(element, "show-week-numbers",
             datePicker::setWeekNumbersVisible, consumedAttributes);
-        context.readBooleanAttribute(element, "clear-button-visible",
-            datePicker::setClearButtonVisible, consumedAttributes);
-        context.readLocalDateAttribute(element, "min", datePicker::setMin, consumedAttributes);
-        context.readLocalDateAttribute(element, "max", datePicker::setMax, consumedAttributes);
-        context.readLocalDateAttribute(element, "initial-position", datePicker::setInitialPosition,
-            consumedAttributes);
+        context.readLocalDateTimeAttribute(element, "min", datePicker::setMin, consumedAttributes);
+        context.readLocalDateTimeAttribute(element, "max", datePicker::setMax, consumedAttributes);
+        context.readDoubleAttribute(element, "step",
+            v -> datePicker.setStep(Duration.ofMillis((long) (v * 1000))), consumedAttributes);
         context.readChildren(element, null, null);
         return datePicker;
     }

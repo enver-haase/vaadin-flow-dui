@@ -24,10 +24,10 @@ public interface ComponentFactory
    * @param consumedAttributes
    *          the set of attribures of the element that have so far been consumed to configure the
    *          component; i.e. this method must add all attributes it understands and reads to the
-   *          set; methods provided by the {@link TemplateContext} will automatically do that
+   *          set; methods provided by the {@link TemplateParseContext} will automatically do that
    * @return the created component or null if the given element is not recognized
    */
-  Component createComponent(Element element, TemplateContext context,
+  Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes);
 
 }

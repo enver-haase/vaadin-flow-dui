@@ -24,7 +24,7 @@ import com.vaadin.flow.component.textfield.TextField;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
 import de.codecamp.vaadin.flowdui.ComponentPostProcessor;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
 
 
@@ -63,7 +63,7 @@ public class TextFieldFactory
 
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     Component component = null;
@@ -243,7 +243,7 @@ public class TextFieldFactory
   }
 
   @Override
-  public void postProcessComponent(Element element, Component component, TemplateContext context,
+  public void postProcessComponent(Element element, Component component, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     if (component instanceof HasAutocorrect)

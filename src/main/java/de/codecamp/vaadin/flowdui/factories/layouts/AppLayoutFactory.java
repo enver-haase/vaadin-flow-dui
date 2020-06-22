@@ -10,8 +10,8 @@ import com.vaadin.flow.component.applayout.AppLayout.Section;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 
 
 public class AppLayoutFactory
@@ -19,7 +19,7 @@ public class AppLayoutFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -33,6 +33,7 @@ public class AppLayoutFactory
           {
             if (appLayout.getContent() != null)
               throw new TemplateException(childElement, "Only one content component supported.");
+
             appLayout.setContent(context.readComponent(childElement, null));
             return true;
           }

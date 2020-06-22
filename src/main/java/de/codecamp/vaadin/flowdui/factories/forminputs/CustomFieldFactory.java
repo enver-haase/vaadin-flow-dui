@@ -10,7 +10,7 @@ import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.html.Div;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 
 
 public class CustomFieldFactory
@@ -18,7 +18,7 @@ public class CustomFieldFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())

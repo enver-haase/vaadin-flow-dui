@@ -9,7 +9,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.timepicker.TimePicker;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 
 
 public class TimePickerFactory
@@ -17,7 +17,7 @@ public class TimePickerFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -27,8 +27,8 @@ public class TimePickerFactory
         context.readStringAttribute(element, "label", timePicker::setLabel, consumedAttributes);
         context.readStringAttribute(element, "placeholder", timePicker::setPlaceholder,
             consumedAttributes);
-        context.readStringAttribute(element, "min", timePicker::setMin, consumedAttributes);
-        context.readStringAttribute(element, "max", timePicker::setMax, consumedAttributes);
+        context.readLocalTimeAttribute(element, "min", timePicker::setMinTime, consumedAttributes);
+        context.readLocalTimeAttribute(element, "max", timePicker::setMaxTime, consumedAttributes);
         context.readDoubleAttribute(element, "step",
             v -> timePicker.setStep(Duration.ofMillis((long) (v * 1000))), consumedAttributes);
         context.readBooleanAttribute(element, "clear-button-visible",

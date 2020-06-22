@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.toSet;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,10 +30,10 @@ import de.codecamp.vaadin.flowdui.components.Slot;
 
 
 /**
- * Contains the state during processing of a template.
+ * Contains the state during processing of a template and provides methods to parse attributes and
+ * child components.
  */
-// TODO rename to TemplateParseContext
-public class TemplateContext
+public class TemplateParseContext
 {
 
   public static final String CUSTOM_ATTR_PREFIX = "";
@@ -40,12 +41,15 @@ public class TemplateContext
   public static final String CUSTOM_LAYOUT_ATTR_PREFIX = "";
 
 
-  private static final Logger LOG = LoggerFactory.getLogger(TemplateContext.class);
+  private static final Logger LOG = LoggerFactory.getLogger(TemplateParseContext.class);
 
 
   private final List<ComponentFactory> factories;
 
   private final List<ComponentPostProcessor> processors;
+
+
+  private String templateResourceName;
 
 
   private Component rootComponent;
@@ -54,9 +58,13 @@ public class TemplateContext
 
   private Map<String, Slot> nameToSlot = new HashMap<>();
 
+  private Map<String, Element> idToTemplateFragment = new HashMap<>();
 
-  public TemplateContext(List<ComponentFactory> factories, List<ComponentPostProcessor> processors)
+
+  public TemplateParseContext(String templateResourceName, List<ComponentFactory> factories,
+      List<ComponentPostProcessor> processors)
   {
+    this.templateResourceName = templateResourceName;
     this.factories = factories;
     this.processors = processors;
   }
@@ -127,6 +135,12 @@ public class TemplateContext
       if (node instanceof Element)
       {
         Element childElement = (Element) node;
+
+        if (childElement.tagName().equals("template"))
+        {
+          registerHtmlTemplate(childElement);
+          continue;
+        }
 
         if (childComponentHandler == null)
           throw new TemplateException(element, "No child elements supported.");
@@ -234,6 +248,13 @@ public class TemplateContext
     return readAttribute(element, attrName, setter, v -> LocalTime.parse(v), consumedAttributes);
   }
 
+  public LocalDateTime readLocalDateTimeAttribute(Element element, String attrName,
+      Consumer<LocalDateTime> setter, Set<String> consumedAttributes)
+  {
+    return readAttribute(element, attrName, setter, v -> LocalDateTime.parse(v),
+        consumedAttributes);
+  }
+
   <C, V> V readAttribute(Element element, String attrName, Consumer<V> setter,
       Function<String, V> parser, Set<String> consumedAttributes)
   {
@@ -286,9 +307,10 @@ public class TemplateContext
   }
 
 
-  public Map<String, Component> getComponentsById()
+
+  public String getTemplateResourceName()
   {
-    return idToComponent;
+    return templateResourceName;
   }
 
   public Component getRootComponent()
@@ -299,6 +321,11 @@ public class TemplateContext
   public void setRootComponent(Component rootComponent)
   {
     this.rootComponent = rootComponent;
+  }
+
+  public Map<String, Component> getComponentsById()
+  {
+    return idToComponent;
   }
 
   private void registerComponent(Component component)
@@ -327,9 +354,23 @@ public class TemplateContext
     }
   }
 
+  private void registerHtmlTemplate(Element htmlTemplateElement)
+  {
+    String id = htmlTemplateElement.id();
+    if (id.isEmpty())
+      throw new TemplateException("The template fragment is missing an ID.");
+
+    idToTemplateFragment.put(id, htmlTemplateElement);
+  }
+
   public Map<String, Slot> getSlotsByName()
   {
     return nameToSlot;
+  }
+
+  public Map<String, Element> getTemplateFragmentById()
+  {
+    return idToTemplateFragment;
   }
 
 }

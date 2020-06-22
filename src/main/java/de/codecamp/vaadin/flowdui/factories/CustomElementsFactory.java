@@ -7,7 +7,7 @@ import org.jsoup.nodes.Element;
 import com.vaadin.flow.component.Component;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.components.CustomStyle;
 import de.codecamp.vaadin.flowdui.components.Slot;
 import de.codecamp.vaadin.flowdui.components.Style;
@@ -18,7 +18,7 @@ public class CustomElementsFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())

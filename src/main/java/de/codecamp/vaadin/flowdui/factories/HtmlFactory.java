@@ -44,7 +44,7 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.html.UnorderedList;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.components.Bold;
 import de.codecamp.vaadin.flowdui.components.Fieldset;
 import de.codecamp.vaadin.flowdui.components.Strong;
@@ -84,7 +84,7 @@ public class HtmlFactory
 
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     Component component;

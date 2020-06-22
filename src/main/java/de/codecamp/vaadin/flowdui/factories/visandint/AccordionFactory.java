@@ -10,7 +10,7 @@ import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.accordion.AccordionPanel;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
 
 
@@ -19,14 +19,14 @@ public class AccordionFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
     {
       case "vaadin-accordion":
         Accordion accordion = new Accordion();
-        context.readBooleanAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "closed",
+        context.readBooleanAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "closed",
             v -> accordion.close(), consumedAttributes);
         context.readChildren(element, (slotName, childElement) -> {
           if (slotName != null)

@@ -10,7 +10,7 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.formlayout.FormLayout.FormItem;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 
 
 public class FormLayoutFactory
@@ -18,7 +18,7 @@ public class FormLayoutFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())

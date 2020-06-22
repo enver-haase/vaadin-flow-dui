@@ -27,10 +27,10 @@ public interface ComponentPostProcessor
    * @param consumedAttributes
    *          the set of attribures of the element that have so far been consumed to configure the
    *          component; i.e. this method must add all attributes it understands and reads to the
-   *          set; methods provided by the {@link TemplateContext} will automatically do that
+   *          set; methods provided by the {@link TemplateParseContext} will automatically do that
    */
   // TODO move Component to the first position
-  void postProcessComponent(Element element, Component component, TemplateContext context,
+  void postProcessComponent(Element element, Component component, TemplateParseContext context,
       Set<String> consumedAttributes);
 
 }

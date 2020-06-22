@@ -8,7 +8,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.richtexteditor.RichTextEditor;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 
 
 public class RichTextEditorFactory
@@ -16,7 +16,7 @@ public class RichTextEditorFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())

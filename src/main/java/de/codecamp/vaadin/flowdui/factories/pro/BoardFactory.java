@@ -9,7 +9,7 @@ import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 
 
 public class BoardFactory
@@ -17,7 +17,7 @@ public class BoardFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())

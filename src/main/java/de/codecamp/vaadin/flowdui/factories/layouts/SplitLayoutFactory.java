@@ -10,7 +10,7 @@ import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
 
 
@@ -19,7 +19,7 @@ public class SplitLayoutFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())

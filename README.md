@@ -1,10 +1,10 @@
 # Declarative UI for Vaadin Flow
 
-This is basically Vaadin-8-style Declarative UI for Vaadin Flow. So unlike Polymer / LitElement templates, it's completely interpreted on the server-side. The goal is to support the same HTML like in a Polymer template (minus all the JavaScript), but offer additional attributes for convenience. See the [list of supports tags and attributes](#currently-supported-elements-and-attributes) further down.
+This is basically Vaadin-8-style Declarative UI for Vaadin Flow. So unlike Polymer / LitElement templates, it's completely interpreted on the server-side. No surprises and inconsistencies between client- and server-side state; but also no Polymer-style support for client-side Javascript. The goal is to support the same HTML like in a Polymer template (minus all the JavaScript), but offer additional attributes for convenience. See the [list of supports tags and attributes](#currently-supported-elements-and-attributes) further down.
 
 # How does it work?
 
-A component (or view) based on DUI consists of two parts: A Java class extending `TemplateComposite` and an HTML file beside it (same name, but .html extension). The HTML is parsed on the server-side. Components are created from HTML elements using `ComponentFactory` implementations. And `ComponentPostProcessor` implementations can be used to share mapping logic between all Components, e.g. for [mixin interfaces](https://vaadin.com/docs/v14/flow/creating-components/tutorial-component-mixins.html). The standard Vaadin components and the most important HTML elements work out of the box.
+A component (or view) based on DUI consists of two parts: A Java class extending `TemplateComposite` and an HTML file beside it (same name, but .html extension). The HTML is parsed on the server-side. Components are created from HTML elements using `ComponentFactory` implementations. And `ComponentPostProcessor` implementations can be used to share mapping logic between all Components, e.g. for [mixin interfaces](https://vaadin.com/docs/v14/flow/creating-components/tutorial-component-mixins.html). The standard Vaadin components and the most important HTML elements work out of the box. It's easy to add your own elements.
 
 ## Basic Example
 
@@ -15,7 +15,7 @@ A basic example for a DUI-based view that also demonstrates how components can b
 
 @Route("dui-view")
 public class DuiView
-  extends TemplateComposite
+  extends DuiTemplateComposite
 {
 
   /**
@@ -30,15 +30,35 @@ public class DuiView
   @Slotted("localeGrid")
   private Grid<Locale> localeGrid = new Grid<>(Locale.class);
 
+  /**
+   * A reference to the template fragment used to create instances of it.
+   */
+  @FragmentId("detailsFragment")
+  private Fragment detailsFragment;
+
+
 
   @Override
   protected Component initContent()
   {
     Component content = super.initContent();
 
-    localeGrid.setColumns("displayLanguage", "displayCountry", "displayVariant");
+    localeGrid.removeAllColumns();
+    localeGrid.addColumn(Locale::toLanguageTag).setHeader("Language Tag");
+    localeGrid.addColumn("displayLanguage");
+    localeGrid.addColumn("displayCountry");
+    localeGrid.addColumn("displayVariant");
+    localeGrid.setDetailsVisibleOnClick(true);
+    localeGrid.setItemDetailsRenderer(new ComponentRenderer<>(locale -> {
+      LocaleDetails details = new LocaleDetails(detailsFragment);
+      details.setLocale(locale);
+      return details;
+    }));
+
 
     button.addClickListener(e -> shuffleLocales());
+
+    localeGrid.setItems(Locale.getAvailableLocales());
 
     return content;
   }
@@ -48,6 +68,28 @@ public class DuiView
     List<Locale> locales = Arrays.asList(Locale.getAvailableLocales());
     Collections.shuffle(locales);
     localeGrid.setItems(locales);
+  }
+
+
+  public static class LocaleDetails
+    extends FragmentComposite
+  {
+
+    @Mapped("info")
+    private TextField info;
+
+
+    public LocaleDetails(Fragment fragment)
+    {
+      super(fragment);
+      getContent();
+    }
+
+    public void setLocale(Locale locale)
+    {
+      info.setValue(locale.getDisplayLanguage(locale) + " / " + locale.getDisplayCountry(locale)
+          + " / " + locale.getDisplayVariant(locale));
+    }
   }
 
 }
@@ -60,6 +102,13 @@ public class DuiView
   <slot name="localeGrid"></slot>
   <vaadin-button id="shuffleButton" theme="primary">Shuffle</vaadin-button>
 </vaadin-vertical-layout>
+
+<template id="detailsFragment">
+  <vaadin-horizontal-layout width-full>
+    <vaadin-text-field id="info" readonly width-full>
+    </vaadin-text-field>
+  </vaadin-horizontal-layout>
+</template>
 ```
 
 ## Adding Custom Elements and Attributes
@@ -103,6 +152,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 | slot | - | name | If you need to create a Component manually, you can add a slot tag, like for a Web Component, and annotate the field with your component with @Slotted("slotName"). The component will be inserted into the slot. |
 | style | - |  | Copied verbatim. |
 | custom-style | - |  | Copied verbatim. |
+| template | - | id | Analogous to [HTML's \<template>](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots). Define a UI fragment that is not rendered immediately, but can be created programmatically whenever and however often you need it. See the example above on how to use them. |
 |  |  |  |  |
 |  |  |  |  |
 | * | Component |  |  |
@@ -158,8 +208,20 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | label |  |
 |  |  | placeholder |  |
 |  |  | show-week-numbers |  |
+|  |  | min |  |
+|  |  | max |  |
+|  |  | step |  |
 |  |  | clear-button-visible |  |
 |  |  | initial-position |  |
+| vaadin-date-time-picker | [DateTimePicker](https://vaadin.com/components/vaadin-date-time-picker) |  |  |
+|  |  | label |  |
+|  |  | date-placeholder |  |
+|  |  | time-placeholder |  |
+|  |  | show-week-numbers |  |
+|  |  | min |  |
+|  |  | max |  |
+|  |  | step |  |
+|  |  | clear-button-visible |  |
 | vaadin-list-box | [ListBox / MultiSelectListBox](https://vaadin.com/components/vaadin-list-box) |  | No children; use Java API. |
 |  |  | multiple | Determines which class is used. |
 | vaadin-radio-group | [RadioButtonGroup](https://vaadin.com/components/vaadin-radio-button) |  | No children; use Java API. |
@@ -293,13 +355,17 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 | vaadin-login-overlay | [LoginOverlay](https://vaadin.com/components/vaadin-login) |  |  |
 | vaadin-horizontal-layout | [HorizontalLayout](https://vaadin.com/components/vaadin-ordered-layout) |  | Default spacing of the Java component is removed per default. |
 | vaadin-vertical-layout | [VerticalLayout](https://vaadin.com/components/vaadin-ordered-layout) |  | Default width, padding, spacing of the Java component is removed per default. |
-| ! vaadin-flex-layout | FlexLayout |  | Not an official tag. Just a div with flex boy layout. [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) |
-|  |  | ! flex-wrap | -> setWrapMode(..) |
+| vaadin-scroller | [Scroller](https://vaadin.com/components/vaadin-ordered-layout) |  |  |
+|  |  | scroll-direction |  | both (default), horizontal, vertical, none
 | * | ThemableLayout |  |  |
 |  |  | ! margin |  |
 |  |  | ! padding |  |
 |  |  | ! spacing |  |
 |  |  | ! box-sizing |  |
+| ! vaadin-flex-layout | FlexLayout |  | Doesn't exist as WebComponent. Just a div with flex box layout. [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/). Also see attributes of FlexComponent. |
+|  |  | align-content | -> setAlignContent(..) |
+|  |  | flex-direction | -> setFlexDirection(..) |
+|  |  | flex-wrap | -> setWrapMode(..) |
 | * | FlexComponent |  | [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) |
 |  |  | ! align-items | Same as CSS property. |
 |  |  | ! justify-content | Same as CSS property. |

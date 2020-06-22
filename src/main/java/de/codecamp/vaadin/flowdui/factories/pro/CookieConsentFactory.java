@@ -8,7 +8,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.cookieconsent.CookieConsent;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 
 
 public class CookieConsentFactory
@@ -16,7 +16,7 @@ public class CookieConsentFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())

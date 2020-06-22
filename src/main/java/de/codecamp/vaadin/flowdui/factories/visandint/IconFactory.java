@@ -8,7 +8,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.icon.Icon;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
 
 
@@ -17,7 +17,7 @@ public class IconFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateContext context,
+  public Component createComponent(Element element, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -32,9 +32,9 @@ public class IconFactory
         }
         Icon icon = new Icon(attrIconTokens[0], attrIconTokens[1]);
 
-        context.readStringAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "color",
+        context.readStringAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "color",
             icon::setColor, consumedAttributes);
-        context.readStringAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "size",
+        context.readStringAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "size",
             icon::setSize, consumedAttributes);
         return icon;
     }

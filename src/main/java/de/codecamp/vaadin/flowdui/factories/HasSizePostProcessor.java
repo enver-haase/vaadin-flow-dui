@@ -8,7 +8,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasSize;
 
 import de.codecamp.vaadin.flowdui.ComponentPostProcessor;
-import de.codecamp.vaadin.flowdui.TemplateContext;
+import de.codecamp.vaadin.flowdui.TemplateParseContext;
 
 
 public class HasSizePostProcessor
@@ -16,38 +16,38 @@ public class HasSizePostProcessor
 {
 
   @Override
-  public void postProcessComponent(Element element, Component component, TemplateContext context,
+  public void postProcessComponent(Element element, Component component, TemplateParseContext context,
       Set<String> consumedAttributes)
   {
     if (component instanceof HasSize)
     {
       HasSize hasSize = (HasSize) component;
 
-      context.readBooleanAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "size-full",
+      context.readBooleanAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "size-full",
           v -> hasSize.setSizeFull(), consumedAttributes);
-      context.readBooleanAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "size-auto",
+      context.readBooleanAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "size-auto",
           v -> hasSize.setSizeUndefined(), consumedAttributes);
 
-      context.readStringAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "width",
+      context.readStringAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "width",
           hasSize::setWidth, consumedAttributes);
-      context.readBooleanAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "width-full",
+      context.readBooleanAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "width-full",
           v -> hasSize.setWidthFull(), consumedAttributes);
-      context.readBooleanAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "width-auto",
+      context.readBooleanAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "width-auto",
           v -> hasSize.setWidth(null), consumedAttributes);
-      context.readStringAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "min-width",
+      context.readStringAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "min-width",
           hasSize::setMinWidth, consumedAttributes);
-      context.readStringAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "max-width",
+      context.readStringAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "max-width",
           hasSize::setMaxWidth, consumedAttributes);
 
-      context.readStringAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "height",
+      context.readStringAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "height",
           hasSize::setHeight, consumedAttributes);
-      context.readBooleanAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "height-full",
+      context.readBooleanAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "height-full",
           v -> hasSize.setHeightFull(), consumedAttributes);
-      context.readBooleanAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "height-auto",
+      context.readBooleanAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "height-auto",
           v -> hasSize.setHeight(null), consumedAttributes);
-      context.readStringAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "min-height",
+      context.readStringAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "min-height",
           hasSize::setMinWidth, consumedAttributes);
-      context.readStringAttribute(element, TemplateContext.CUSTOM_ATTR_PREFIX + "max-height",
+      context.readStringAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "max-height",
           hasSize::setMaxWidth, consumedAttributes);
     }
   }
