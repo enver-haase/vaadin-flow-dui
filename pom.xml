@@ -96,6 +96,7 @@
       </exclusions>
     </dependency>
 
+    <!-- includes the Pro components as optional -->
     <dependency>
       <groupId>com.vaadin</groupId>
       <artifactId>vaadin</artifactId>

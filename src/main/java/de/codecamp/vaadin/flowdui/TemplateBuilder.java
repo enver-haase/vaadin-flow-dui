@@ -123,9 +123,14 @@ public class TemplateBuilder
     DEFAULT_FACTORIES.add(new ProgressBarFactory());
     DEFAULT_FACTORIES.add(new TabsFactory());
 
-    DEFAULT_FACTORIES.add(new BoardFactory());
-    DEFAULT_FACTORIES.add(new CrudFactory());
-    DEFAULT_FACTORIES.add(new ChartFactory());
+
+    // Pro components might not be present
+    if (classExists("com.vaadin.flow.component.board.Board"))
+      DEFAULT_FACTORIES.add(new BoardFactory());
+    if (classExists("com.vaadin.flow.component.crud.Crud"))
+      DEFAULT_FACTORIES.add(new CrudFactory());
+    if (classExists("com.vaadin.flow.component.charts.Chart"))
+      DEFAULT_FACTORIES.add(new ChartFactory());
   }
 
   private static final List<ComponentFactory> ADDITIONAL_FACTORIES = new ArrayList<>();
@@ -544,6 +549,19 @@ public class TemplateBuilder
           new Fragment(templateHostClass, template.getTemplateResourceName(), fragmentId);
 
       ReflectTools.setJavaFieldValue(host, field, templateFragment);
+    }
+  }
+
+  private static boolean classExists(String className)
+  {
+    try
+    {
+      Class.forName(className);
+      return true;
+    }
+    catch (ClassNotFoundException ex)
+    {
+      return false;
     }
   }
 
