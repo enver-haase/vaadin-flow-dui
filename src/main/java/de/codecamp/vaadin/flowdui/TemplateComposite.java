@@ -38,6 +38,7 @@ public abstract class TemplateComposite
    *          be the same as the simple name of the component class with an {@code .html} ending in
    *          the same directory/package as the class
    */
+  // TODO this constructor prevents validation in annotation processor
   protected TemplateComposite(String templateResourceName)
   {
     this.templateResourceName = templateResourceName;
