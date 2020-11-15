@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
 import de.codecamp.vaadin.flowdui.ComponentPostProcessor;
-import de.codecamp.vaadin.flowdui.TemplateBuilder;
+import de.codecamp.vaadin.flowdui.TemplateResolver;
+import de.codecamp.vaadin.flowdui.TemplateEngine;
 
 
 @Configuration
@@ -26,10 +27,12 @@ public class TemplateAutoConfiguration
 
 
   @Bean
-  public TemplateBuilder vaadinTemplateBuilder(List<ComponentFactory> additionalFactories,
-      List<ComponentPostProcessor> additionalPostProcessors)
+  public TemplateEngine vaadinTemplateBuilder(List<ComponentFactory> additionalFactories,
+      List<ComponentPostProcessor> additionalPostProcessors,
+      List<TemplateResolver> additionalResolvers)
   {
-    TemplateBuilder bean = new TemplateBuilder(additionalFactories, additionalPostProcessors);
+    TemplateEngine bean = new TemplateEngine(additionalFactories,
+        additionalPostProcessors, additionalResolvers);
     bean.setCacheMode(properties.getCacheMode());
     return bean;
   }

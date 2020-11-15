@@ -7,7 +7,7 @@ import org.jsoup.nodes.Element;
 import com.vaadin.flow.component.Component;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 import de.codecamp.vaadin.flowdui.components.CustomStyle;
 import de.codecamp.vaadin.flowdui.components.Slot;
 import de.codecamp.vaadin.flowdui.components.Style;
@@ -18,7 +18,7 @@ public class CustomElementsFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -28,7 +28,7 @@ public class CustomElementsFactory
 
         context.readStringAttribute(element, "name", slot::setName, consumedAttributes);
 
-        context.readChildren(element, (slotName, childElement) -> {
+        context.readChildren(slot, element, (slotName, childElement) -> {
           slot.add(context.readComponent(childElement, null));
           return true;
         }, textNode -> {

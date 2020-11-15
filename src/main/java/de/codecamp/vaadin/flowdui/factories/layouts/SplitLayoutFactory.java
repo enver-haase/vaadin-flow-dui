@@ -10,8 +10,8 @@ import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout.Orientation;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class SplitLayoutFactory
@@ -19,7 +19,7 @@ public class SplitLayoutFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -33,7 +33,7 @@ public class SplitLayoutFactory
 
         AtomicInteger nextArea = new AtomicInteger(0);
 
-        context.readChildren(element, (slotName, childElement) -> {
+        context.readChildren(splitLayout, element, (slotName, childElement) -> {
           if (slotName != null)
             return false;
 

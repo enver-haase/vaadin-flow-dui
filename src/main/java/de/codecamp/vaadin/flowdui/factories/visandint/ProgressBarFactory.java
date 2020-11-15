@@ -8,7 +8,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class ProgressBarFactory
@@ -16,7 +16,7 @@ public class ProgressBarFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -28,7 +28,7 @@ public class ProgressBarFactory
         context.readDoubleAttribute(element, "min", progressBar::setMin, consumedAttributes);
         context.readDoubleAttribute(element, "max", progressBar::setMax, consumedAttributes);
         context.readDoubleAttribute(element, "value", progressBar::setValue, consumedAttributes);
-        context.readChildren(element, null, null);
+        context.readChildren(progressBar, element, null, null);
         return progressBar;
     }
 

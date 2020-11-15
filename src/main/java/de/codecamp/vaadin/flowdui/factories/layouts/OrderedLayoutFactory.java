@@ -20,7 +20,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
 import de.codecamp.vaadin.flowdui.ComponentPostProcessor;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class OrderedLayoutFactory
@@ -96,7 +96,7 @@ public class OrderedLayoutFactory
 
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     Component component = null;
@@ -141,20 +141,20 @@ public class OrderedLayoutFactory
     {
       FlexComponent<?> flexComponent = (FlexComponent<?>) component;
 
-      context.readChildren(element, (slotName, childElement) -> {
+      context.readChildren(component, element, (slotName, childElement) -> {
         if (slotName != null)
           return false;
 
         Set<String> consumedChildAttributes = new HashSet<>();
 
         Boolean expand = context.readBooleanAttribute(childElement,
-            TemplateParseContext.CUSTOM_LAYOUT_ATTR_PREFIX + "expand", null,
+            TemplateParserContext.CUSTOM_LAYOUT_ATTR_PREFIX + "expand", null,
             consumedChildAttributes);
         Alignment alignSelf = context.readEnumAttribute(childElement,
-            TemplateParseContext.CUSTOM_LAYOUT_ATTR_PREFIX + "align-self", ALIGNMENT::get, null,
+            TemplateParserContext.CUSTOM_LAYOUT_ATTR_PREFIX + "align-self", ALIGNMENT::get, null,
             consumedChildAttributes);
         Double flexGrow = context.readDoubleAttribute(childElement,
-            TemplateParseContext.CUSTOM_LAYOUT_ATTR_PREFIX + "flex-grow", null,
+            TemplateParserContext.CUSTOM_LAYOUT_ATTR_PREFIX + "flex-grow", null,
             consumedChildAttributes);
 
         Component childComponent = context.readComponent(childElement, consumedChildAttributes);
@@ -172,10 +172,10 @@ public class OrderedLayoutFactory
           FlexLayout flexLayout = (FlexLayout) flexComponent;
 
           String flexBasis = context.readStringAttribute(childElement,
-              TemplateParseContext.CUSTOM_LAYOUT_ATTR_PREFIX + "flex-basis", null,
+              TemplateParserContext.CUSTOM_LAYOUT_ATTR_PREFIX + "flex-basis", null,
               consumedChildAttributes);
           Double flexShrink = context.readDoubleAttribute(childElement,
-              TemplateParseContext.CUSTOM_LAYOUT_ATTR_PREFIX + "flex-shrink", null,
+              TemplateParserContext.CUSTOM_LAYOUT_ATTR_PREFIX + "flex-shrink", null,
               consumedChildAttributes);
 
           if (flexBasis != null)
@@ -194,20 +194,20 @@ public class OrderedLayoutFactory
   }
 
   @Override
-  public void postProcessComponent(Element element, Component component,
-      TemplateParseContext context, Set<String> consumedAttributes)
+  public void postProcessComponent(Component component, Element element,
+      TemplateParserContext context, Set<String> consumedAttributes)
   {
     if (component instanceof ThemableLayout)
     {
       ThemableLayout themableLayout = (ThemableLayout) component;
 
-      context.readBooleanAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "margin",
+      context.readBooleanAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "margin",
           themableLayout::setMargin, consumedAttributes);
-      context.readBooleanAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "padding",
+      context.readBooleanAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "padding",
           themableLayout::setPadding, consumedAttributes);
-      context.readBooleanAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "spacing",
+      context.readBooleanAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "spacing",
           themableLayout::setSpacing, consumedAttributes);
-      context.readEnumAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "box-sizing",
+      context.readEnumAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "box-sizing",
           BOX_SIZING::get, themableLayout::setBoxSizing, consumedAttributes);
     }
 
@@ -215,10 +215,10 @@ public class OrderedLayoutFactory
     {
       FlexComponent<?> flexComponent = (FlexComponent<?>) component;
 
-      context.readEnumAttribute(element, TemplateParseContext.CUSTOM_ATTR_PREFIX + "align-items",
+      context.readEnumAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "align-items",
           ALIGNMENT::get, flexComponent::setAlignItems, consumedAttributes);
       context.readEnumAttribute(element,
-          TemplateParseContext.CUSTOM_ATTR_PREFIX + "justify-content", JUSTIFY_CONTENT::get,
+          TemplateParserContext.CUSTOM_ATTR_PREFIX + "justify-content", JUSTIFY_CONTENT::get,
           flexComponent::setJustifyContentMode, consumedAttributes);
     }
   }

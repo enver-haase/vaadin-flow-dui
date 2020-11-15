@@ -9,7 +9,7 @@ import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginOverlay;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class LoginFactory
@@ -17,19 +17,19 @@ public class LoginFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
     {
       case "vaadin-login-form":
         LoginForm loginForm = new LoginForm();
-        context.readChildren(element, null, null);
+        context.readChildren(loginForm, element, null, null);
         return loginForm;
 
       case "vaadin-login-overlay":
         LoginOverlay loginOverlay = new LoginOverlay();
-        context.readChildren(element, null, null);
+        context.readChildren(loginOverlay, element, null, null);
         return loginOverlay;
     }
 

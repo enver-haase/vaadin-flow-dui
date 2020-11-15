@@ -3,25 +3,25 @@ package de.codecamp.vaadin.flowdui;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasSize;
-import com.vaadin.flow.server.VaadinService;
 
 
 /**
- * A {@link Composite composite} whose content is created from a DUI template.
+ * A {@link Composite composite} whose content is created from a template.
  *
  * @see Mapped
  * @see Slotted
+ * @see FragmentId
  */
 public abstract class TemplateComposite
   extends Composite<Component>
   implements HasSize
 {
 
-  private String templateResourceName;
+  private String templateId;
 
 
   /**
-   * Creates the template composite using the default resource name for the template.
+   * Creates the template composite using the default template ID.
    *
    * @see #TemplateComposite(String)
    */
@@ -31,24 +31,24 @@ public abstract class TemplateComposite
   }
 
   /**
-   * Creates the template composite using the given resource name for the template.
+   * Creates the template composite using the given template ID.
    *
-   * @param templateResourceName
-   *          the resource name of the template file to load; if empty the name will be assumed to
-   *          be the same as the simple name of the component class with an {@code .html} ending in
-   *          the same directory/package as the class
+   * @param templateId
+   *          the ID of the template file to load; if null, the ID will default to the fully
+   *          qualified name of this class
    */
-  protected TemplateComposite(String templateResourceName)
+  protected TemplateComposite(String templateId)
   {
-    this.templateResourceName = templateResourceName;
+    if (templateId == null)
+      templateId = "/" + getClass().getName().replace(".", "/");
+    this.templateId = templateId;
   }
 
 
   @Override
   protected Component initContent()
   {
-    return VaadinService.getCurrent().getInstantiator().getOrCreate(TemplateBuilder.class)
-        .readTemplate(this, templateResourceName);
+    return TemplateEngine.get().instantiateTemplate(this, templateId);
   }
 
 }

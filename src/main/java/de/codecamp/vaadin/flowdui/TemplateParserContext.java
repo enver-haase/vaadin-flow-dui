@@ -11,13 +11,15 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
-import java.util.function.BiPredicate;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.StreamSupport;
 
 import org.jsoup.nodes.Attribute;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
@@ -30,10 +32,10 @@ import de.codecamp.vaadin.flowdui.components.Slot;
 
 
 /**
- * Contains the state during processing of a template and provides methods to parse attributes and
- * child components.
+ * Gathers the state while parsing a template and provides methods to parse attributes and child
+ * components.
  */
-public class TemplateParseContext
+public class TemplateParserContext
 {
 
   public static final String CUSTOM_ATTR_PREFIX = "";
@@ -41,7 +43,7 @@ public class TemplateParseContext
   public static final String CUSTOM_LAYOUT_ATTR_PREFIX = "";
 
 
-  private static final Logger LOG = LoggerFactory.getLogger(TemplateParseContext.class);
+  private static final Logger LOG = LoggerFactory.getLogger(TemplateParserContext.class);
 
 
   private final List<ComponentFactory> factories;
@@ -49,7 +51,7 @@ public class TemplateParseContext
   private final List<ComponentPostProcessor> processors;
 
 
-  private String templateResourceName;
+  private String templateId;
 
 
   private Component rootComponent;
@@ -61,26 +63,80 @@ public class TemplateParseContext
   private Map<String, Element> idToTemplateFragment = new HashMap<>();
 
 
-  public TemplateParseContext(String templateResourceName, List<ComponentFactory> factories,
+  public TemplateParserContext(String templateId, List<ComponentFactory> factories,
       List<ComponentPostProcessor> processors)
   {
-    this.templateResourceName = templateResourceName;
+    this.templateId = templateId;
     this.factories = factories;
     this.processors = processors;
   }
 
 
-  public Component readComponentForSlot(Element element, Set<String> consumedAttributes)
+  public void parseTemplate(Document templateDocument)
   {
-    if (consumedAttributes == null)
-      consumedAttributes = new HashSet<>();
-    consumedAttributes.add("slot");
-    return readComponent(element, consumedAttributes);
+    Element body = templateDocument.body();
+
+    AtomicBoolean hasNonBlankTextNodes = new AtomicBoolean(false);
+    doReadChildren(null, body, (slotName, childElement) -> {
+      if (slotName != null)
+        return false;
+
+      if (getRootComponent() != null)
+      {
+        String msg = "The template '%s' must have exactly one single single root component, but"
+            + " found more than one.";
+        msg = String.format(msg, getTemplateId());
+        throw new TemplateException(msg);
+      }
+
+      setRootComponent(readComponent(childElement, null));
+      return true;
+    }, textNode -> {
+      hasNonBlankTextNodes.set(true);
+    });
+
+    if (getRootComponent() == null)
+    {
+      String msg =
+          "The template '%s' must have exactly one single root component, but found" + " none.";
+      msg = String.format(msg, getTemplateId());
+      throw new TemplateException(msg);
+    }
+
+    if (hasNonBlankTextNodes.get())
+    {
+      LOG.warn("The template '{}' contains text around its root component that will be ignored.",
+          getTemplateId());
+    }
   }
 
+  public void parseTemplateFragment(Element fragmentElement)
+  {
+    doReadChildren(null, fragmentElement, (slotName, childElement) -> {
+      if (slotName != null)
+        return false;
+
+      if (getRootComponent() != null)
+        throw new TemplateException("The template fragment must have a single root element.");
+
+      setRootComponent(readComponent(childElement, null));
+      return true;
+    }, null);
+  }
+
+
+  /**
+   * Creates a component based on the given HTML element.
+   *
+   * @param element
+   *          the HTML to create the component from
+   * @param consumedAttributes
+   *          the set of attributes of the element that have already been consumed to configure the
+   *          component; additional consumed attributes will be added to the set; may be null
+   * @return the new component
+   */
   public Component readComponent(Element element, Set<String> consumedAttributes)
   {
-    ComponentFactory factory = null;
     Component component = null;
 
     if (consumedAttributes == null)
@@ -90,21 +146,15 @@ public class TemplateParseContext
     {
       component = f.createComponent(element, this, consumedAttributes);
       if (component != null)
-      {
-        factory = f;
         break;
-      }
     }
     if (component == null)
-      throw new RuntimeException("Unknown element in design template: " + element.tagName());
-
-    if (factory == null)
-      throw new AssertionError();
+      throw new RuntimeException("Unknown element in template: " + element.tagName());
 
 
     for (ComponentPostProcessor p : processors)
     {
-      p.postProcessComponent(element, component, this, consumedAttributes);
+      p.postProcessComponent(component, element, this, consumedAttributes);
     }
 
     registerComponent(component);
@@ -125,58 +175,112 @@ public class TemplateParseContext
     return component;
   }
 
-  public void readChildren(Element element, BiPredicate<String, Element> childComponentHandler,
-      Consumer<TextNode> textNodeHandler)
+  /**
+   * Creates a component based on the given HTML element. Same as
+   * {@link #readComponent(Element, Set)} except that the slot-attribute is automatically marked as
+   * consumed.
+   *
+   * @param element
+   *          the element for which to create a component
+   * @param consumedAttributes
+   *          a set of attributes of the element that are already consumed; may be null
+   * @return the created component
+   */
+  public Component readComponentForSlot(Element element, Set<String> consumedAttributes)
   {
+    if (consumedAttributes == null)
+      consumedAttributes = new HashSet<>();
+    consumedAttributes.add("slot");
+    return readComponent(element, consumedAttributes);
+  }
+
+
+  /**
+   * Reads the children of of the given component.
+   *
+   * @param parentComponent
+   *          the parent component
+   * @param parentElement
+   *          the HTML element of the parent component
+   * @param childComponentHandler
+   *          a child component handler; may be null
+   * @param textNodeHandler
+   *          a text node handler; may be null
+   */
+  public void readChildren(Component parentComponent, Element parentElement,
+      ChildComponentHandler childComponentHandler, TextNodeHandler textNodeHandler)
+  {
+    Objects.requireNonNull(parentComponent, "parentComponent must not be null");
+
+    doReadChildren(parentComponent, parentElement, childComponentHandler, textNodeHandler);
+  }
+
+  private void doReadChildren(Component parentComponent, Element parentElement,
+      ChildComponentHandler childComponentHandler, TextNodeHandler textNodeHandler)
+  {
+    Objects.requireNonNull(parentElement, "parentElement must not be null");
+
     Set<String> consumedSlot = new HashSet<>();
 
-    for (Node node : element.childNodes())
+    for (Node node : parentElement.childNodes())
     {
       if (node instanceof Element)
       {
         Element childElement = (Element) node;
 
-        if (childElement.tagName().equals("template"))
+        if (childElement.tagName().equals("template") || childElement.tagName().equals("fragment"))
         {
-          registerHtmlTemplate(childElement);
+          registerTemplateFragment(childElement);
           continue;
         }
 
-        if (childComponentHandler == null)
-          throw new TemplateException(element, "No child elements supported.");
 
+        String slotName = null;
         if (childElement.hasAttr("slot"))
         {
-          String slotName = childElement.attr("slot");
+          slotName = childElement.attr("slot");
           if (consumedSlot.contains(slotName))
           {
             String msg = "Slot '%s' already filled.";
             msg = String.format(msg, slotName);
-            throw new TemplateException(element, msg);
-          }
-
-          if (!childComponentHandler.test(slotName, childElement))
-          {
-            throw new TemplateException(element, "Unknown slot: " + slotName);
+            throw new TemplateException(parentElement, msg);
           }
         }
-        else
-        {
-          if (!childComponentHandler.test(null, childElement))
-          {
 
+        boolean handled =
+            childComponentHandler != null && childComponentHandler.handle(slotName, childElement);
+
+        if (!handled && parentComponent != null)
+        {
+          for (ComponentPostProcessor processor : processors)
+          {
+            handled = processor.handleChildComponent(parentComponent, slotName, childElement, this);
+            if (handled)
+              break;
+          }
+        }
+
+        if (!handled)
+        {
+          if (slotName != null)
+          {
+            throw new TemplateException(parentElement, "Unknown slot: " + slotName);
+          }
+          else
+          {
             String msg = "Child element '%s' not supported here.";
             msg = String.format(msg, childElement.tagName());
-            throw new TemplateException(element, msg);
+            throw new TemplateException(parentElement, msg);
           }
         }
       }
+
       else if (node instanceof TextNode)
       {
         if (textNodeHandler != null)
-          textNodeHandler.accept((TextNode) node);
+          textNodeHandler.handle((TextNode) node);
         else if (!((TextNode) node).text().trim().isEmpty())
-          throw new TemplateException(element, "No child text supported.");
+          throw new TemplateException(parentElement, "No child text supported.");
       }
     }
   }
@@ -308,9 +412,9 @@ public class TemplateParseContext
 
 
 
-  public String getTemplateResourceName()
+  public String getTemplateId()
   {
-    return templateResourceName;
+    return templateId;
   }
 
   public Component getRootComponent()
@@ -354,7 +458,7 @@ public class TemplateParseContext
     }
   }
 
-  private void registerHtmlTemplate(Element htmlTemplateElement)
+  private void registerTemplateFragment(Element htmlTemplateElement)
   {
     String id = htmlTemplateElement.id();
     if (id.isEmpty())

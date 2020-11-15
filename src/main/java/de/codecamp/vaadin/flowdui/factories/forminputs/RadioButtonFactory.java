@@ -8,8 +8,8 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class RadioButtonFactory
@@ -17,7 +17,7 @@ public class RadioButtonFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -26,9 +26,9 @@ public class RadioButtonFactory
         RadioButtonGroup<?> radioButtonGroup = new RadioButtonGroup<>();
         context.readStringAttribute(element, "label", radioButtonGroup::setLabel,
             consumedAttributes);
-        context.readChildren(element, (slotName, childComponent) -> {
+        context.readChildren(radioButtonGroup, element, (slotName, childComponent) -> {
           throw new TemplateException(
-              "RadioButtonGroup cannot be populated using a DUI template. Use its Java API instead.");
+              "RadioButtonGroup cannot be populated using a template. Use its Java API instead.");
         }, null);
         return radioButtonGroup;
     }

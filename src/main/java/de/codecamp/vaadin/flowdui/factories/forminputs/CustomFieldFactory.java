@@ -10,7 +10,7 @@ import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.html.Div;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class CustomFieldFactory
@@ -18,7 +18,7 @@ public class CustomFieldFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -27,7 +27,7 @@ public class CustomFieldFactory
         CustomField customField = new CustomField();
         context.readStringAttribute(element, "label",
             v -> customField.getElement().setAttribute("label", v), consumedAttributes);
-        context.readChildren(element, (slotName, childElement) -> {
+        context.readChildren(customField, element, (slotName, childElement) -> {
           if (slotName != null)
             return false;
           customField.add(context.readComponent(childElement, null));

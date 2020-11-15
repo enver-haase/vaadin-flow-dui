@@ -9,8 +9,8 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.checkbox.CheckboxGroup;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class CheckboxFactory
@@ -18,7 +18,7 @@ public class CheckboxFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -34,9 +34,9 @@ public class CheckboxFactory
       case "vaadin-checkbox-group":
         CheckboxGroup<?> checkboxGroup = new CheckboxGroup<>();
         context.readStringAttribute(element, "label", checkboxGroup::setLabel, consumedAttributes);
-        context.readChildren(element, (slotName, childComponent) -> {
+        context.readChildren(checkboxGroup, element, (slotName, childComponent) -> {
           throw new TemplateException(
-              "CheckboxGroup cannot be populated using a DUI template. Use its Java API instead.");
+              "CheckboxGroup cannot be populated using a template. Use its Java API instead.");
         }, null);
 
         return checkboxGroup;

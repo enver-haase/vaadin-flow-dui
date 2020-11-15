@@ -9,7 +9,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class DateTimePickerFactory
@@ -17,7 +17,7 @@ public class DateTimePickerFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -35,7 +35,7 @@ public class DateTimePickerFactory
         context.readLocalDateTimeAttribute(element, "max", datePicker::setMax, consumedAttributes);
         context.readDoubleAttribute(element, "step",
             v -> datePicker.setStep(Duration.ofMillis((long) (v * 1000))), consumedAttributes);
-        context.readChildren(element, null, null);
+        context.readChildren(datePicker, element, null, null);
         return datePicker;
     }
 

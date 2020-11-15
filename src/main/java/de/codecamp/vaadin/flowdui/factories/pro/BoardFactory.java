@@ -9,7 +9,7 @@ import com.vaadin.flow.component.board.Board;
 import com.vaadin.flow.component.board.Row;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class BoardFactory
@@ -17,14 +17,14 @@ public class BoardFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
     {
       case "vaadin-board":
         Board board = new Board();
-        context.readChildren(element, (slotName, childElement) -> {
+        context.readChildren(board, element, (slotName, childElement) -> {
           if (slotName != null)
             return false;
           board.add(context.readComponent(childElement, null));
@@ -36,7 +36,7 @@ public class BoardFactory
 
       case "vaadin-board-row":
         Row row = new Row();
-        context.readChildren(element, (slotName, childElement) -> {
+        context.readChildren(row, element, (slotName, childElement) -> {
           if (slotName != null)
             return false;
           row.add(context.readComponent(childElement, null));

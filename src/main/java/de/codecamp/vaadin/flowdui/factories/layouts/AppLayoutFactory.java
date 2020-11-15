@@ -11,7 +11,7 @@ import com.vaadin.flow.component.applayout.DrawerToggle;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
 import de.codecamp.vaadin.flowdui.TemplateException;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class AppLayoutFactory
@@ -19,7 +19,7 @@ public class AppLayoutFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -28,7 +28,7 @@ public class AppLayoutFactory
         AppLayout appLayout = new AppLayout();
         context.readEnumAttribute(element, "primary-section", Section::fromWebcomponentValue,
             appLayout::setPrimarySection, null);
-        context.readChildren(element, (slotName, childElement) -> {
+        context.readChildren(appLayout, element, (slotName, childElement) -> {
           if (slotName == null)
           {
             if (appLayout.getContent() != null)

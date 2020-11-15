@@ -10,8 +10,8 @@ import com.vaadin.flow.component.listbox.ListBoxBase;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class ListBoxFactory
@@ -19,7 +19,7 @@ public class ListBoxFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -31,9 +31,9 @@ public class ListBoxFactory
         else
           listBox = new ListBox<>();
 
-        context.readChildren(element, (slotName, childComponent) -> {
+        context.readChildren(listBox, element, (slotName, childComponent) -> {
           throw new TemplateException(
-              "ListBox/MultiSelectListBox cannot be populated using a DUI template. Use its Java API instead.");
+              "ListBox/MultiSelectListBox cannot be populated using a template. Use its Java API instead.");
         }, null);
 
         return listBox;

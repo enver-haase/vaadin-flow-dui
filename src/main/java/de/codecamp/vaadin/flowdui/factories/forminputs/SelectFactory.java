@@ -8,8 +8,8 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.select.Select;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class SelectFactory
@@ -17,7 +17,7 @@ public class SelectFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -27,9 +27,9 @@ public class SelectFactory
         context.readStringAttribute(element, "label", select::setLabel, consumedAttributes);
         context.readStringAttribute(element, "placeholder", select::setPlaceholder,
             consumedAttributes);
-        context.readChildren(element, (slotName, childComponent) -> {
+        context.readChildren(select, element, (slotName, childComponent) -> {
           throw new TemplateException(
-              "Select cannot be populated using a DUI template. Use its Java API instead.");
+              "Select cannot be populated using a template. Use its Java API instead.");
         }, null);
         return select;
     }

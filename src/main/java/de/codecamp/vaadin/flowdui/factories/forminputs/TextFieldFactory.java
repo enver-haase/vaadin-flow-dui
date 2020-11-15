@@ -24,8 +24,8 @@ import com.vaadin.flow.component.textfield.TextField;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
 import de.codecamp.vaadin.flowdui.ComponentPostProcessor;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class TextFieldFactory
@@ -63,7 +63,7 @@ public class TextFieldFactory
 
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     Component component = null;
@@ -212,7 +212,7 @@ public class TextFieldFactory
     if (component instanceof HasPrefixAndSuffix)
     {
       HasPrefixAndSuffix hasPrefixAndSuffix = (HasPrefixAndSuffix) component;
-      context.readChildren(element, (slotName, childElement) -> {
+      context.readChildren(component, element, (slotName, childElement) -> {
         if (slotName == null)
           return false;
         switch (slotName)
@@ -236,15 +236,15 @@ public class TextFieldFactory
     }
     else if (component != null)
     {
-      context.readChildren(element, null, null);
+      context.readChildren(component, element, null, null);
     }
 
     return component;
   }
 
   @Override
-  public void postProcessComponent(Element element, Component component, TemplateParseContext context,
-      Set<String> consumedAttributes)
+  public void postProcessComponent(Component component, Element element,
+      TemplateParserContext context, Set<String> consumedAttributes)
   {
     if (component instanceof HasAutocorrect)
     {

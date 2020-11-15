@@ -8,8 +8,8 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.combobox.ComboBox;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class ComboBoxFactory
@@ -17,7 +17,7 @@ public class ComboBoxFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -31,9 +31,9 @@ public class ComboBoxFactory
             comboBox::setClearButtonVisible, consumedAttributes);
         context.readBooleanAttribute(element, "allow-custom-value", comboBox::setAllowCustomValue,
             consumedAttributes);
-        context.readChildren(element, (slotName, childComponent) -> {
+        context.readChildren(comboBox, element, (slotName, childComponent) -> {
           throw new TemplateException(
-              "ComboBox cannot be populated using a DUI template. Use its Java API instead.");
+              "ComboBox cannot be populated using a template. Use its Java API instead.");
         }, null);
         return comboBox;
     }

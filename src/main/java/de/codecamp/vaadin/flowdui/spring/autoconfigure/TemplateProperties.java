@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
-import de.codecamp.vaadin.flowdui.TemplateBuilder.CacheMode;
+import de.codecamp.vaadin.flowdui.TemplateEngine.CacheMode;
 
 
 /**

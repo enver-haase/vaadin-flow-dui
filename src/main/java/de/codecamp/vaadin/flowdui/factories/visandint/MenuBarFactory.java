@@ -8,7 +8,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.menubar.MenuBar;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class MenuBarFactory
@@ -16,7 +16,7 @@ public class MenuBarFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -25,7 +25,7 @@ public class MenuBarFactory
         MenuBar menuBar = new MenuBar();
         context.readBooleanAttribute(element, "open-on-hover", menuBar::setOpenOnHover,
             consumedAttributes);
-        context.readChildren(element, null, null);
+        context.readChildren(menuBar, element, null, null);
         return menuBar;
     }
 

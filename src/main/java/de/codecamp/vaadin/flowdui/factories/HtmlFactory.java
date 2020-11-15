@@ -44,7 +44,7 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.html.UnorderedList;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 import de.codecamp.vaadin.flowdui.components.Bold;
 import de.codecamp.vaadin.flowdui.components.Fieldset;
 import de.codecamp.vaadin.flowdui.components.Strong;
@@ -84,7 +84,7 @@ public class HtmlFactory
 
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     Component component;
@@ -239,7 +239,7 @@ public class HtmlFactory
     {
       HasComponents hasComponents = (HasComponents) component;
 
-      context.readChildren(element, (slotName, childElement) -> {
+      context.readChildren(component, element, (slotName, childElement) -> {
         hasComponents.add(context.readComponent(childElement, null));
         return true;
       }, textNode -> {
@@ -248,7 +248,7 @@ public class HtmlFactory
     }
     else if (component != null)
     {
-      context.readChildren(element, null, null);
+      context.readChildren(component, element, null, null);
     }
 
     return component;

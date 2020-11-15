@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 
 /**
- * Used to mark fields that should be inserted into a {@code <slot>} in the DUI template.
+ * Used to mark fields that should be inserted into a {@code <slot>} in the template.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
@@ -26,7 +26,7 @@ public @interface Slotted
 
   /**
    * Returns whether the component for the slot is optional.
-   * 
+   *
    * @return whether the component for the slot is optional
    */
   boolean optional() default false;

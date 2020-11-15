@@ -8,7 +8,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dialog.Dialog;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class DialogFactory
@@ -16,7 +16,7 @@ public class DialogFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -28,7 +28,7 @@ public class DialogFactory
         context.readBooleanAttribute(element, "no-close-on-outside-click",
             v -> dialog.setCloseOnOutsideClick(!v), consumedAttributes);
 
-        context.readChildren(element, (slotName, childElement) -> {
+        context.readChildren(dialog, element, (slotName, childElement) -> {
           if (slotName != null)
             return false;
           dialog.add(context.readComponent(childElement, null));

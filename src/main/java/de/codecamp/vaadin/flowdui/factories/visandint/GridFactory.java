@@ -9,8 +9,8 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.treegrid.TreeGrid;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class GridFactory
@@ -18,7 +18,7 @@ public class GridFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -26,9 +26,9 @@ public class GridFactory
       case "vaadin-grid":
         Grid<?> grid = new Grid<>();
 
-        context.readChildren(element, (slotName, childComponent) -> {
+        context.readChildren(grid, element, (slotName, childComponent) -> {
           throw new TemplateException(
-              "Grid cannot be populated using a DUI template. Use its Java API instead.");
+              "Grid cannot be populated using a template. Use its Java API instead.");
         }, null);
 
         return grid;
@@ -37,9 +37,9 @@ public class GridFactory
         // does not actually exist as a separate component
         TreeGrid<?> treeGrid = new TreeGrid<>();
 
-        context.readChildren(element, (slotName, childComponent) -> {
+        context.readChildren(treeGrid, element, (slotName, childComponent) -> {
           throw new TemplateException(
-              "TreeGrid cannot be populated using a DUI template. Use its Java API instead.");
+              "TreeGrid cannot be populated using a template. Use its Java API instead.");
         }, null);
 
         return treeGrid;

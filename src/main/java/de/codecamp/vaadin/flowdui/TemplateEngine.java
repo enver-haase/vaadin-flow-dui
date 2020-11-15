@@ -1,10 +1,7 @@
 package de.codecamp.vaadin.flowdui;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,8 +11,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.apache.commons.io.IOUtils;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -30,6 +25,7 @@ import de.codecamp.vaadin.flowdui.factories.BasicFlowPostProcessor;
 import de.codecamp.vaadin.flowdui.factories.CustomElementsFactory;
 import de.codecamp.vaadin.flowdui.factories.FocusablePostProcessor;
 import de.codecamp.vaadin.flowdui.factories.HasEnabledPostProcessor;
+import de.codecamp.vaadin.flowdui.factories.HasHelperPostProcessor;
 import de.codecamp.vaadin.flowdui.factories.HasSizePostProcessor;
 import de.codecamp.vaadin.flowdui.factories.HasStylePostProcessor;
 import de.codecamp.vaadin.flowdui.factories.HasThemePostProcessor;
@@ -66,7 +62,7 @@ import de.codecamp.vaadin.flowdui.factories.visandint.ProgressBarFactory;
 import de.codecamp.vaadin.flowdui.factories.visandint.TabsFactory;
 
 
-public class TemplateBuilder
+public class TemplateEngine
 {
 
   private static final List<ComponentFactory> DEFAULT_FACTORIES = new ArrayList<>();
@@ -83,6 +79,7 @@ public class TemplateBuilder
     DEFAULT_POST_PROCESSORS.add(new HasThemePostProcessor());
     DEFAULT_POST_PROCESSORS.add(new HasValuePostProcessor());
     DEFAULT_POST_PROCESSORS.add(new HasValidationPostProcessor());
+    DEFAULT_POST_PROCESSORS.add(new HasHelperPostProcessor());
 
     DEFAULT_FACTORIES.add(new CustomElementsFactory());
 
@@ -133,9 +130,17 @@ public class TemplateBuilder
       DEFAULT_FACTORIES.add(new ChartFactory());
   }
 
+  private static final List<TemplateResolver> DEFAULT_RESOLVERS = new ArrayList<>();
+  static
+  {
+    DEFAULT_RESOLVERS.add(new ClassPathTemplateResolver());
+  }
+
   private static final List<ComponentFactory> ADDITIONAL_FACTORIES = new ArrayList<>();
 
   private static final List<ComponentPostProcessor> ADDITIONAL_POST_PROCESSORS = new ArrayList<>();
+
+  private static final List<TemplateResolver> ADDITIONAL_RESOLVERS = new ArrayList<>();
 
   private static CacheMode defaultCacheMode = CacheMode.AUTO;
 
@@ -144,31 +149,37 @@ public class TemplateBuilder
 
   private List<ComponentPostProcessor> processors = new ArrayList<>();
 
+  private List<TemplateResolver> resolvers = new ArrayList<>();
 
   private CacheMode cacheMode;
 
   private ConcurrentMap<String, Document> templateCache = new ConcurrentHashMap<>();
 
 
-  public TemplateBuilder()
+  public TemplateEngine()
   {
-    this(ADDITIONAL_FACTORIES, ADDITIONAL_POST_PROCESSORS);
+    this(ADDITIONAL_FACTORIES, ADDITIONAL_POST_PROCESSORS, ADDITIONAL_RESOLVERS);
   }
 
-  public TemplateBuilder(List<ComponentFactory> additionalFactories,
-      List<ComponentPostProcessor> additionalPostProcessors)
+  public TemplateEngine(List<ComponentFactory> additionalFactories,
+      List<ComponentPostProcessor> additionalPostProcessors,
+      List<TemplateResolver> additionalResolvers)
   {
     this.factories =
         additionalFactories == null ? new ArrayList<>() : new ArrayList<>(additionalFactories);
     this.processors = additionalPostProcessors == null ? new ArrayList<>()
         : new ArrayList<>(additionalPostProcessors);
+    this.resolvers =
+        additionalResolvers == null ? new ArrayList<>() : new ArrayList<>(additionalResolvers);
 
 
     this.factories.addAll(ADDITIONAL_FACTORIES);
     this.processors.addAll(ADDITIONAL_POST_PROCESSORS);
+    this.resolvers.addAll(ADDITIONAL_RESOLVERS);
 
     this.factories.addAll(DEFAULT_FACTORIES);
     this.processors.addAll(DEFAULT_POST_PROCESSORS);
+    this.resolvers.addAll(DEFAULT_RESOLVERS);
 
     cacheMode = defaultCacheMode;
   }
@@ -211,8 +222,20 @@ public class TemplateBuilder
   }
 
   /**
-   * Sets the default cache mode for new {@link TemplateBuilder} instances. Please note that the
-   * Spring Boot integration provides a better way to do this.
+   * Returns the list of additional {@link TemplateResolver template resolvers}. This list can be
+   * edited to extend the list of supported attributes. Please note that the Spring Boot integration
+   * provides a better way to do this.
+   *
+   * @return the list of additional {@link TemplateResolver template resolvers}
+   */
+  public static List<TemplateResolver> getAdditionalResolvers()
+  {
+    return ADDITIONAL_RESOLVERS;
+  }
+
+  /**
+   * Sets the default cache mode for new {@link TemplateEngine} instances. Please note that
+   * the Spring Boot integration provides a better way to do this.
    *
    * @param cacheMode
    *          the default cache mode
@@ -225,31 +248,38 @@ public class TemplateBuilder
 
 
   /**
-   * Reads a template and returns the results. If no resource name for the template file is
-   * provided, it will be assumed to be the same as the simple name of the component class with an
-   * {@code .html} ending.
+   * Returns a {@link TemplateEngine}. This method requires the
+   * {@link VaadinService#getCurrent()} to be available.
+   *
+   * @return a {@link TemplateEngine}
+   */
+  static TemplateEngine get()
+  {
+    return VaadinService.getCurrent().getInstantiator().getOrCreate(TemplateEngine.class);
+  }
+
+
+  /**
+   * Reads a template for the given template ID and returns the root component.
    *
    * @param host
-   *          the host object (component or otherwise) that is used for the component mapping, used
-   *          to determine the class loader used to load the template and optionally the resource
-   *          name of the template
-   * @param templateResourceName
-   *          the resource name of the template file to load; if empty the name will be assumed to
-   *          be the same as the simple name of the component class with an {@code .html} ending
-   * @return the parsed template
+   *          the host object (component or otherwise) that is used for the component mapping; the
+   *          associated class loader may also be used to load the template document
+   * @param templateId
+   *          the template ID is used by the {@link TemplateResolver} to find and load the template
+   *          document
+   * @return the root component of the processed template
    * @throws TemplateException
-   *           if the template could not be successfully parsed
+   *           if the template could not be successfully read
    */
-  public Component readTemplate(Object host, String templateResourceName)
+  public Component instantiateTemplate(Object host, String templateId)
     throws TemplateException
   {
-    if (templateResourceName == null || templateResourceName.isEmpty())
-      templateResourceName = host.getClass().getSimpleName() + ".html";
+    Objects.requireNonNull(templateId, "templateId must not be null");
 
-    Document document = getDocument(host.getClass(), templateResourceName);
+    Document document = getTemplateDocument(host.getClass(), templateId);
 
-    ParsedDuiTemplate parsedTemplate = readTemplate(document,
-        new TemplateParseContext(templateResourceName, factories, processors));
+    ParsedTemplate parsedTemplate = parseTemplate(templateId, document);
 
     mapComponents(host, parsedTemplate);
     slotComponents(host, parsedTemplate);
@@ -258,14 +288,13 @@ public class TemplateBuilder
     return parsedTemplate.getRootComponent();
   }
 
-  public Component readTemplateFragment(Class<?> templateHostClass, String templateResourceName,
+  public Component instantiateTemplateFragment(Class<?> templateHostClass, String templateId,
       Object fragmentHost, String fragmentId)
     throws TemplateException
   {
-    if (templateResourceName == null || templateResourceName.isEmpty())
-      templateResourceName = templateHostClass.getSimpleName() + ".html";
+    Objects.requireNonNull(templateId, "templateId must not be null");
 
-    Document document = getDocument(templateHostClass, templateResourceName);
+    Document document = getTemplateDocument(templateHostClass, templateId);
 
     Elements select = document.select("template#" + fragmentId);
     if (select.isEmpty())
@@ -283,8 +312,7 @@ public class TemplateBuilder
 
     Element templateFragment = select.first();
 
-    ParsedDuiTemplate parsedTemplate = readTemplateFragment(templateFragment,
-        new TemplateParseContext(templateResourceName, factories, processors));
+    ParsedTemplate parsedTemplate = parseTemplateFragment(templateId, templateFragment);
 
     if (fragmentHost != null)
     {
@@ -296,47 +324,33 @@ public class TemplateBuilder
     return parsedTemplate.getRootComponent();
   }
 
-  private ParsedDuiTemplate readTemplate(Document templateDoc, TemplateParseContext context)
+  protected ParsedTemplate parseTemplate(String templateId, Document templateDocument)
     throws TemplateException
   {
-    Element body = templateDoc.body();
+    TemplateParserContext context = new TemplateParserContext(templateId, factories, processors);
 
-    context.readChildren(body, (slotName, childElement) -> {
-      if (slotName != null)
-        return false;
+    context.parseTemplate(templateDocument);
 
-      if (context.getRootComponent() != null)
-        throw new TemplateException("The DUI template must have a single root element.");
-
-      context.setRootComponent(context.readComponent(childElement, null));
-      return true;
-    }, null);
-
-    return new ParsedDuiTemplate(context.getTemplateResourceName(), context.getRootComponent(),
+    return new ParsedTemplate(context.getTemplateId(), context.getRootComponent(),
         context.getComponentsById(), context.getSlotsByName(), context.getTemplateFragmentById());
   }
 
-  private ParsedDuiTemplate readTemplateFragment(Element fragmentElement,
-      TemplateParseContext context)
+  protected ParsedTemplate parseTemplateFragment(String templateId, Element fragmentElement)
     throws TemplateException
   {
-    context.readChildren(fragmentElement, (slotName, childElement) -> {
-      if (slotName != null)
-        return false;
+    TemplateParserContext context = new TemplateParserContext(templateId, factories, processors);
 
-      if (context.getRootComponent() != null)
-        throw new TemplateException("The template fragment must have a single root element.");
+    context.parseTemplateFragment(fragmentElement);
 
-      context.setRootComponent(context.readComponent(childElement, null));
-      return true;
-    }, null);
-
-    return new ParsedDuiTemplate(context.getTemplateResourceName(), context.getRootComponent(),
+    return new ParsedTemplate(context.getTemplateId(), context.getRootComponent(),
         context.getComponentsById(), context.getSlotsByName(), null);
   }
 
-  private Document getDocument(Class<?> hostClass, String templateResourceName)
+  private Document getTemplateDocument(Class<?> hostClass, String templateId)
   {
+    if (templateId == null || templateId.isEmpty())
+      templateId = hostClass.getSimpleName();
+
     boolean useCache;
     switch (cacheMode)
     {
@@ -356,53 +370,47 @@ public class TemplateBuilder
         break;
     }
 
+    // muss templateId ganzen Pfad enthalten?
     Document document;
     if (useCache)
     {
-      /*
-       * Cache key should contain the full path. Resource names starting with '/' are absolute, all
-       * others relative to the component class. So for the latter, prefix the package name.
-       */
-      String cacheKey = templateResourceName.startsWith("/") ? templateResourceName
-          : hostClass.getPackage().getName().replace('.', '/') + "/" + templateResourceName;
-
-      document = templateCache.computeIfAbsent(cacheKey,
-          resname -> loadDocument(hostClass, templateResourceName));
+      document =
+          templateCache.computeIfAbsent(templateId, tid -> resolveTemplateDocument(hostClass, tid));
     }
     else
     {
-      document = loadDocument(hostClass, templateResourceName);
+      document = resolveTemplateDocument(hostClass, templateId);
     }
     return document;
   }
 
-  private Document loadDocument(Class<?> hostClass, String templateResourceName)
+  private Document resolveTemplateDocument(Class<?> hostClass, String templateId)
   {
-    InputStream inputStream = hostClass.getResourceAsStream(templateResourceName);
-    if (inputStream == null)
+    if (resolvers == null || resolvers.isEmpty())
+      throw new IllegalStateException("No TemplateResolvers registered.");
+
+    Document document = null;
+    for (TemplateResolver loader : resolvers)
     {
-      String msg = "DUI template resource '%s' not found through classloader of class '%s'.";
-      msg = String.format(msg, templateResourceName, hostClass.getName());
+      document = loader.resolveTemplateDocument(hostClass, templateId).orElse(null);
+      if (document != null)
+        break;
+    }
+
+    if (document == null)
+    {
+      String msg = "No document found for template '%s' and host class '%s'.";
+      msg = String.format(msg, templateId, hostClass.getName());
       throw new TemplateException(msg);
     }
 
-    Document doc;
-    try
-    {
-      String bodyHtml = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-      doc = Jsoup.parseBodyFragment(bodyHtml);
-    }
-    catch (IOException ex)
-    {
-      throw new TemplateException("Failed to parse the DUI template resource.", ex);
-    }
-    return doc;
+    return document;
   }
 
 
   /**
-   * Maps components from the given {@link ParsedDuiTemplate} to the {@link Mapped}-annotated fields
-   * of the given host object.
+   * Maps components from the given {@link ParsedTemplate} to the {@link Mapped}-annotated fields of
+   * the given host object.
    *
    * @param host
    *          the host object
@@ -410,7 +418,7 @@ public class TemplateBuilder
    *          the parsed template
    * @see Mapped
    */
-  public static void mapComponents(Object host, ParsedDuiTemplate template)
+  public static void mapComponents(Object host, ParsedTemplate template)
   {
     for (Field field : host.getClass().getDeclaredFields())
     {
@@ -448,7 +456,7 @@ public class TemplateBuilder
 
   /**
    * Inserts components from the {@link Slotted}-annotated fields of the given host object into the
-   * slots of the {@link ParsedDuiTemplate template}.
+   * slots of the {@link ParsedTemplate template}.
    *
    * @param host
    *          the host object
@@ -456,7 +464,7 @@ public class TemplateBuilder
    *          the parsed template
    * @see Slotted
    */
-  public static void slotComponents(Object host, ParsedDuiTemplate template)
+  public static void slotComponents(Object host, ParsedTemplate template)
   {
     Set<String> encounteredSlots = new HashSet<>();
 
@@ -519,7 +527,7 @@ public class TemplateBuilder
   }
 
   public static void mapTemplateFragments(Object host, Class<?> templateHostClass,
-      ParsedDuiTemplate template)
+      ParsedTemplate template)
   {
     for (Field field : host.getClass().getDeclaredFields())
     {
@@ -545,8 +553,8 @@ public class TemplateBuilder
         throw new TemplateException(msg);
       }
 
-      Fragment templateFragment =
-          new Fragment(templateHostClass, template.getTemplateResourceName(), fragmentId);
+      TemplateFragment templateFragment =
+          new TemplateFragment(templateHostClass, template.getTemplateResourceName(), fragmentId);
 
       ReflectTools.setJavaFieldValue(host, field, templateFragment);
     }

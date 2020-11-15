@@ -14,7 +14,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasValue;
 
 import de.codecamp.vaadin.flowdui.ComponentPostProcessor;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class HasValuePostProcessor
@@ -23,8 +23,8 @@ public class HasValuePostProcessor
 
   @Override
   @SuppressWarnings("unchecked")
-  public void postProcessComponent(Element element, Component component, TemplateParseContext context,
-      Set<String> consumedAttributes)
+  public void postProcessComponent(Component component, Element element,
+      TemplateParserContext context, Set<String> consumedAttributes)
   {
     if (component instanceof HasValue)
     {

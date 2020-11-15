@@ -10,7 +10,7 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.formlayout.FormLayout.FormItem;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class FormLayoutFactory
@@ -18,14 +18,14 @@ public class FormLayoutFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
     {
       case "vaadin-form-layout":
         FormLayout formLayout = new FormLayout();
-        context.readChildren(element, (slotName, childElement) -> {
+        context.readChildren(formLayout, element, (slotName, childElement) -> {
           if (slotName != null)
             return false;
 
@@ -44,7 +44,7 @@ public class FormLayoutFactory
 
       case "vaadin-form-item":
         ExtFormItem formItem = new ExtFormItem();
-        context.readChildren(element, (slotName, childElement) -> {
+        context.readChildren(formItem, element, (slotName, childElement) -> {
           if (slotName == null)
           {
             formItem.add(context.readComponent(childElement, null));

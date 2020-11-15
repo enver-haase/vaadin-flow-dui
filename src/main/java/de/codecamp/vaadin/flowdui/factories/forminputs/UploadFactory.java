@@ -8,8 +8,8 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.upload.Upload;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class UploadFactory
@@ -17,7 +17,7 @@ public class UploadFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -34,7 +34,7 @@ public class UploadFactory
         context.readStringAttribute(element, "capture",
             v -> upload.getElement().setAttribute("capture", v), consumedAttributes);
 
-        context.readChildren(element, (slotName, childElement) -> {
+        context.readChildren(upload, element, (slotName, childElement) -> {
           if (slotName == null)
             return false;
           switch (slotName)

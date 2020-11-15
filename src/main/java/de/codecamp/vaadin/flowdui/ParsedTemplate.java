@@ -1,6 +1,5 @@
 package de.codecamp.vaadin.flowdui;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.jsoup.nodes.Element;
@@ -11,24 +10,24 @@ import de.codecamp.vaadin.flowdui.components.Slot;
 
 
 /**
- * Contains the end result of a parsed template, including the root component and information about
- * the encountered component IDs and slots.
+ * Contains the end result of parsing a template, including the root component and information about
+ * the encountered component IDs, slots and fragments.
  */
-public class ParsedDuiTemplate
+public class ParsedTemplate
 {
 
-  private String templateResourceName;
+  private final String templateResourceName;
 
-  private Component rootComponent;
+  private final Component rootComponent;
 
-  private Map<String, Component> idToComponent = new HashMap<>();
+  private final Map<String, Component> idToComponent;
 
-  private Map<String, Slot> nameToSlot = new HashMap<>();
+  private final Map<String, Slot> nameToSlot;
 
-  private Map<String, Element> idToTemplateFragment = new HashMap<>();
+  private final Map<String, Element> idToTemplateFragment;
 
 
-  public ParsedDuiTemplate(String templateResourceName, Component rootComponent,
+  public ParsedTemplate(String templateResourceName, Component rootComponent,
       Map<String, Component> idToComponent, Map<String, Slot> nameToSlot,
       Map<String, Element> idToTemplateFragment)
   {
@@ -45,14 +44,14 @@ public class ParsedDuiTemplate
     return templateResourceName;
   }
 
-  public Component getComponentById(String id)
-  {
-    return idToComponent.get(id);
-  }
-
   public Component getRootComponent()
   {
     return rootComponent;
+  }
+
+  public Component getComponentById(String id)
+  {
+    return idToComponent.get(id);
   }
 
   public Slot getSlotByName(String name)

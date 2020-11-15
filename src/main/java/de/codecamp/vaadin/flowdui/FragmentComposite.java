@@ -8,20 +8,26 @@ public class FragmentComposite
   extends Composite<Component>
 {
 
-  private Fragment fragment;
+  private TemplateFragment fragment;
 
 
-  public FragmentComposite(Fragment fragment)
+  public FragmentComposite(TemplateFragment fragment)
   {
-    super();
+    this(fragment, true);
+  }
+
+  public FragmentComposite(TemplateFragment fragment, boolean createContentEagerly)
+  {
     this.fragment = fragment;
+    if (createContentEagerly)
+      getContent();
   }
 
 
   @Override
   protected Component initContent()
   {
-    return fragment.create(this);
+    return fragment.instantiate(this);
   }
 
 }

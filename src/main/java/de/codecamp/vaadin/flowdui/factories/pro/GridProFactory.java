@@ -8,8 +8,8 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.gridpro.GridPro;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class GridProFactory
@@ -17,7 +17,7 @@ public class GridProFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -25,9 +25,9 @@ public class GridProFactory
       case "vaadin-grid-pro":
         GridPro<?> gridPro = new GridPro<>();
 
-        context.readChildren(element, (slotName, childComponent) -> {
+        context.readChildren(gridPro, element, (slotName, childComponent) -> {
           throw new TemplateException(
-              "GridPro cannot be populated using a DUI template. Use its Java API instead.");
+              "GridPro cannot be populated using a template. Use its Java API instead.");
         }, null);
 
         return gridPro;

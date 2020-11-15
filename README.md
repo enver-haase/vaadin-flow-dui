@@ -1,10 +1,28 @@
 # Declarative UI for Vaadin Flow
 
-This is basically Vaadin-8-style Declarative UI for Vaadin Flow. So unlike Polymer / LitElement templates, it's completely interpreted on the server-side. No surprises and inconsistencies between client- and server-side state; but also no Polymer-style support for client-side Javascript. The goal is to support the same HTML like in a Polymer template (minus all the JavaScript), but offer additional attributes for convenience. See the [list of supports tags and attributes](#currently-supported-elements-and-attributes) further down.
+This is basically Vaadin-8-style Declarative UI for Vaadin Flow. The goal is to externalize the layout of the components in your application and have it as much more readable HTML/XML instead of cluttering up your Java code. It's completely interpreted and converted to a Component-tree on the server-side.
+
+# Why use this over Polymer / LitElement templates?
+
+I created this addon, because of two major issues:
+
+ * The initial state of components in Polymer / LitElement templates is not available on the server-side. Although, there are now [plans to support this in Vaadin 18](https://vaadin.com/blog/future-of-html-templates-in-vaadin).
+ * Vaadin did not intend to support [@Id to map components from a LitElement template](https://vaadin.com/labs/lit-element) to a field in Java. But in the meantime they [changed their stance on this](https://vaadin.com/blog/future-of-html-templates-in-vaadin), too:
+
+So now that my most important concerns are being or will be addressed, it remains to be seen how useful this addon will be in the future. But currently it still offers a few advantages for the purely Java-based approach of Vaadin Flow that could very well be worth it.
+ * While the HTML-like syntax of DUI is mostly compatible with the syntax from Polymer / LitElement templates, it adds a few conveniences e.g. regarding sizing and layouting. See the [list of supports tags and attributes](#currently-supported-elements-and-attributes) further down.
+ * It's extensible. Add your own custom elements and attributes!
+ * Definitely no inconsistencies between client- and server-side state as everything is done through the server-side Java API.
+
+To be fair, there's also a potential disadvantage to keep in mind: The memory overhead on the server-side is bigger compared to Polymer / LitElement as every element in the template will have a corresponding Component, not just the ones you need to access in Java. But in principle I'd expect the overhead to be similar to Vaadin 8's Declarative UI.
+
 
 # How does it work?
 
-A component (or view) based on DUI consists of two parts: A Java class extending `TemplateComposite` and an HTML file beside it (same name, but .html extension). The HTML is parsed on the server-side. Components are created from HTML elements using `ComponentFactory` implementations. And `ComponentPostProcessor` implementations can be used to share mapping logic between all Components, e.g. for [mixin interfaces](https://vaadin.com/docs/v14/flow/creating-components/tutorial-component-mixins.html). The standard Vaadin components and the most important HTML elements work out of the box. It's easy to add your own elements.
+A component or view based on DUI consists of two parts:
+ * a Java class extending `TemplateComposite`
+ * an HTML file containing the component tree
+Per default, the HTML file is expected beside the Java class (same name, but .html extension) in the classpath. The HTML is parsed on the server-side. Components are created from HTML elements using `ComponentFactory` implementations. And `ComponentPostProcessor` implementations can be used to share mapping logic between all Components, e.g. for [mixin interfaces](https://vaadin.com/docs/v14/flow/creating-components/tutorial-component-mixins.html). The standard Vaadin components and the most important HTML elements work out of the box. But it's easy to add your own elements.
 
 ## Basic Example
 
@@ -15,7 +33,7 @@ A basic example for a DUI-based view that also demonstrates how components can b
 
 @Route("dui-view")
 public class DuiView
-  extends DuiTemplateComposite
+  extends TemplateComposite
 {
 
   /**
@@ -34,7 +52,7 @@ public class DuiView
    * A reference to the template fragment used to create instances of it.
    */
   @FragmentId("detailsFragment")
-  private Fragment detailsFragment;
+  private TemplateFragment detailsFragment;
 
 
 
@@ -79,10 +97,9 @@ public class DuiView
     private TextField info;
 
 
-    public LocaleDetails(Fragment fragment)
+    public LocaleDetails(TemplateFragment fragment)
     {
       super(fragment);
-      getContent();
     }
 
     public void setLocale(Locale locale)
@@ -113,30 +130,26 @@ public class DuiView
 
 ## Adding Custom Elements and Attributes
 
-Implementing new factories and post processors should for the most part be painless. Take a look at the source code to see plenty of examples.
+Implementing new factories (`ComponentFactory`) and post processors (`ComponentPostProcessor`) should for the most part be painless. Take a look at the source code to see plenty of examples.
 
-In Spring Boot applications it should be enough to simply declare them as beans to have them automatically be picked up. In other environments use the following to add more factories and post processors:
+In Spring Boot applications it's enough to simply declare them as beans to have them automatically be picked up. In other environments they can be registered manually:
 ```
-TemplateBuilder.getAdditionalFactories().add(...)
-TemplateBuilder.getAdditionalPostProcessors().add(...)
+TemplateEngine.getAdditionalFactories().add(...)
+TemplateEngine.getAdditionalPostProcessors().add(...)
 ```
 
+## Load Templates From Other Sources
 
-# Motivation
+Per default, the HTML file is expected besides the Java class in the classpath.
 
-Basically, this add-on was created as a reaction to the [Vaadin Labs blog post about LitElement](https://vaadin.com/labs/lit-element) and resulting discussion in the comments.
+There's also support to load them from JavaScript-based Polymer / LitElement templates. This might allow you to still make use of Vaadin Designer, but this isn't thoroughly tested and would probably require you to avoid any of the custom attributes and components.
 
-The old Declarative UI (DUI) was a great way to externalize the layout of your application and have it as much more readable HTML/XML instead of as messy Java code. The interpretation of those layouts was completely on the server-side.
-However, with Vaadin Flow (Vaadin 10+) DUI was dropped in favor of Polymer-based - or soon LitElement-based - templates. In contrast to DUI, these are primarily interpreted by the browser directly, but using `@Id` it was still possible to map a client-side element to a server-side Component. While this looks almost identical to the old Declarative UI, there is one major difference: The server-side Component does not know about the initial the client-side state from the template. And making changes to a component on the client-side might not always be reflected back to the server.
-The resulting inconsistency between client- and server-side could easily lead to confusion, so going forward, it's currently Vaadin's intention to avoid this mixed approach, and instead focus on two very distinctive ones:
+Besides from the classpath, the template document can also be loaded from any other source by providing additional `TemplateResolver` implementations. 
+In Spring Boot applications they'll be automatically picked up as beans. In other environments they can be registered manually:
 
-1. A server-owned UI built using the Java API. This is the old-school Vaadin way, only now without DUI. 
-
-1. A client-owned UI built using Polymer/LitElement and TypeScript. Here, knowing the above mentioned issues, it makes sense that there's currently no plan to implement `@Id` for LitElement-based templates (which will replace Polymer in the long run). However, this leaves \<slot> as the only means to add server-owned Components to those client-side templates. This might be enough for leaf nodes in your layout, but accessing any element in between, like a split layout, on the server-side is no longer possible without workarounds.
-
-While I do think the second approach is a great replacement for GWT to create new components, I'd like to stick mostly with Java to create my applications. This is basically where this add-on comes in: to give back the convenience of DUI with a predictable server-side state, while using basically the same HTML as in a Polymer template.
-
-Anyway, see the mentioned [Vaadin Labs blog post about LitElement](https://vaadin.com/labs/lit-element) (and the discussion in the comments) for maybe some more details. And feel free to chime in if you have an opinion about this topic :)
+```
+TemplateEngine.getAdditionalResolvers().add(...)
+```
 
 
 # Currently Supported Elements and Attributes
@@ -190,6 +203,8 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | required |  |
 |  |  | readonly |  |
 |  |  | value |  |
+| * | HasHelper |  |  |
+|  |  | helper-text |  |
 |  |  |  |  |
 |  |  |  |  |
 | vaadin-checkbox | [Checkbox](https://vaadin.com/components/vaadin-checkbox) |  |  |

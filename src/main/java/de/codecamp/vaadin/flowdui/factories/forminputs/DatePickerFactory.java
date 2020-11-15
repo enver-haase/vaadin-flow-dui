@@ -8,7 +8,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.datepicker.DatePicker;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class DatePickerFactory
@@ -16,7 +16,7 @@ public class DatePickerFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -34,7 +34,7 @@ public class DatePickerFactory
         context.readLocalDateAttribute(element, "max", datePicker::setMax, consumedAttributes);
         context.readLocalDateAttribute(element, "initial-position", datePicker::setInitialPosition,
             consumedAttributes);
-        context.readChildren(element, null, null);
+        context.readChildren(datePicker, element, null, null);
         return datePicker;
     }
 

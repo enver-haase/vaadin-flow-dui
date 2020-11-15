@@ -10,8 +10,8 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.Tabs.Orientation;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
-import de.codecamp.vaadin.flowdui.TemplateParseContext;
 import de.codecamp.vaadin.flowdui.TemplateException;
+import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class TabsFactory
@@ -19,7 +19,7 @@ public class TabsFactory
 {
 
   @Override
-  public Component createComponent(Element element, TemplateParseContext context,
+  public Component createComponent(Element element, TemplateParserContext context,
       Set<String> consumedAttributes)
   {
     switch (element.tagName())
@@ -31,7 +31,7 @@ public class TabsFactory
             tabs.setOrientation(Orientation.VERTICAL);
         }, consumedAttributes);
 
-        context.readChildren(element, (slotName, childElement) -> {
+        context.readChildren(tabs, element, (slotName, childElement) -> {
           if (slotName != null)
             return false;
           if (!childElement.tagName().equals("vaadin-tab"))
@@ -47,7 +47,7 @@ public class TabsFactory
 
       case "vaadin-tab":
         Tab tab = new Tab();
-        context.readChildren(element, (slotName, childElement) -> {
+        context.readChildren(tab, element, (slotName, childElement) -> {
           if (slotName != null)
             return false;
           tab.add(context.readComponent(childElement, null));
