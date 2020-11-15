@@ -11,33 +11,9 @@ image: adoptopenjdk:11-jdk-hotspot
 
 stages:
   - build
-  - pages
 
 
-snapshot:
-  stage: build
-  script:
-    - './mvnw clean deploy "-DREPO_SNAPSHOT_URL=file:${CI_PROJECT_DIR}/target/m2/" $MAVEN_CLI_OPTS'
-    - mv target/m2/ m2/
-  artifacts:
-    paths:
-      - m2
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "master"'
-
-pages:
-  stage: pages
-  dependencies:
-    - snapshot
-  script:
-    - mv m2/ public/
-  artifacts:
-    paths:
-      - public
-  rules:
-    - if: '$CI_COMMIT_REF_NAME == "master"'
-
-release:
+build:
   stage: build
   script:
     - './mvnw clean deploy $MAVEN_CLI_OPTS'
@@ -46,4 +22,5 @@ release:
       - target/*.jar
       - target/*.zip
   rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
     - if: '$CI_COMMIT_TAG =~ /^release-/'

@@ -57,8 +57,8 @@
       <url>https://api.bintray.com/maven/frettman/m2/${projectId}/</url>
     </repository>
     <snapshotRepository>
-      <id>filesystem</id>
-      <url>${REPO_SNAPSHOT_URL}</url>
+      <id>gitlab-maven</id>
+      <url>https://gitlab.com/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</url>
     </snapshotRepository>
   </distributionManagement>
 
