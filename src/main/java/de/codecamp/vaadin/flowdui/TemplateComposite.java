@@ -40,7 +40,7 @@ public abstract class TemplateComposite
   protected TemplateComposite(String templateId)
   {
     if (templateId == null)
-      templateId = "/" + getClass().getName().replace(".", "/");
+      templateId = getClass().getName();
     this.templateId = templateId;
   }
 

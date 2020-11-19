@@ -10,9 +10,10 @@ public class ClassPathTemplateResolver
   @Override
   protected InputStream getInputStream(Class<?> hostClass, String templateId)
   {
-    InputStream inputStream = hostClass.getResourceAsStream(templateId + ".html");
+    String resourcePath = "/" + templateId.replace(".", "/");
+    InputStream inputStream = hostClass.getResourceAsStream(resourcePath + ".html");
     if (inputStream == null)
-      inputStream = hostClass.getResourceAsStream(templateId + ".js");
+      inputStream = hostClass.getResourceAsStream(resourcePath + ".js");
     return inputStream;
   }
 
