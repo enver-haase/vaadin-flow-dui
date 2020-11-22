@@ -29,10 +29,10 @@ Per default, the HTML file is expected beside the Java class (same name, but .ht
 A basic example for a DUI-based view that also demonstrates how components can be mapped from and into the template.
 
 ```java
-// src/main/java/my/package/DuiView.java
+// src/main/java/my/package/DemoView.java
 
-@Route("dui-view")
-public class DuiView
+@Route("demo")
+public class DemoView
   extends TemplateComposite
 {
 
@@ -40,7 +40,7 @@ public class DuiView
    * Created in the template and mapped to this field.
    */
   @Mapped("shuffleButton")
-  private Button button;
+  private Button shuffleButton;
 
   /**
    * Created here and mapped into the template.
@@ -48,12 +48,10 @@ public class DuiView
   @Slotted("localeGrid")
   private Grid<Locale> localeGrid = new Grid<>(Locale.class);
 
-  /**
-   * A reference to the template fragment used to create instances of it.
-   */
-  @FragmentId("detailsFragment")
-  private TemplateFragment detailsFragment;
 
+  public DemoView()
+  {
+  }
 
 
   @Override
@@ -68,13 +66,13 @@ public class DuiView
     localeGrid.addColumn("displayVariant");
     localeGrid.setDetailsVisibleOnClick(true);
     localeGrid.setItemDetailsRenderer(new ComponentRenderer<>(locale -> {
-      LocaleDetails details = new LocaleDetails(detailsFragment);
+      LocaleDetails details = new LocaleDetails();
       details.setLocale(locale);
       return details;
     }));
 
 
-    button.addClickListener(e -> shuffleLocales());
+    shuffleButton.addClickListener(e -> shuffleLocales());
 
     localeGrid.setItems(Locale.getAvailableLocales());
 
@@ -89,6 +87,7 @@ public class DuiView
   }
 
 
+  @FragmentId("DetailsFragment")
   public static class LocaleDetails
     extends FragmentComposite
   {
@@ -97,35 +96,31 @@ public class DuiView
     private TextField info;
 
 
-    public LocaleDetails(TemplateFragment fragment)
-    {
-      super(fragment);
-    }
-
     public void setLocale(Locale locale)
     {
       info.setValue(locale.getDisplayLanguage(locale) + " / " + locale.getDisplayCountry(locale)
           + " / " + locale.getDisplayVariant(locale));
     }
+
   }
 
 }
 ```
 
 ```html
-<!-- src/main/resources/my/package/DuiView.html -->
+<!-- src/main/resources/my/package/DemoView.html -->
 
 <vaadin-vertical-layout size-full>
   <slot name="localeGrid"></slot>
   <vaadin-button id="shuffleButton" theme="primary">Shuffle</vaadin-button>
 </vaadin-vertical-layout>
 
-<template id="detailsFragment">
+<fragment id="DetailsFragment">
   <vaadin-horizontal-layout width-full>
     <vaadin-text-field id="info" readonly width-full>
     </vaadin-text-field>
   </vaadin-horizontal-layout>
-</template>
+</fragment>
 ```
 
 ## Adding Custom Elements and Attributes
