@@ -8,19 +8,19 @@ import java.lang.annotation.Target;
 
 
 /**
- * Used to annotate subclasses of {@link FragmentComposite} in order to override the default
- * fragment ID. The default fragment ID is the simple name of the class.
+ * Used to annotate subclasses of {@link TemplateComposite} in order to override the default
+ * template ID. The default template ID is the fully qualified name of the class.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-public @interface FragmentId
+public @interface TemplateId
 {
 
   /**
-   * Returns the ID of the fragment to be loaded from the template.
+   * Returns the ID of the template to be loaded.
    *
-   * @return the ID of the fragment to be loaded from the template
+   * @return the ID of the template to be loaded
    */
   String value();
 

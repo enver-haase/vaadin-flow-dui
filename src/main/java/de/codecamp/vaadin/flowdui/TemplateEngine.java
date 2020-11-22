@@ -17,6 +17,7 @@ import org.jsoup.select.Elements;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.polymertemplate.Id;
+import com.vaadin.flow.internal.AnnotationReader;
 import com.vaadin.flow.internal.ReflectTools;
 import com.vaadin.flow.server.VaadinService;
 
@@ -133,7 +134,7 @@ public class TemplateEngine
   private static final List<TemplateResolver> DEFAULT_RESOLVERS = new ArrayList<>();
   static
   {
-    DEFAULT_RESOLVERS.add(new ClassPathTemplateResolver());
+    DEFAULT_RESOLVERS.add(new ClasspathTemplateResolver());
   }
 
   private static final List<ComponentFactory> ADDITIONAL_FACTORIES = new ArrayList<>();
@@ -234,8 +235,8 @@ public class TemplateEngine
   }
 
   /**
-   * Sets the default cache mode for new {@link TemplateEngine} instances. Please note that
-   * the Spring Boot integration provides a better way to do this.
+   * Sets the default cache mode for new {@link TemplateEngine} instances. Please note that the
+   * Spring Boot integration provides a better way to do this.
    *
    * @param cacheMode
    *          the default cache mode
@@ -248,8 +249,8 @@ public class TemplateEngine
 
 
   /**
-   * Returns a {@link TemplateEngine}. This method requires the
-   * {@link VaadinService#getCurrent()} to be available.
+   * Returns a {@link TemplateEngine}. This method requires the {@link VaadinService#getCurrent()}
+   * to be available.
    *
    * @return a {@link TemplateEngine}
    */
@@ -260,43 +261,142 @@ public class TemplateEngine
 
 
   /**
-   * Reads a template for the given template ID and returns the root component.
+   * Builds the component tree based on the template for the given {@link TemplateComposite}.
+   * <p>
+   * Components from the component tree can be {@link Mapped mapped} to fields of the composite.
+   * Manually created components in fields of the composite can be {@link Slotted slotted} into the
+   * component tree.
+   * <p>
+   * The template ID is assumed to be the fully qualified name of the subclass, unless an explict ID
+   * is provided via {@link TemplateId}.
    *
-   * @param host
+   * @param templateComposite
+   *          the {@link TemplateComposite} for which to build the component tree based on a
+   *          template
+   * @return the root component of the created component tree
+   * @throws TemplateException
+   *           if the template could not be successfully processed
+   * @see #mapComponents(Object, ParsedTemplate)
+   * @see #slotComponents(Object, ParsedTemplate)
+   */
+  public Component instantiateTemplate(TemplateComposite templateComposite)
+    throws TemplateException
+  {
+    Objects.requireNonNull(templateComposite, "templateComposite must not be null");
+
+    String templateId = TemplateEngine.getTemplateId(templateComposite.getClass());
+
+    return instantiateTemplate(templateId, templateComposite);
+  }
+
+  /**
+   * Builds the component tree based on the template for the given template ID.
+   * <p>
+   * Components are {@link #mapComponents(Object, ParsedTemplate) mapped} and
+   * {@link #slotComponents(Object, ParsedTemplate) slotted} on the given template host.
+   *
+   * @param templateId
+   *          the template ID
+   * @param templateHost
    *          the host object (component or otherwise) that is used for the component mapping; the
    *          associated class loader may also be used to load the template document
-   * @param templateId
-   *          the template ID is used by the {@link TemplateResolver} to find and load the template
-   *          document
    * @return the root component of the processed template
    * @throws TemplateException
    *           if the template could not be successfully read
+   * @see #mapComponents(Object, ParsedTemplate)
+   * @see #slotComponents(Object, ParsedTemplate)
    */
-  public Component instantiateTemplate(Object host, String templateId)
+  public Component instantiateTemplate(String templateId, Object templateHost)
     throws TemplateException
   {
+    Objects.requireNonNull(templateHost, "templateHost must not be null");
     Objects.requireNonNull(templateId, "templateId must not be null");
 
-    Document document = getTemplateDocument(host.getClass(), templateId);
+    Document document = getTemplateDocument(templateHost.getClass().getClassLoader(), templateId);
 
     ParsedTemplate parsedTemplate = parseTemplate(templateId, document);
 
-    mapComponents(host, parsedTemplate);
-    slotComponents(host, parsedTemplate);
-    mapTemplateFragments(host, host.getClass(), parsedTemplate);
+    mapComponents(templateHost, parsedTemplate);
+    slotComponents(templateHost, parsedTemplate);
 
     return parsedTemplate.getRootComponent();
   }
 
-  public Component instantiateTemplateFragment(Class<?> templateHostClass, String templateId,
-      Object fragmentHost, String fragmentId)
+  /**
+   * Builds the component tree based on the template fragment for the given
+   * {@link FragmentComposite}.
+   * <p>
+   * Components from the component tree can be {@link Mapped mapped} to fields of the composite.
+   * Manually created components in fields of the composite can be {@link Slotted slotted} into the
+   * component tree.
+   * <p>
+   * To ensure that the corresponding template can be determined, subclasses of
+   * {@link FragmentComposite} either need to be inner classes of {@link TemplateComposite template
+   * composites} or they need to be annotated with {@link TemplateId}.
+   * <p>
+   * The fragment ID is assumed to be the simple name of the subclass, unless an explict ID is
+   * provided via {@link FragmentId}.
+   *
+   * @param fragmentComposite
+   *          the {@link FragmentComposite} for which to build the component tree based on a
+   *          template fragment
+   * @return the root component of the created component tree
+   * @throws TemplateException
+   *           if the template could not be successfully processed
+   * @see #mapComponents(Object, ParsedTemplate)
+   * @see #slotComponents(Object, ParsedTemplate)
+   */
+  public Component instantiateTemplateFragment(FragmentComposite fragmentComposite)
+    throws TemplateException
+  {
+    Objects.requireNonNull(fragmentComposite, "fragmentComposite must not be null");
+
+    Class<?> templateHostClass = getClass().getEnclosingClass();
+    while (templateHostClass != null
+        && !TemplateComposite.class.isAssignableFrom(templateHostClass))
+    {
+      templateHostClass.getEnclosingClass();
+    }
+
+    String templateId = TemplateEngine.getTemplateIdForFragment(fragmentComposite.getClass());
+    String fragmentId = TemplateEngine.getFragmentId(fragmentComposite.getClass());
+
+    return instantiateTemplateFragment(templateId, fragmentId, fragmentComposite);
+  }
+
+  /**
+   * Builds the component tree based on the template fragment for the given template ID and fragment
+   * ID.
+   * <p>
+   * Components are {@link #mapComponents(Object, ParsedTemplate) mapped} and
+   * {@link #slotComponents(Object, ParsedTemplate) slotted} on the given fragment host.
+   *
+   * @param templateId
+   *          the template ID
+   * @param fragmentId
+   *          the fragment ID
+   * @param fragmentHost
+   *          the host object (component or otherwise) that is used for the component mapping; the
+   *          associated class loader may also be used to load the template document
+   * @return the root component of the created component tree
+   * @throws TemplateException
+   *           if the template could not be successfully processed
+   * @see #mapComponents(Object, ParsedTemplate)
+   * @see #slotComponents(Object, ParsedTemplate)
+   */
+  public Component instantiateTemplateFragment(String templateId, String fragmentId,
+      Object fragmentHost)
     throws TemplateException
   {
     Objects.requireNonNull(templateId, "templateId must not be null");
 
-    Document document = getTemplateDocument(templateHostClass, templateId);
+    Document document = getTemplateDocument(fragmentHost.getClass().getClassLoader(), templateId);
 
     Elements select = document.select("template#" + fragmentId);
+
+    if (select.isEmpty())
+      select = document.select("fragment#" + fragmentId);
+
     if (select.isEmpty())
     {
       String msg = "No template fragment with ID '%s' found.";
@@ -318,7 +418,6 @@ public class TemplateEngine
     {
       mapComponents(fragmentHost, parsedTemplate);
       slotComponents(fragmentHost, parsedTemplate);
-      mapTemplateFragments(fragmentHost, templateHostClass, parsedTemplate);
     }
 
     return parsedTemplate.getRootComponent();
@@ -346,10 +445,10 @@ public class TemplateEngine
         context.getComponentsById(), context.getSlotsByName(), null);
   }
 
-  private Document getTemplateDocument(Class<?> hostClass, String templateId)
+  private Document getTemplateDocument(ClassLoader classLoader, String templateId)
   {
-    if (templateId == null || templateId.isEmpty())
-      templateId = hostClass.getSimpleName();
+    Objects.requireNonNull(classLoader, "classLoader must not be null");
+    Objects.requireNonNull(templateId, "templateId must not be null");
 
     boolean useCache;
     switch (cacheMode)
@@ -370,21 +469,20 @@ public class TemplateEngine
         break;
     }
 
-    // muss templateId ganzen Pfad enthalten?
     Document document;
     if (useCache)
     {
-      document =
-          templateCache.computeIfAbsent(templateId, tid -> resolveTemplateDocument(hostClass, tid));
+      document = templateCache.computeIfAbsent(templateId,
+          tid -> resolveTemplateDocument(classLoader, tid));
     }
     else
     {
-      document = resolveTemplateDocument(hostClass, templateId);
+      document = resolveTemplateDocument(classLoader, templateId);
     }
     return document;
   }
 
-  private Document resolveTemplateDocument(Class<?> hostClass, String templateId)
+  private Document resolveTemplateDocument(ClassLoader classLoader, String templateId)
   {
     if (resolvers == null || resolvers.isEmpty())
       throw new IllegalStateException("No TemplateResolvers registered.");
@@ -392,15 +490,15 @@ public class TemplateEngine
     Document document = null;
     for (TemplateResolver loader : resolvers)
     {
-      document = loader.resolveTemplateDocument(hostClass, templateId).orElse(null);
+      document = loader.resolveTemplateDocument(classLoader, templateId).orElse(null);
       if (document != null)
         break;
     }
 
     if (document == null)
     {
-      String msg = "No document found for template '%s' and host class '%s'.";
-      msg = String.format(msg, templateId, hostClass.getName());
+      String msg = "No document found for template ID '%s'.";
+      msg = String.format(msg, templateId);
       throw new TemplateException(msg);
     }
 
@@ -410,7 +508,7 @@ public class TemplateEngine
 
   /**
    * Maps components from the given {@link ParsedTemplate} to the {@link Mapped}-annotated fields of
-   * the given host object.
+   * the given host.
    *
    * @param host
    *          the host object
@@ -455,8 +553,8 @@ public class TemplateEngine
   }
 
   /**
-   * Inserts components from the {@link Slotted}-annotated fields of the given host object into the
-   * slots of the {@link ParsedTemplate template}.
+   * Inserts components from the {@link Slotted}-annotated fields of the given host into the slots
+   * of the {@link ParsedTemplate template}.
    *
    * @param host
    *          the host object
@@ -526,38 +624,64 @@ public class TemplateEngine
     }
   }
 
-  public static void mapTemplateFragments(Object host, Class<?> templateHostClass,
-      ParsedTemplate template)
+  private static String getTemplateId(Class<? extends TemplateComposite> templateHostClass)
   {
-    for (Field field : host.getClass().getDeclaredFields())
+    Optional<TemplateId> templateIdAtOpt =
+        AnnotationReader.getAnnotationFor(templateHostClass, TemplateId.class);
+
+    String templateId;
+    if (templateIdAtOpt.isPresent())
+      templateId = templateIdAtOpt.get().value();
+    else
+      templateId = templateHostClass.getName();
+
+    return templateId;
+  }
+
+  private static String getTemplateIdForFragment(
+      Class<? extends FragmentComposite> fragmentHostClass)
+  {
+    String templateId = null;
+
+    Class<?> clazz = fragmentHostClass;
+    while (templateId == null && clazz != null)
     {
-      String fragmentId = null;
-
-      FragmentId fragmentAt = field.getAnnotation(FragmentId.class);
-      if (fragmentAt != null)
+      if (TemplateComposite.class.isAssignableFrom(clazz))
       {
-        fragmentId = fragmentAt.value();
+        templateId = TemplateEngine.getTemplateId(clazz.asSubclass(TemplateComposite.class));
       }
-
-      if (fragmentId == null)
-        continue;
-
-      if (fragmentId.isEmpty())
-        fragmentId = field.getName();
-
-      Element fragmentElement = template.getTemplateFragmentById(fragmentId);
-      if (fragmentElement == null)
+      else
       {
-        String msg = "No template fragment found with ID '%s' for field %s.";
-        msg = String.format(msg, fragmentId, field);
-        throw new TemplateException(msg);
+        Optional<TemplateId> templateIdAtOpt =
+            AnnotationReader.getAnnotationFor(clazz, TemplateId.class);
+        if (templateIdAtOpt.isPresent())
+          templateId = templateIdAtOpt.get().value();
+        else
+          clazz = clazz.getEnclosingClass();
       }
-
-      TemplateFragment templateFragment =
-          new TemplateFragment(templateHostClass, template.getTemplateResourceName(), fragmentId);
-
-      ReflectTools.setJavaFieldValue(host, field, templateFragment);
     }
+
+    if (templateId == null)
+    {
+      throw new TemplateException(String.format("No template ID found for fragment host class %s.",
+          fragmentHostClass.getName()));
+    }
+
+    return templateId;
+  }
+
+  private static String getFragmentId(Class<? extends FragmentComposite> fragmentHostClass)
+  {
+    Optional<FragmentId> fragmentIdAtOpt =
+        AnnotationReader.getAnnotationFor(fragmentHostClass, FragmentId.class);
+
+    String fragmentId;
+    if (fragmentIdAtOpt.isPresent())
+      fragmentId = fragmentIdAtOpt.get().value();
+    else
+      fragmentId = fragmentHostClass.getSimpleName();
+
+    return fragmentId;
   }
 
   private static boolean classExists(String className)

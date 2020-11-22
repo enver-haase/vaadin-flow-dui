@@ -4,21 +4,25 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 
 
-public class FragmentComposite
+/**
+ * Abstract base class for {@link Composite composites} whose content is created from a fragment of
+ * a template.
+ *
+ * @see TemplateEngine#instantiateTemplateFragment(FragmentComposite)
+ * @see Mapped
+ * @see Slotted
+ */
+public abstract class FragmentComposite
   extends Composite<Component>
 {
 
-  private TemplateFragment fragment;
-
-
-  public FragmentComposite(TemplateFragment fragment)
+  protected FragmentComposite()
   {
-    this(fragment, true);
+    this(true);
   }
 
-  public FragmentComposite(TemplateFragment fragment, boolean createContentEagerly)
+  protected FragmentComposite(boolean createContentEagerly)
   {
-    this.fragment = fragment;
     if (createContentEagerly)
       getContent();
   }
@@ -27,7 +31,7 @@ public class FragmentComposite
   @Override
   protected Component initContent()
   {
-    return fragment.instantiate(this);
+    return TemplateEngine.get().instantiateTemplateFragment(this);
   }
 
 }
