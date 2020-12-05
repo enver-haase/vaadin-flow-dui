@@ -365,13 +365,13 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 | vaadin-login-overlay | [LoginOverlay](https://vaadin.com/components/vaadin-login) |  |  |
 | vaadin-horizontal-layout | [HorizontalLayout](https://vaadin.com/components/vaadin-ordered-layout) |  | Default spacing of the Java component is removed per default. |
 | vaadin-vertical-layout | [VerticalLayout](https://vaadin.com/components/vaadin-ordered-layout) |  | Default width, padding, spacing of the Java component is removed per default. |
+| * | ThemableLayout |  |  |
+|  |  | ! margin | active when attribute present; attribute has no value |
+|  |  | ! padding | active when attribute present; attribute has no value |
+|  |  | ! spacing | active when attribute present; also supports **xs**, **s**, **m** (default), **l**, **xl** |
+|  |  | ! box-sizing | border-box, content-box |
 | vaadin-scroller | [Scroller](https://vaadin.com/components/vaadin-ordered-layout) |  |  |
 |  |  | scroll-direction |  | both (default), horizontal, vertical, none
-| * | ThemableLayout |  |  |
-|  |  | ! margin |  |
-|  |  | ! padding |  |
-|  |  | ! spacing |  |
-|  |  | ! box-sizing |  |
 | ! vaadin-flex-layout | FlexLayout |  | Doesn't exist as WebComponent. Just a div with flex box layout. [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/). Also see attributes of FlexComponent. |
 |  |  | align-content | -> setAlignContent(..) |
 |  |  | flex-direction | -> setFlexDirection(..) |

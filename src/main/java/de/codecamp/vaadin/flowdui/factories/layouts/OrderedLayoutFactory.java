@@ -20,11 +20,15 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
 import de.codecamp.vaadin.flowdui.ComponentPostProcessor;
+import de.codecamp.vaadin.flowdui.TemplateException;
 import de.codecamp.vaadin.flowdui.TemplateParserContext;
+import de.codecamp.vaadin.flowdui.util.ThemableLayoutSpacing;
 
 
 public class OrderedLayoutFactory
-  implements ComponentFactory, ComponentPostProcessor
+  implements
+    ComponentFactory,
+    ComponentPostProcessor
 {
 
   private static final Map<String, FlexComponent.Alignment> ALIGNMENT = new HashMap<>();
@@ -205,8 +209,35 @@ public class OrderedLayoutFactory
           themableLayout::setMargin, consumedAttributes);
       context.readBooleanAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "padding",
           themableLayout::setPadding, consumedAttributes);
-      context.readBooleanAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "spacing",
-          themableLayout::setSpacing, consumedAttributes);
+      context.readStringAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "spacing",
+          value ->
+          {
+            switch (value)
+            {
+              case "":
+                themableLayout.setSpacing(true);
+                break;
+              case "xs":
+                ThemableLayoutSpacing.XS.applyTo(themableLayout);
+                break;
+              case "s":
+                ThemableLayoutSpacing.S.applyTo(themableLayout);
+                break;
+              case "m":
+                ThemableLayoutSpacing.M.applyTo(themableLayout);
+                break;
+              case "l":
+                ThemableLayoutSpacing.L.applyTo(themableLayout);
+                break;
+              case "xl":
+                ThemableLayoutSpacing.XL.applyTo(themableLayout);
+                break;
+              default:
+                throw new TemplateException(element,
+                    String.format("Unsupported value found for attribute '%s': '%s'",
+                        TemplateParserContext.CUSTOM_ATTR_PREFIX + "spacing", value));
+            }
+          }, consumedAttributes);
       context.readEnumAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "box-sizing",
           BOX_SIZING::get, themableLayout::setBoxSizing, consumedAttributes);
     }
