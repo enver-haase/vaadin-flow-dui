@@ -1,6 +1,6 @@
 
 variables:
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository --show-version"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   MAVEN_CLI_OPTS: "-s .m2/settings.xml"
 
 cache:
@@ -15,6 +15,11 @@ stages:
 
 build:
   stage: build
+  before_script:
+    - apt-get update && apt-get install gnupg -y
+    - gpg --version
+    - gpg --import --batch --yes $SIGNING_PRIVATE_KEY
+    - gpg --list-secret-keys
   script:
     - >
       if [[ $CI_COMMIT_BRANCH =~ ^feature- ]]; then
@@ -24,7 +29,6 @@ build:
     - './mvnw clean deploy $MAVEN_CLI_OPTS'
   artifacts:
     paths:
-      - target/*.jar
       - target/*.zip
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'

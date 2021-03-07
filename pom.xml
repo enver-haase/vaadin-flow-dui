@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>de.codecamp.vaadin</groupId>
@@ -35,7 +35,7 @@
   </licenses>
 
   <organization>
-    <name>codecamp.de</name>
+    <name>Patrick Schmidt</name>
   </organization>
 
   <developers>
@@ -50,17 +50,6 @@
     <connection>scm:git:https://gitlab.com/codecamp-de/${projectId}.git</connection>
     <developerConnection>scm:git:https://gitlab.com/codecamp-de/${projectId}.git</developerConnection>
   </scm>
-
-  <distributionManagement>
-    <repository>
-      <id>bintray</id>
-      <url>https://api.bintray.com/maven/frettman/m2/${projectId}/</url>
-    </repository>
-    <snapshotRepository>
-      <id>gitlab-maven</id>
-      <url>https://gitlab.com/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-    </snapshotRepository>
-  </distributionManagement>
 
 
   <dependencies>
@@ -136,11 +125,6 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-autoconfigure</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure-processor</artifactId>
       <optional>true</optional>
     </dependency>
@@ -171,23 +155,21 @@
     </dependencies>
   </dependencyManagement>
 
+
   <build>
 
     <plugins>
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
+        <groupId>io.repaint.maven</groupId>
+        <artifactId>tiles-maven-plugin</artifactId>
+        <version>2.19</version>
+        <extensions>true</extensions>
+        <configuration>
+          <tiles>
+            <tile>de.codecamp.tiles:oss-vaadin-addon-build-tile:RELEASE</tile>
+          </tiles>
+        </configuration>
       </plugin>
 
     </plugins>
@@ -195,17 +177,9 @@
     <pluginManagement>
       <plugins>
 
+        <!-- ECLIPSE Included for Eclipse and its lack of tiles support. -->
         <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.1.0</version>
-        </plugin>
-
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.1.0</version>
-        </plugin>
-
-        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.1</version>
         </plugin>
@@ -213,77 +187,13 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.2.0</version>
           <configuration>
             <archive>
-              <index>true</index>
-              <manifest>
-                <addClasspath>false</addClasspath>
-                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-              </manifest>
               <manifestEntries>
-                <Vaadin-Package-Version>1</Vaadin-Package-Version>
                 <Automatic-Module-Name>de.codecamp.vaadin.flowdui</Automatic-Module-Name>
               </manifestEntries>
             </archive>
-            <!-- Generated file that shouldn't be included in add-ons -->
-            <excludes>
-              <exclude>META-INF/VAADIN/config/flow-build-info.json</exclude>
-            </excludes>
           </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>3.2.1</version>
-          <executions>
-            <execution>
-              <id>attach-sources</id>
-              <goals>
-                <goal>jar-no-fork</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.2.0</version>
-          <executions>
-            <execution>
-              <id>attach-javadocs</id>
-              <goals>
-                <goal>jar</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <doclint>none</doclint>
-            <quiet>true</quiet>
-          </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.3.0</version>
-          <configuration>
-            <appendAssemblyId>false</appendAssemblyId>
-            <attach>false</attach>
-            <descriptors>
-              <descriptor>assembly/assembly.xml</descriptor>
-            </descriptors>
-          </configuration>
-          <executions>
-            <execution>
-              <goals>
-                <goal>single</goal>
-              </goals>
-              <phase>package</phase>
-            </execution>
-          </executions>
         </plugin>
 
       </plugins>
