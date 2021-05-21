@@ -72,64 +72,71 @@ public class TemplateEngine
 
   static
   {
-    DEFAULT_POST_PROCESSORS.add(new BasicFlowPostProcessor());
-    DEFAULT_POST_PROCESSORS.add(new HasEnabledPostProcessor());
-    DEFAULT_POST_PROCESSORS.add(new HasSizePostProcessor());
-    DEFAULT_POST_PROCESSORS.add(new FocusablePostProcessor());
-    DEFAULT_POST_PROCESSORS.add(new HasStylePostProcessor());
-    DEFAULT_POST_PROCESSORS.add(new HasThemePostProcessor());
-    DEFAULT_POST_PROCESSORS.add(new HasValuePostProcessor());
-    DEFAULT_POST_PROCESSORS.add(new HasValidationPostProcessor());
-    DEFAULT_POST_PROCESSORS.add(new HasHelperPostProcessor());
+    registerDefaultFactory(new BasicFlowPostProcessor());
+    registerDefaultFactory(new HasEnabledPostProcessor());
+    registerDefaultFactory(new HasSizePostProcessor());
+    registerDefaultFactory(new FocusablePostProcessor());
+    registerDefaultFactory(new HasStylePostProcessor());
+    registerDefaultFactory(new HasThemePostProcessor());
+    registerDefaultFactory(new HasValuePostProcessor());
+    registerDefaultFactory(new HasValidationPostProcessor());
+    registerDefaultFactory(new HasHelperPostProcessor());
 
-    DEFAULT_FACTORIES.add(new CustomElementsFactory());
+    registerDefaultFactory(new CustomElementsFactory());
 
-    DEFAULT_FACTORIES.add(new HtmlFactory());
+    registerDefaultFactory(new HtmlFactory());
 
     // layouts
-    DEFAULT_FACTORIES.add(new AppLayoutFactory());
-    DEFAULT_FACTORIES.add(new FormLayoutFactory());
-    DEFAULT_FACTORIES.add(new LoginFactory());
-    OrderedLayoutFactory orderedLayoutFactory = new OrderedLayoutFactory();
-    DEFAULT_FACTORIES.add(orderedLayoutFactory);
-    DEFAULT_POST_PROCESSORS.add(orderedLayoutFactory);
-    DEFAULT_FACTORIES.add(new SplitLayoutFactory());
+    registerDefaultFactory(new AppLayoutFactory());
+    registerDefaultFactory(new FormLayoutFactory());
+    registerDefaultFactory(new LoginFactory());
+    registerDefaultFactory(new OrderedLayoutFactory());
+    registerDefaultFactory(new SplitLayoutFactory());
 
     // form inputs
-    DEFAULT_FACTORIES.add(new CheckboxFactory());
-    DEFAULT_FACTORIES.add(new ComboBoxFactory());
-    DEFAULT_FACTORIES.add(new CustomFieldFactory());
-    DEFAULT_FACTORIES.add(new DatePickerFactory());
-    DEFAULT_FACTORIES.add(new DateTimePickerFactory());
-    DEFAULT_FACTORIES.add(new ListBoxFactory());
-    DEFAULT_FACTORIES.add(new RadioButtonFactory());
-    DEFAULT_FACTORIES.add(new SelectFactory());
-    TextFieldFactory textFieldFlowFactory = new TextFieldFactory();
-    DEFAULT_FACTORIES.add(textFieldFlowFactory);
-    DEFAULT_POST_PROCESSORS.add(textFieldFlowFactory);
-    DEFAULT_FACTORIES.add(new TimePickerFactory());
-    DEFAULT_FACTORIES.add(new UploadFactory());
+    registerDefaultFactory(new CheckboxFactory());
+    registerDefaultFactory(new ComboBoxFactory());
+    registerDefaultFactory(new CustomFieldFactory());
+    registerDefaultFactory(new DatePickerFactory());
+    registerDefaultFactory(new DateTimePickerFactory());
+    registerDefaultFactory(new ListBoxFactory());
+    registerDefaultFactory(new RadioButtonFactory());
+    registerDefaultFactory(new SelectFactory());
+    registerDefaultFactory(new TextFieldFactory());
+    registerDefaultFactory(new TimePickerFactory());
+    registerDefaultFactory(new UploadFactory());
 
     // visualization & interaction
-    DEFAULT_FACTORIES.add(new AccordionFactory());
-    DEFAULT_FACTORIES.add(new ButtonFactory());
-    DEFAULT_FACTORIES.add(new DetailsFactory());
-    DEFAULT_FACTORIES.add(new DialogFactory());
-    DEFAULT_FACTORIES.add(new GridFactory());
-    DEFAULT_FACTORIES.add(new IconFactory());
-    DEFAULT_FACTORIES.add(new MenuBarFactory());
-    DEFAULT_FACTORIES.add(new ProgressBarFactory());
-    DEFAULT_FACTORIES.add(new TabsFactory());
+    registerDefaultFactory(new AccordionFactory());
+    registerDefaultFactory(new ButtonFactory());
+    registerDefaultFactory(new DetailsFactory());
+    registerDefaultFactory(new DialogFactory());
+    registerDefaultFactory(new GridFactory());
+    registerDefaultFactory(new IconFactory());
+    registerDefaultFactory(new MenuBarFactory());
+    registerDefaultFactory(new ProgressBarFactory());
+    registerDefaultFactory(new TabsFactory());
 
 
     // Pro components might not be present
     if (classExists("com.vaadin.flow.component.board.Board"))
-      DEFAULT_FACTORIES.add(new BoardFactory());
+      registerDefaultFactory(new BoardFactory());
     if (classExists("com.vaadin.flow.component.crud.Crud"))
-      DEFAULT_FACTORIES.add(new CrudFactory());
+      registerDefaultFactory(new CrudFactory());
     if (classExists("com.vaadin.flow.component.charts.Chart"))
-      DEFAULT_FACTORIES.add(new ChartFactory());
+      registerDefaultFactory(new ChartFactory());
   }
+
+
+  private static final void registerDefaultFactory(Object factory)
+  {
+    if (factory instanceof ComponentPostProcessor)
+      DEFAULT_POST_PROCESSORS.add((ComponentPostProcessor) factory);
+
+    if (factory instanceof ComponentFactory)
+      DEFAULT_FACTORIES.add((ComponentFactory) factory);
+  }
+
 
   private static final List<TemplateResolver> DEFAULT_RESOLVERS = new ArrayList<>();
   static
