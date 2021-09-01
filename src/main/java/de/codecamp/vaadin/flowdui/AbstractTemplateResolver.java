@@ -13,7 +13,8 @@ import org.jsoup.nodes.Document;
 
 
 public abstract class AbstractTemplateResolver
-  implements TemplateResolver
+  implements
+    TemplateResolver
 {
 
   /**

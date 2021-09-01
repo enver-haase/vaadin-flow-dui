@@ -8,6 +8,7 @@ import com.vaadin.flow.component.Tag;
 @Tag("b")
 public class Bold
   extends HtmlContainer
-  implements ClickNotifier<Bold>
+  implements
+    ClickNotifier<Bold>
 {
 }

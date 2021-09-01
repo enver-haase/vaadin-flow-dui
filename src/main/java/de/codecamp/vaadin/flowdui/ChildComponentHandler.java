@@ -7,7 +7,8 @@ import org.jsoup.nodes.Element;
 
 @FunctionalInterface
 public interface ChildComponentHandler
-  extends Serializable
+  extends
+    Serializable
 {
 
   boolean handle(String slotName, Element childElement);

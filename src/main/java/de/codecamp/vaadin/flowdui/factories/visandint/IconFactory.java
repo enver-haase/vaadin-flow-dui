@@ -14,7 +14,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class IconFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override

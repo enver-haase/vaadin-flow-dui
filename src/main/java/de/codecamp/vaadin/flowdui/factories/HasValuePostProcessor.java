@@ -18,7 +18,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class HasValuePostProcessor
-  implements ComponentPostProcessor
+  implements
+    ComponentPostProcessor
 {
 
   @Override

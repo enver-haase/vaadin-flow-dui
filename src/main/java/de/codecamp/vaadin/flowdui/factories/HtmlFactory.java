@@ -51,7 +51,8 @@ import de.codecamp.vaadin.flowdui.components.Strong;
 
 
 public class HtmlFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   private static final Map<String, NumberingType> NUMBERING_TYPE = new HashMap<>();

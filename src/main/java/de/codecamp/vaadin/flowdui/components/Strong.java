@@ -8,6 +8,7 @@ import com.vaadin.flow.component.Tag;
 @Tag(Tag.STRONG)
 public class Strong
   extends HtmlContainer
-  implements ClickNotifier<Strong>
+  implements
+    ClickNotifier<Strong>
 {
 }

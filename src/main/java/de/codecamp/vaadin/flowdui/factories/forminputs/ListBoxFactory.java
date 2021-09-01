@@ -15,7 +15,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class ListBoxFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override

@@ -7,7 +7,8 @@ import org.jsoup.nodes.TextNode;
 
 @FunctionalInterface
 public interface TextNodeHandler
-  extends Serializable
+  extends
+    Serializable
 {
 
   void handle(TextNode textNode);

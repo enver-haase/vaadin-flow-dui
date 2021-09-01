@@ -13,7 +13,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class GridProFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override

@@ -13,7 +13,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class SelectFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override

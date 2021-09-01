@@ -14,7 +14,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class DetailsFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override

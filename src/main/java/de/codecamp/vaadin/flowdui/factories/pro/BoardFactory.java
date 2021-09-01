@@ -13,7 +13,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class BoardFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override

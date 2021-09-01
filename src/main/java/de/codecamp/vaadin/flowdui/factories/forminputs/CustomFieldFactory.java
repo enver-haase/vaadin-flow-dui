@@ -14,7 +14,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class CustomFieldFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override

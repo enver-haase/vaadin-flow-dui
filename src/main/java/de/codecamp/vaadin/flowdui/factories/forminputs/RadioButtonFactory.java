@@ -13,7 +13,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class RadioButtonFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override

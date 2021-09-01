@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 import de.codecamp.vaadin.flowdui.ComponentFactory;
 import de.codecamp.vaadin.flowdui.ComponentPostProcessor;
-import de.codecamp.vaadin.flowdui.TemplateResolver;
 import de.codecamp.vaadin.flowdui.TemplateEngine;
+import de.codecamp.vaadin.flowdui.TemplateResolver;
 
 
 @Configuration
@@ -31,8 +31,8 @@ public class TemplateAutoConfiguration
       List<ComponentPostProcessor> additionalPostProcessors,
       List<TemplateResolver> additionalResolvers)
   {
-    TemplateEngine bean = new TemplateEngine(additionalFactories,
-        additionalPostProcessors, additionalResolvers);
+    TemplateEngine bean =
+        new TemplateEngine(additionalFactories, additionalPostProcessors, additionalResolvers);
     bean.setCacheMode(properties.getCacheMode());
     return bean;
   }

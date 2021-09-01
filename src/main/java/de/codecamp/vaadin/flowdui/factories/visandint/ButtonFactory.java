@@ -14,7 +14,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class ButtonFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override
@@ -28,8 +29,8 @@ public class ButtonFactory
         context.readBooleanAttribute(element, "autofocus", button::setAutofocus,
             consumedAttributes);
         context.readBooleanAttribute(element,
-            TemplateParserContext.CUSTOM_ATTR_PREFIX + "disable-on-click", button::setDisableOnClick,
-            consumedAttributes);
+            TemplateParserContext.CUSTOM_ATTR_PREFIX + "disable-on-click",
+            button::setDisableOnClick, consumedAttributes);
 
         AtomicBoolean iconFound = new AtomicBoolean(false);
         context.readChildren(button, element, (slotName, childElement) -> {

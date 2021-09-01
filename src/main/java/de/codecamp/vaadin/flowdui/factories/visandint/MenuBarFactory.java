@@ -12,7 +12,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class MenuBarFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override

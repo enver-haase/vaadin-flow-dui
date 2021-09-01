@@ -12,7 +12,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class HasSizePostProcessor
-  implements ComponentPostProcessor
+  implements
+    ComponentPostProcessor
 {
 
   @Override
@@ -41,10 +42,12 @@ public class HasSizePostProcessor
 
       context.readStringAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "height",
           hasSize::setHeight, consumedAttributes);
-      context.readBooleanAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "height-full",
-          v -> hasSize.setHeightFull(), consumedAttributes);
-      context.readBooleanAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "height-auto",
-          v -> hasSize.setHeight(null), consumedAttributes);
+      context.readBooleanAttribute(element,
+          TemplateParserContext.CUSTOM_ATTR_PREFIX + "height-full", v -> hasSize.setHeightFull(),
+          consumedAttributes);
+      context.readBooleanAttribute(element,
+          TemplateParserContext.CUSTOM_ATTR_PREFIX + "height-auto", v -> hasSize.setHeight(null),
+          consumedAttributes);
       context.readStringAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "min-height",
           hasSize::setMinWidth, consumedAttributes);
       context.readStringAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "max-height",

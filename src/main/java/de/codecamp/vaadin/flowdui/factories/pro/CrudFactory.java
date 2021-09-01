@@ -12,7 +12,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class CrudFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override

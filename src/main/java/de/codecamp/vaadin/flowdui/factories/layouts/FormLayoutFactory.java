@@ -14,7 +14,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class FormLayoutFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override

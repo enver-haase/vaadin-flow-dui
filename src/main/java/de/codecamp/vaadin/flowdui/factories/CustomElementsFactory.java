@@ -14,7 +14,8 @@ import de.codecamp.vaadin.flowdui.components.Style;
 
 
 public class CustomElementsFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override

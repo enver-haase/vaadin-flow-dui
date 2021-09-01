@@ -29,7 +29,9 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class TextFieldFactory
-  implements ComponentFactory, ComponentPostProcessor
+  implements
+    ComponentFactory,
+    ComponentPostProcessor
 {
 
   private static final Map<String, Autocapitalize> autocapitalizeEnumMapping = new HashMap<>();

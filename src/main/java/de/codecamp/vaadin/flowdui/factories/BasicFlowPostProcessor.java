@@ -11,7 +11,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class BasicFlowPostProcessor
-  implements ComponentPostProcessor
+  implements
+    ComponentPostProcessor
 {
 
   @Override

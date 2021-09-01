@@ -13,7 +13,8 @@ import de.codecamp.vaadin.flowdui.TemplateParserContext;
 
 
 public class UploadFactory
-  implements ComponentFactory
+  implements
+    ComponentFactory
 {
 
   @Override
