@@ -1,5 +1,6 @@
 package de.codecamp.vaadin.flowdui;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -261,7 +262,7 @@ public class TemplateEngine
    *
    * @return a {@link TemplateEngine}
    */
-  static TemplateEngine get()
+  public static TemplateEngine get()
   {
     return VaadinService.getCurrent().getInstantiator().getOrCreate(TemplateEngine.class);
   }
@@ -277,23 +278,24 @@ public class TemplateEngine
    * The template ID is assumed to be the fully qualified name of the subclass, unless an explict ID
    * is provided via {@link TemplateId}.
    *
-   * @param templateComposite
-   *          the {@link TemplateComposite} for which to build the component tree based on a
-   *          template
+   * @param templateHost
+   *          the host object (component or otherwise) that is used for the component mapping; the
+   *          associated class loader may also be used to load the template document; also used to
+   *          determine the template ID
    * @return the root component of the created component tree
    * @throws TemplateException
    *           if the template could not be successfully processed
    * @see #mapComponents(Object, ParsedTemplate)
    * @see #slotComponents(Object, ParsedTemplate)
    */
-  public Component instantiateTemplate(TemplateComposite templateComposite)
+  public Component instantiateTemplate(Object templateHost)
     throws TemplateException
   {
-    Objects.requireNonNull(templateComposite, "templateComposite must not be null");
+    Objects.requireNonNull(templateHost, "templateHost must not be null");
 
-    String templateId = TemplateEngine.getTemplateId(templateComposite.getClass());
+    String templateId = TemplateEngine.getTemplateId(templateHost.getClass());
 
-    return instantiateTemplate(templateId, templateComposite);
+    return instantiateTemplate(templateId, templateHost);
   }
 
   /**
@@ -339,7 +341,8 @@ public class TemplateEngine
    * <p>
    * To ensure that the corresponding template can be determined, subclasses of
    * {@link FragmentComposite} either need to be inner classes of {@link TemplateComposite template
-   * composites} or they need to be annotated with {@link TemplateId}.
+   * composites}, have any enclosing class annotated with {@link TemplateId} or be themselves
+   * annotated with {@link TemplateId}.
    * <p>
    * The fragment ID is assumed to be the simple name of the subclass, unless an explict ID is
    * provided via {@link FragmentId}.
@@ -357,13 +360,6 @@ public class TemplateEngine
     throws TemplateException
   {
     Objects.requireNonNull(fragmentComposite, "fragmentComposite must not be null");
-
-    Class<?> templateHostClass = getClass().getEnclosingClass();
-    while (templateHostClass != null
-        && !TemplateComposite.class.isAssignableFrom(templateHostClass))
-    {
-      templateHostClass.getEnclosingClass();
-    }
 
     String templateId = TemplateEngine.getTemplateIdForFragment(fragmentComposite.getClass());
     String fragmentId = TemplateEngine.getFragmentId(fragmentComposite.getClass());
@@ -631,7 +627,7 @@ public class TemplateEngine
     }
   }
 
-  private static String getTemplateId(Class<? extends TemplateComposite> templateHostClass)
+  private static String getTemplateId(Class<?> templateHostClass)
   {
     Optional<TemplateId> templateIdAtOpt =
         AnnotationReader.getAnnotationFor(templateHostClass, TemplateId.class);
@@ -648,33 +644,31 @@ public class TemplateEngine
   private static String getTemplateIdForFragment(
       Class<? extends FragmentComposite> fragmentHostClass)
   {
-    String templateId = null;
-
     Class<?> clazz = fragmentHostClass;
-    while (templateId == null && clazz != null)
+    while (true)
     {
       if (TemplateComposite.class.isAssignableFrom(clazz))
       {
-        templateId = TemplateEngine.getTemplateId(clazz.asSubclass(TemplateComposite.class));
+        return TemplateEngine.getTemplateId(clazz);
       }
       else
       {
         Optional<TemplateId> templateIdAtOpt =
             AnnotationReader.getAnnotationFor(clazz, TemplateId.class);
         if (templateIdAtOpt.isPresent())
-          templateId = templateIdAtOpt.get().value();
+        {
+          return templateIdAtOpt.get().value();
+        }
         else
-          clazz = clazz.getEnclosingClass();
+        {
+          Class<?> enclosingClass = clazz.getEnclosingClass();
+          if (enclosingClass == null)
+            return TemplateEngine.getTemplateId(clazz);
+
+          clazz = enclosingClass;
+        }
       }
     }
-
-    if (templateId == null)
-    {
-      throw new TemplateException(String.format("No template ID found for fragment host class %s.",
-          fragmentHostClass.getName()));
-    }
-
-    return templateId;
   }
 
   private static String getFragmentId(Class<? extends FragmentComposite> fragmentHostClass)

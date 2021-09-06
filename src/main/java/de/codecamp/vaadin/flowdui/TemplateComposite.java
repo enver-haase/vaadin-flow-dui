@@ -7,7 +7,7 @@ import com.vaadin.flow.component.Composite;
 /**
  * Abstract base class for {@link Composite composites} whose content is created from a template.
  *
- * @see TemplateEngine#instantiateTemplate(TemplateComposite)
+ * @see TemplateEngine#instantiateTemplate(Object)
  * @see Mapped
  * @see Slotted
  */
