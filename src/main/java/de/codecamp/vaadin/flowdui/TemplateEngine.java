@@ -551,6 +551,31 @@ public class TemplateEngine
         throw new TemplateException(msg);
       }
 
+      if (!field.getType().isAssignableFrom(component.getClass()))
+      {
+        // try to implicitly wrap the component if matching constructor exists
+        try
+        {
+          Constructor<?> constructor = field.getType().getConstructor(component.getClass());
+          Object wrapper = constructor.newInstance(component);
+          ReflectTools.setJavaFieldValue(host, field, wrapper);
+          continue;
+        }
+        catch (NoSuchMethodException | SecurityException ex)
+        {
+          // no matching constructor found, ignore
+        }
+        catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+            | InvocationTargetException ex)
+        {
+          String msg =
+              "Failed to wrap component with ID '%s' and type '%s' in an instance of type '%s'.";
+          msg = String.format(msg, componentId, component.getClass().getName(),
+              field.getType().getName());
+          throw new TemplateException(msg, ex);
+        }
+      }
+
       ReflectTools.setJavaFieldValue(host, field, component);
     }
   }
