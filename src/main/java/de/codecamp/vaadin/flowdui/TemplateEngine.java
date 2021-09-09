@@ -54,6 +54,7 @@ import de.codecamp.vaadin.flowdui.factories.pro.BoardFactory;
 import de.codecamp.vaadin.flowdui.factories.pro.ChartFactory;
 import de.codecamp.vaadin.flowdui.factories.pro.CrudFactory;
 import de.codecamp.vaadin.flowdui.factories.visandint.AccordionFactory;
+import de.codecamp.vaadin.flowdui.factories.visandint.AvatarFactory;
 import de.codecamp.vaadin.flowdui.factories.visandint.ButtonFactory;
 import de.codecamp.vaadin.flowdui.factories.visandint.DetailsFactory;
 import de.codecamp.vaadin.flowdui.factories.visandint.DialogFactory;
@@ -109,6 +110,7 @@ public class TemplateEngine
 
     // visualization & interaction
     registerDefaultFactory(new AccordionFactory());
+    registerDefaultFactory(new AvatarFactory());
     registerDefaultFactory(new ButtonFactory());
     registerDefaultFactory(new DetailsFactory());
     registerDefaultFactory(new DialogFactory());

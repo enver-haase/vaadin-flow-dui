@@ -324,6 +324,13 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 | vaadin-accordion | [Accordion](https://vaadin.com/components/vaadin-accordion) |  | Only vaadin-accordion-panel as child elements. |
 |  |  | ! closed |  |
 | vaadin-accordion-panel | AccordionPanel |  | Slots: summary |
+| vaadin-avatar | [Avatar](https://vaadin.com/docs/latest/ds/components/avatar) |  |  |
+|  |  | name |  |
+|  |  | abbr |  |
+|  |  | img |  |
+|  |  | color-index |  |
+| vaadin-avatar-group | [Avatar](https://vaadin.com/docs/latest/ds/components/avatar) |  |  |
+|  |  | max-items-visible |  |
 | vaadin-button | [Button](https://vaadin.com/components/vaadin-button) |  |  |
 |  |  | autofocus |  |
 |  |  | disable-on-click | Slots: prefix, suffix (only one is supported; limit of the Java Component) |
