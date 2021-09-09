@@ -10,11 +10,9 @@
 
   <name>Declarative UI for Vaadin Flow</name>
   <description>Declarative UI in the style of Vaadin 8 implemented for Vaadin Flow.</description>
-  <url>https://gitlab.com/codecamp-de/${projectId}</url>
+  <url>https://gitlab.com/codecamp-de/vaadin-flow-dui</url>
 
   <properties>
-    <projectId>vaadin-flow-dui</projectId>
-
     <maven.compiler.release>8</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -46,9 +44,9 @@
   </developers>
 
   <scm>
-    <url>https://gitlab.com/codecamp-de/${projectId}</url>
-    <connection>scm:git:https://gitlab.com/codecamp-de/${projectId}.git</connection>
-    <developerConnection>scm:git:https://gitlab.com/codecamp-de/${projectId}.git</developerConnection>
+    <url>https://gitlab.com/codecamp-de/vaadin-flow-dui</url>
+    <connection>scm:git:https://gitlab.com/codecamp-de/vaadin-flow-dui.git</connection>
+    <developerConnection>scm:git:https://gitlab.com/codecamp-de/vaadin-flow-dui.git</developerConnection>
   </scm>
 
 
