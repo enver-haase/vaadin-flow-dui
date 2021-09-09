@@ -36,7 +36,8 @@ public class TabsFactory
           if (slotName != null)
             return false;
           if (!childElement.tagName().equals("vaadin-tab"))
-            throw new TemplateException("Tabs only supports Tab as child component.");
+            throw new TemplateException(context.getTemplateId(),
+                "Tabs only supports Tab as child component.");
 
           tabs.add(context.readComponent(childElement, null));
           return true;

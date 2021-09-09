@@ -58,7 +58,7 @@ public class TextFieldFactory
     }
     catch (NoSuchFieldException | IllegalAccessException | RuntimeException ex)
     {
-      throw new TemplateException("Failed to extract possible attribute values from Autocomplete.",
+      throw new RuntimeException("Failed to extract possible attribute values from Autocomplete.",
           ex);
     }
   }
@@ -221,13 +221,15 @@ public class TextFieldFactory
         {
           case "prefix":
             if (hasPrefixAndSuffix.getPrefixComponent() != null)
-              throw new TemplateException(element, "Slot 'prefix' already filled.");
+              throw new TemplateException(context.getTemplateId(), element,
+                  "Slot 'prefix' already filled.");
 
             hasPrefixAndSuffix.setPrefixComponent(context.readComponentForSlot(childElement, null));
             return true;
           case "suffix":
             if (hasPrefixAndSuffix.getSuffixComponent() != null)
-              throw new TemplateException(element, "Slot 'suffix' already filled.");
+              throw new TemplateException(context.getTemplateId(), element,
+                  "Slot 'suffix' already filled.");
 
             hasPrefixAndSuffix.setSuffixComponent(context.readComponentForSlot(childElement, null));
             return true;
@@ -267,7 +269,7 @@ public class TextFieldFactory
         {
           String msg = "Illegal value for attribute '%s' found: %s";
           msg = String.format(msg, HasAutocorrect.AUTOCORRECT_ATTRIBUTE, valueString);
-          throw new TemplateException(element, msg);
+          throw new TemplateException(context.getTemplateId(), element, msg);
         }
 
         ((HasAutocorrect) component).setAutocorrect(value);

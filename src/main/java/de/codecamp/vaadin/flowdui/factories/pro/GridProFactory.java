@@ -27,7 +27,7 @@ public class GridProFactory
         GridPro<?> gridPro = new GridPro<>();
 
         context.readChildren(gridPro, element, (slotName, childComponent) -> {
-          throw new TemplateException(
+          throw new TemplateException(context.getTemplateId(),
               "GridPro cannot be populated using a template. Use its Java API instead.");
         }, null);
 

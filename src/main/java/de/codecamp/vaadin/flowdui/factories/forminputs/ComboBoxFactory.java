@@ -33,7 +33,7 @@ public class ComboBoxFactory
         context.readBooleanAttribute(element, "allow-custom-value", comboBox::setAllowCustomValue,
             consumedAttributes);
         context.readChildren(comboBox, element, (slotName, childComponent) -> {
-          throw new TemplateException(
+          throw new TemplateException(context.getTemplateId(),
               "ComboBox cannot be populated using a template. Use its Java API instead.");
         }, null);
         return comboBox;

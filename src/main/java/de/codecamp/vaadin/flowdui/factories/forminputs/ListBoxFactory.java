@@ -33,7 +33,7 @@ public class ListBoxFactory
           listBox = new ListBox<>();
 
         context.readChildren(listBox, element, (slotName, childComponent) -> {
-          throw new TemplateException(
+          throw new TemplateException(context.getTemplateId(),
               "ListBox/MultiSelectListBox cannot be populated using a template. Use its Java API instead.");
         }, null);
 

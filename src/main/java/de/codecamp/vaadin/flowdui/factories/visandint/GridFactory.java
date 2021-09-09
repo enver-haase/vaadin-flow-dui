@@ -28,7 +28,7 @@ public class GridFactory
         Grid<?> grid = new Grid<>();
 
         context.readChildren(grid, element, (slotName, childComponent) -> {
-          throw new TemplateException(
+          throw new TemplateException(context.getTemplateId(),
               "Grid cannot be populated using a template. Use its Java API instead.");
         }, null);
 
@@ -39,7 +39,7 @@ public class GridFactory
         TreeGrid<?> treeGrid = new TreeGrid<>();
 
         context.readChildren(treeGrid, element, (slotName, childComponent) -> {
-          throw new TemplateException(
+          throw new TemplateException(context.getTemplateId(),
               "TreeGrid cannot be populated using a template. Use its Java API instead.");
         }, null);
 

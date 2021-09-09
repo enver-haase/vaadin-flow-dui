@@ -35,7 +35,7 @@ public class AccordionFactory
 
           if (!childElement.tagName().equals("vaadin-accordion-panel"))
           {
-            throw new TemplateException(
+            throw new TemplateException(context.getTemplateId(),
                 "Accordion only supports AccordionPanel as child component.");
           }
 
@@ -59,7 +59,7 @@ public class AccordionFactory
             case "summary":
               if (panel.getSummary() != null)
               {
-                throw new TemplateException(element,
+                throw new TemplateException(context.getTemplateId(), element,
                     "Only one component for the 'summary' slot supported.");
               }
               panel.setSummary(context.readComponentForSlot(childElement, null));

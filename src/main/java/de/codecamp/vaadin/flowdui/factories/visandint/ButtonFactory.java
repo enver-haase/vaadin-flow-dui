@@ -45,7 +45,7 @@ public class ButtonFactory
             case "suffix":
               if (iconFound.get())
               {
-                throw new TemplateException(element,
+                throw new TemplateException(context.getTemplateId(), element,
                     "Slot 'prefix' or 'suffix' already filled. Button only supports one of them.");
               }
               button.setIcon(context.readComponentForSlot(childElement, null));

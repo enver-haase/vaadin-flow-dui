@@ -39,7 +39,7 @@ public class DetailsFactory
             case "summary":
               if (details.getSummary() != null)
               {
-                throw new TemplateException(element,
+                throw new TemplateException(context.getTemplateId(), element,
                     "Only one component for the 'summary' slot supported.");
               }
               details.setSummary(context.readComponentForSlot(childElement, null));

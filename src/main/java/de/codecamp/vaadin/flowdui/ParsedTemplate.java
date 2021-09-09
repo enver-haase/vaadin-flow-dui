@@ -16,7 +16,7 @@ import de.codecamp.vaadin.flowdui.components.Slot;
 public class ParsedTemplate
 {
 
-  private final String templateResourceName;
+  private final String templateId;
 
   private final Component rootComponent;
 
@@ -27,11 +27,11 @@ public class ParsedTemplate
   private final Map<String, Element> idToTemplateFragment;
 
 
-  public ParsedTemplate(String templateResourceName, Component rootComponent,
+  public ParsedTemplate(String templateId, Component rootComponent,
       Map<String, Component> idToComponent, Map<String, Slot> nameToSlot,
       Map<String, Element> idToTemplateFragment)
   {
-    this.templateResourceName = templateResourceName;
+    this.templateId = templateId;
     this.rootComponent = rootComponent;
     this.idToComponent = idToComponent;
     this.nameToSlot = nameToSlot;
@@ -39,9 +39,9 @@ public class ParsedTemplate
   }
 
 
-  public String getTemplateResourceName()
+  public String getTemplateId()
   {
-    return templateResourceName;
+    return templateId;
   }
 
   public Component getRootComponent()

@@ -36,7 +36,7 @@ public class CheckboxFactory
         CheckboxGroup<?> checkboxGroup = new CheckboxGroup<>();
         context.readStringAttribute(element, "label", checkboxGroup::setLabel, consumedAttributes);
         context.readChildren(checkboxGroup, element, (slotName, childComponent) -> {
-          throw new TemplateException(
+          throw new TemplateException(context.getTemplateId(),
               "CheckboxGroup cannot be populated using a template. Use its Java API instead.");
         }, null);
 

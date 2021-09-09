@@ -29,7 +29,7 @@ public class SelectFactory
         context.readStringAttribute(element, "placeholder", select::setPlaceholder,
             consumedAttributes);
         context.readChildren(select, element, (slotName, childComponent) -> {
-          throw new TemplateException(
+          throw new TemplateException(context.getTemplateId(),
               "Select cannot be populated using a template. Use its Java API instead.");
         }, null);
         return select;

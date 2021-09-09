@@ -39,7 +39,8 @@ public class SplitLayoutFactory
             return false;
 
           if (nextArea.get() >= 2)
-            throw new TemplateException(element, "Both areas already filled.");
+            throw new TemplateException(context.getTemplateId(), element,
+                "Both areas already filled.");
 
           Component childComponent = context.readComponent(childElement, null);
 

@@ -33,7 +33,8 @@ public class AppLayoutFactory
           if (slotName == null)
           {
             if (appLayout.getContent() != null)
-              throw new TemplateException(childElement, "Only one content component supported.");
+              throw new TemplateException(context.getTemplateId(), childElement,
+                  "Only one content component supported.");
 
             appLayout.setContent(context.readComponent(childElement, null));
             return true;

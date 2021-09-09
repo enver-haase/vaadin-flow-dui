@@ -31,7 +31,7 @@ public abstract class AbstractTemplateResolver
     if (inputStream == null)
       return Optional.empty();
 
-    Document doc = readDocumentFromStream(inputStream);
+    Document doc = readDocumentFromStream(templateId, inputStream);
     return Optional.of(doc);
   }
 
@@ -41,13 +41,15 @@ public abstract class AbstractTemplateResolver
   /**
    * Reads the document from the given input stream.
    *
+   * @param templateId
+   *          the template ID
    * @param inputStream
    *          the input stream to be read
    * @return the document read from the stream
    * @throws TemplateException
    *           if the stream could not be loaded into a document
    */
-  public static Document readDocumentFromStream(InputStream inputStream)
+  public static Document readDocumentFromStream(String templateId, InputStream inputStream)
   {
     try (InputStream is = inputStream)
     {
@@ -60,7 +62,7 @@ public abstract class AbstractTemplateResolver
     }
     catch (IOException ex)
     {
-      throw new TemplateException("Failed to parse the template resource.", ex);
+      throw new TemplateException(templateId, "Failed to parse the template resource.", ex);
     }
   }
 

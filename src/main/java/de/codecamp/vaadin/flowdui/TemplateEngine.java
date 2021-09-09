@@ -404,13 +404,13 @@ public class TemplateEngine
     {
       String msg = "No template fragment with ID '%s' found.";
       msg = String.format(msg, fragmentId);
-      throw new TemplateException(msg);
+      throw new TemplateException(templateId, msg);
     }
     if (select.size() > 1)
     {
       String msg = "More than one template fragment with ID '%s' found.";
       msg = String.format(msg, fragmentId);
-      throw new TemplateException(msg);
+      throw new TemplateException(templateId, msg);
     }
 
     Element templateFragment = select.first();
@@ -500,9 +500,7 @@ public class TemplateEngine
 
     if (document == null)
     {
-      String msg = "No document found for template ID '%s'.";
-      msg = String.format(msg, templateId);
-      throw new TemplateException(msg);
+      throw new TemplateException(templateId, "No document found for template ID.");
     }
 
     return document;
@@ -548,7 +546,7 @@ public class TemplateEngine
       {
         String msg = "No component found with ID '%s' for field %s.";
         msg = String.format(msg, componentId, field);
-        throw new TemplateException(msg);
+        throw new TemplateException(template.getTemplateId(), msg);
       }
 
       if (!field.getType().isAssignableFrom(component.getClass()))
@@ -572,7 +570,7 @@ public class TemplateEngine
               "Failed to wrap component with ID '%s' and type '%s' in an instance of type '%s'.";
           msg = String.format(msg, componentId, component.getClass().getName(),
               field.getType().getName());
-          throw new TemplateException(msg, ex);
+          throw new TemplateException(template.getTemplateId(), msg, ex);
         }
       }
 
@@ -619,7 +617,7 @@ public class TemplateEngine
       {
         String msg = "Could not slot in component. Slot not found: %s";
         msg = String.format(msg, slotName);
-        throw new TemplateException(msg);
+        throw new TemplateException(template.getTemplateId(), msg);
       }
       /*
        * The child elements of the slot from the template are the default content. If a
@@ -638,14 +636,16 @@ public class TemplateEngine
       }
       catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException ex)
       {
-        throw new TemplateException("Unable to get the value from the field " + field.getName()
-            + " in " + host.getClass().getName() + ".", ex);
+        throw new TemplateException(template.getTemplateId(),
+            "Unable to get the value from the field " + field.getName() + " in "
+                + host.getClass().getName() + ".",
+            ex);
       }
       if (component == null)
       {
         String msg = "No component set on field '%s' for slot '%s'.";
         msg = String.format(msg, field.getName(), slotName);
-        throw new TemplateException(msg);
+        throw new TemplateException(template.getTemplateId(), msg);
       }
 
       slot.add(component);

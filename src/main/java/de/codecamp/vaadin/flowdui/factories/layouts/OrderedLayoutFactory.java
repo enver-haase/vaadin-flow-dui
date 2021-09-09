@@ -233,7 +233,7 @@ public class OrderedLayoutFactory
                 ThemableLayoutSpacing.XL.applyTo(themableLayout);
                 break;
               default:
-                throw new TemplateException(element,
+                throw new TemplateException(context.getTemplateId(), element,
                     String.format("Unsupported value found for attribute '%s': '%s'",
                         TemplateParserContext.CUSTOM_ATTR_PREFIX + "spacing", value));
             }

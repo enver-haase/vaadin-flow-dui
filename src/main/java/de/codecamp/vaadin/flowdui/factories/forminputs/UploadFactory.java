@@ -42,17 +42,20 @@ public class UploadFactory
           {
             case "add-button":
               if (upload.getUploadButton() != null)
-                throw new TemplateException(element, "Slot 'add-button' already filled.");
+                throw new TemplateException(context.getTemplateId(), element,
+                    "Slot 'add-button' already filled.");
               upload.setUploadButton(context.readComponentForSlot(childElement, null));
               return true;
             case "drop-label":
               if (upload.getDropLabel() != null)
-                throw new TemplateException(element, "Slot 'drop-label' already filled.");
+                throw new TemplateException(context.getTemplateId(), element,
+                    "Slot 'drop-label' already filled.");
               upload.setDropLabel(context.readComponentForSlot(childElement, null));
               return true;
             case "drop-label-icon":
               if (upload.getDropLabelIcon() != null)
-                throw new TemplateException(element, "Slot 'drop-label-icon' already filled.");
+                throw new TemplateException(context.getTemplateId(), element,
+                    "Slot 'drop-label-icon' already filled.");
               upload.setDropLabelIcon(context.readComponentForSlot(childElement, null));
               return true;
             default:

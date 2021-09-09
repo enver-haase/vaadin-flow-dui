@@ -86,7 +86,7 @@ public class TemplateParserContext
         String msg = "The template '%s' must have exactly one single single root component, but"
             + " found more than one.";
         msg = String.format(msg, getTemplateId());
-        throw new TemplateException(msg);
+        throw new TemplateException(templateId, msg);
       }
 
       setRootComponent(readComponent(childElement, null));
@@ -100,9 +100,10 @@ public class TemplateParserContext
       String msg =
           "The template '%s' must have exactly one single root component, but found" + " none.";
       msg = String.format(msg, getTemplateId());
-      throw new TemplateException(msg);
+      throw new TemplateException(templateId, msg);
     }
 
+    // TODO consider removing; not that useful
     if (hasNonBlankTextNodes.get())
     {
       LOG.warn("The template '{}' contains text around its root component that will be ignored.",
@@ -117,7 +118,8 @@ public class TemplateParserContext
         return false;
 
       if (getRootComponent() != null)
-        throw new TemplateException("The template fragment must have a single root element.");
+        throw new TemplateException(templateId,
+            "The template fragment must have a single root element.");
 
       setRootComponent(readComponent(childElement, null));
       return true;
@@ -149,7 +151,7 @@ public class TemplateParserContext
         break;
     }
     if (component == null)
-      throw new RuntimeException("Unknown element in template: " + element.tagName());
+      throw new TemplateException(templateId, "Unknown element: " + element.tagName());
 
 
     for (ComponentPostProcessor p : processors)
@@ -243,7 +245,7 @@ public class TemplateParserContext
           {
             String msg = "Slot '%s' already filled.";
             msg = String.format(msg, slotName);
-            throw new TemplateException(parentElement, msg);
+            throw new TemplateException(templateId, parentElement, msg);
           }
         }
 
@@ -264,13 +266,13 @@ public class TemplateParserContext
         {
           if (slotName != null)
           {
-            throw new TemplateException(parentElement, "Unknown slot: " + slotName);
+            throw new TemplateException(templateId, parentElement, "Unknown slot: " + slotName);
           }
           else
           {
             String msg = "Child element '%s' not supported here.";
             msg = String.format(msg, childElement.tagName());
-            throw new TemplateException(parentElement, msg);
+            throw new TemplateException(templateId, parentElement, msg);
           }
         }
       }
@@ -280,7 +282,7 @@ public class TemplateParserContext
         if (textNodeHandler != null)
           textNodeHandler.handle((TextNode) node);
         else if (!((TextNode) node).text().trim().isEmpty())
-          throw new TemplateException(parentElement, "No child text supported.");
+          throw new TemplateException(templateId, parentElement, "No child text supported.");
       }
     }
   }
@@ -439,7 +441,7 @@ public class TemplateParserContext
       {
         String msg = "The ID '%s' is already used.";
         msg = String.format(msg, id);
-        throw new TemplateException(msg);
+        throw new TemplateException(templateId, msg);
       }
       idToComponent.put(id, component);
     });
@@ -451,7 +453,7 @@ public class TemplateParserContext
       {
         String msg = "The slot name '%s' is already used.";
         msg = String.format(msg, slot.getName());
-        throw new TemplateException(msg);
+        throw new TemplateException(templateId, msg);
       }
 
       nameToSlot.put(slot.getName(), slot);
@@ -462,7 +464,10 @@ public class TemplateParserContext
   {
     String id = htmlTemplateElement.id();
     if (id.isEmpty())
-      throw new TemplateException("The template fragment is missing an ID.");
+    {
+      throw new TemplateException(templateId, htmlTemplateElement,
+          "The template fragment is missing an ID.");
+    }
 
     idToTemplateFragment.put(id, htmlTemplateElement);
   }

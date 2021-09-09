@@ -28,7 +28,7 @@ public class RadioButtonFactory
         context.readStringAttribute(element, "label", radioButtonGroup::setLabel,
             consumedAttributes);
         context.readChildren(radioButtonGroup, element, (slotName, childComponent) -> {
-          throw new TemplateException(
+          throw new TemplateException(context.getTemplateId(),
               "RadioButtonGroup cannot be populated using a template. Use its Java API instead.");
         }, null);
         return radioButtonGroup;
