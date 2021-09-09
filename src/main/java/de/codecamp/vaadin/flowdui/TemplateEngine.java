@@ -52,7 +52,10 @@ import de.codecamp.vaadin.flowdui.factories.layouts.OrderedLayoutFactory;
 import de.codecamp.vaadin.flowdui.factories.layouts.SplitLayoutFactory;
 import de.codecamp.vaadin.flowdui.factories.pro.BoardFactory;
 import de.codecamp.vaadin.flowdui.factories.pro.ChartFactory;
+import de.codecamp.vaadin.flowdui.factories.pro.CookieConsentFactory;
 import de.codecamp.vaadin.flowdui.factories.pro.CrudFactory;
+import de.codecamp.vaadin.flowdui.factories.pro.GridProFactory;
+import de.codecamp.vaadin.flowdui.factories.pro.RichTextEditorFactory;
 import de.codecamp.vaadin.flowdui.factories.visandint.AccordionFactory;
 import de.codecamp.vaadin.flowdui.factories.visandint.AvatarFactory;
 import de.codecamp.vaadin.flowdui.factories.visandint.ButtonFactory;
@@ -124,10 +127,16 @@ public class TemplateEngine
     // Pro components might not be present
     if (classExists("com.vaadin.flow.component.board.Board"))
       registerDefaultFactory(new BoardFactory());
-    if (classExists("com.vaadin.flow.component.crud.Crud"))
-      registerDefaultFactory(new CrudFactory());
     if (classExists("com.vaadin.flow.component.charts.Chart"))
       registerDefaultFactory(new ChartFactory());
+    if (classExists("com.vaadin.flow.component.cookieconsent.CookieConsent"))
+      registerDefaultFactory(new CookieConsentFactory());
+    if (classExists("com.vaadin.flow.component.crud.Crud"))
+      registerDefaultFactory(new CrudFactory());
+    if (classExists("com.vaadin.flow.component.gridpro.GridPro"))
+      registerDefaultFactory(new GridProFactory());
+    if (classExists("com.vaadin.flow.component.richtexteditor.RichTextEditor"))
+      registerDefaultFactory(new RichTextEditorFactory());
   }
 
 
