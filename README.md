@@ -358,10 +358,6 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 | vaadin-tab | Tab |  |  |
 |  |  |  |  |
 |  |  |  |  |
-| fieldset |  |  | Styled to fit Lumo. |
-| All the other HTML tags for which Vaadin provides Components. |  |  | There's some special attribute handling, all others are just copied verbatim. |
-|  |  |  |  |
-|  |  |  |  |
 | vaadin-app-layout | [AppLayout](https://vaadin.com/components/vaadin-app-layout) |  | Slots: navbar (touch-optimized), drawer |
 |  |  | primary-section |  | navbar, drawer
 | vaadin-drawer-toggle | [DrawerToggle](https://vaadin.com/components/vaadin-app-layout) |  |  |

@@ -46,7 +46,6 @@ import com.vaadin.flow.component.html.UnorderedList;
 import de.codecamp.vaadin.flowdui.ComponentFactory;
 import de.codecamp.vaadin.flowdui.TemplateParserContext;
 import de.codecamp.vaadin.flowdui.components.Bold;
-import de.codecamp.vaadin.flowdui.components.Fieldset;
 import de.codecamp.vaadin.flowdui.components.Strong;
 
 
@@ -216,9 +215,6 @@ public class HtmlFactory
         component = new UnorderedList();
         break;
 
-      case "fieldset":
-        component = new Fieldset();
-        break;
 
       default:
         component = null;
