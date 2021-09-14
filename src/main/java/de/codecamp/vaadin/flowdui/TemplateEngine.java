@@ -17,7 +17,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.polymertemplate.Id;
+import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.internal.AnnotationReader;
 import com.vaadin.flow.internal.ReflectTools;
 import com.vaadin.flow.server.VaadinService;
@@ -339,6 +339,8 @@ public class TemplateEngine
     mapComponents(templateHost, parsedTemplate);
     slotComponents(templateHost, parsedTemplate);
 
+    ComponentUtil.setData(parsedTemplate.getRootComponent(), ParsedTemplate.class, parsedTemplate);
+
     return parsedTemplate.getRootComponent();
   }
 
@@ -536,15 +538,7 @@ public class TemplateEngine
 
       Mapped mappedAt = field.getAnnotation(Mapped.class);
       if (mappedAt != null)
-      {
         componentId = mappedAt.value();
-      }
-      else
-      {
-        Id idAt = field.getAnnotation(Id.class);
-        if (idAt != null)
-          componentId = idAt.value();
-      }
 
       if (componentId == null)
         continue;
