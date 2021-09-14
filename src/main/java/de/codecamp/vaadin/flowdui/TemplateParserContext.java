@@ -92,7 +92,8 @@ public class TemplateParserContext
       setRootComponent(readComponent(childElement, null));
       return true;
     }, textNode -> {
-      hasNonBlankTextNodes.set(true);
+      if (!textNode.text().trim().isEmpty())
+        hasNonBlankTextNodes.set(true);
     });
 
     if (getRootComponent() == null)
