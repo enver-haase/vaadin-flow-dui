@@ -1,28 +1,25 @@
-# Declarative UI for Vaadin Flow
 
-This is basically Vaadin-8-style Declarative UI for Vaadin Flow. The goal is to externalize the layout of the components in your application and have it as much more readable HTML/XML instead of cluttering up your Java code. It's completely interpreted and converted to a Component-tree on the server-side.
+# Declarative UI (DUI) for Vaadin Flow
 
-# Why use this over Polymer / LitElement templates?
+This is basically Vaadin-8-style Declarative UI for Vaadin Flow. The goal is to externalize the layout of views (or parts of views) in an application and have it as much more readable HTML/XML instead of cluttering up the Java code. For some added convenience there's also an experimental fluent-style API for most Vaadin components.  
 
-I created this addon, because of two major issues:
+## DUI vs Lit
 
- * The initial state of components in Polymer / LitElement templates is not available on the server-side. Although, there are now [plans to support this in Vaadin 18](https://vaadin.com/blog/future-of-html-templates-in-vaadin).
- * Vaadin did not intend to support [@Id to map components from a LitElement template](https://vaadin.com/labs/lit-element) to a field in Java. But in the meantime they [changed their stance on this](https://vaadin.com/blog/future-of-html-templates-in-vaadin), too:
+There is some overlap with [Lit-based templates](https://vaadin.com/docs/latest/flow/templates/overview), but the goals and approach are different.
 
-So now that my most important concerns are being or will be addressed, it remains to be seen how useful this addon will be in the future. But currently it still offers a few advantages for the purely Java-based approach of Vaadin Flow that could very well be worth it.
- * While the HTML-like syntax of DUI is mostly compatible with the syntax from Polymer / LitElement templates, it adds a few conveniences e.g. regarding sizing and layouting. See the [list of supports tags and attributes](#currently-supported-elements-and-attributes) further down.
- * It's extensible. Add your own custom elements and attributes!
- * Definitely no inconsistencies between client- and server-side state as everything is done through the server-side Java API.
-
-To be fair, there's also a potential disadvantage to keep in mind: The memory overhead on the server-side is bigger compared to Polymer / LitElement as every element in the template will have a corresponding Component, not just the ones you need to access in Java. But in principle I'd expect the overhead to be similar to Vaadin 8's Declarative UI.
+ * DUI has none of the [limitations Lit templates have](https://vaadin.com/docs/latest/flow/templates/mapped-components-limitations). It's completely interpreted and converted to a Component-tree on the server-side. So one can expect exactly the same behavior as using the Java API directly.
+* DUI likely has a bigger memory overhead on the server-side, because every element is represented there, whether you need to actually access it or not. But if the overhead of Vaadin 8's DUI wasn't a concern, it shouldn't be one here either.
+ * DUI does not support JavaScript or CSS, and is not ideal when you intend to also use actual HTML elements. The focus is purely on the composition of components. Lit is likely the better option when creating new or heavily customized components.
+ * While the HTML-like syntax of DUI for each component is mostly compatible with their respective Web Component API (as it is also used in Lit templates), it adds a few conveniences that you might already know from Vaadin 8 but which aren't available in Lit templates. E.g. adding `size-full` is more convenient that using the equivalent CSS. See the [list of supports tags and attributes](#currently-supported-elements-and-attributes) further down.
+ * DUI is extensible. Add your own custom elements and attributes (even to existing components)!
 
 
 # How does it work?
 
 A component or view based on DUI consists of two parts:
- * a Java class extending `TemplateComposite`
- * an HTML file containing the component tree
-Per default, the HTML file is expected beside the Java class (same name, but .html extension) in the classpath. The HTML is parsed on the server-side. Components are created from HTML elements using `ComponentFactory` implementations. And `ComponentPostProcessor` implementations can be used to share mapping logic between all Components, e.g. for [mixin interfaces](https://vaadin.com/docs/v14/flow/creating-components/tutorial-component-mixins.html). The standard Vaadin components and the most important HTML elements work out of the box. But it's easy to add your own elements.
+ * an HTML-like template file containing the component tree
+ * a Java class receiving components mapped from the template, usually sextending `TemplateComposite`
+Per default, the HTML file is expected beside the Java class (same name, but .html extension) in the classpath. The HTML is parsed on the server-side. Components are created from HTML elements using `ComponentFactory` implementations. And `ComponentPostProcessor` implementations are used to apply mapping and other logic to multiple Component types, e.g. for [mixin interfaces](https://vaadin.com/docs/latest/flow/creating-components/mixins). The standard Vaadin components work out of the box, but it's easy to add your own elements.
 
 ## Basic Example
 
@@ -123,6 +120,51 @@ public class DemoView
 </fragment>
 ```
 
+## Fluent-Style API
+
+For an additional bit of convenience, there's also an experimental fluent-style API as a complementary way to further configure the components from the template. For most Vaadin components there is an equivalent wrapper class prefixed with `Fluent`. So e.g. there's a `FluentButton` for `Button`.  
+The static methods of `de.codecamp.vaadin.flowdui.fluent.Fluent` serve as a manual entry point to creating new or wrapping existing components in a fluent wrapper.
+
+```java
+import static de.codecamp.vaadin.flowdui.fluent.Fluent.*;
+
+...
+
+FluentButton button1 = button().text("Label").themeVariants(ButtonVariant.LUMO_PRIMARY).addClickListener(event -> {
+  Notification.show("Clicked.")
+});
+
+fluent(someButton).text("Label").themeVariants(ButtonVariant.LUMO_PRIMARY);
+```
+
+But components from the template can also be automatically wrapped in the fluent API simply when mapping them to a field via `@Mapped` by using the fluent type instead of the regular component type.
+
+```java
+@Route("fluent-demo")
+public class FluentDemoView
+  extends TemplateComposite
+{
+
+  @Mapped
+  private FluentButton button;
+
+
+  @Override
+  protected Component initContent()
+  {
+    Component content = super.initContent();
+
+    button.text("Label").themeVariants(ButtonVariant.LUMO_PRIMARY).addClickListener(event -> {
+      Notification.show("Clicked.");
+    });
+
+    return content;
+  }
+
+}
+```
+
+
 ## Adding Custom Elements and Attributes
 
 Implementing new factories (`ComponentFactory`) and post processors (`ComponentPostProcessor`) should for the most part be painless. Take a look at the source code to see plenty of examples.
@@ -137,7 +179,7 @@ TemplateEngine.getAdditionalPostProcessors().add(...)
 
 Per default, the HTML file is expected besides the Java class in the classpath.
 
-There's also support to load them from JavaScript-based Polymer / LitElement templates. This might allow you to still make use of Vaadin Designer, but this isn't thoroughly tested and would probably require you to avoid any of the custom attributes and components.
+There's also support to load them from JavaScript-based Lit templates. This might allow you to still make use of Vaadin Designer, but this isn't thoroughly tested and would probably require you to avoid any of the custom attributes and components.
 
 Besides from the classpath, the template document can also be loaded from any other source by providing additional `TemplateResolver` implementations. 
 In Spring Boot applications they'll be automatically picked up as beans. In other environments they can be registered manually:
@@ -320,6 +362,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | max-files |  |
 |  |  | max-file-size |  |
 |  |  | capture |  |
+|  |  |  |  |
 |  |  |  |  |
 | vaadin-accordion | [Accordion](https://vaadin.com/components/vaadin-accordion) |  | Only vaadin-accordion-panel as child elements. |
 |  |  | ! closed |  |
