@@ -5,6 +5,8 @@ import com.vaadin.flow.component.icon.IronIcon;
 import de.codecamp.vaadin.flowdui.fluent.FluentClickNotifier;
 import de.codecamp.vaadin.flowdui.fluent.FluentComponent;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasStyle;
+import de.codecamp.vaadin.flowdui.util.LumoColor;
+import de.codecamp.vaadin.flowdui.util.LumoIconSize;
 
 
 public class FluentIronIcon
@@ -31,9 +33,37 @@ public class FluentIronIcon
     return this;
   }
 
+  public FluentIronIcon size(LumoIconSize size)
+  {
+    getComponent().setSize(size.var());
+    return this;
+  }
+
+  public FluentIronIcon sizeS()
+  {
+    return size(LumoIconSize.S);
+  }
+
+  public FluentIronIcon sizeM()
+  {
+    return size(LumoIconSize.M);
+  }
+
+  public FluentIronIcon sizeL()
+  {
+    return size(LumoIconSize.L);
+  }
+
+
   public FluentIronIcon color(String color)
   {
     getComponent().setColor(color);
+    return this;
+  }
+
+  public FluentIronIcon color(LumoColor color)
+  {
+    getComponent().setColor(color.var());
     return this;
   }
 
