@@ -36,7 +36,6 @@ import de.codecamp.vaadin.flowdui.factories.HasValuePostProcessor;
 import de.codecamp.vaadin.flowdui.factories.HtmlFactory;
 import de.codecamp.vaadin.flowdui.factories.forminputs.CheckboxFactory;
 import de.codecamp.vaadin.flowdui.factories.forminputs.ComboBoxFactory;
-import de.codecamp.vaadin.flowdui.factories.forminputs.CustomFieldFactory;
 import de.codecamp.vaadin.flowdui.factories.forminputs.DatePickerFactory;
 import de.codecamp.vaadin.flowdui.factories.forminputs.DateTimePickerFactory;
 import de.codecamp.vaadin.flowdui.factories.forminputs.ListBoxFactory;
@@ -101,7 +100,6 @@ public class TemplateEngine
     // form inputs
     registerDefaultFactory(new CheckboxFactory());
     registerDefaultFactory(new ComboBoxFactory());
-    registerDefaultFactory(new CustomFieldFactory());
     registerDefaultFactory(new DatePickerFactory());
     registerDefaultFactory(new DateTimePickerFactory());
     registerDefaultFactory(new ListBoxFactory());
