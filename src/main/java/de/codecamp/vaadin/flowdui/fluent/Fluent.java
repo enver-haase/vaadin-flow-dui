@@ -12,7 +12,6 @@ import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.IronIcon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
@@ -67,7 +66,6 @@ import de.codecamp.vaadin.flowdui.fluent.visandint.FluentButton;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentDetails;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentGrid;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentIcon;
-import de.codecamp.vaadin.flowdui.fluent.visandint.FluentIronIcon;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentMenuBar;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentProgressBar;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentTab;
@@ -388,11 +386,6 @@ public interface Fluent
   static FluentIcon fluent(Icon component)
   {
     return new FluentIcon(component);
-  }
-
-  public static FluentIronIcon fluent(IronIcon component)
-  {
-    return new FluentIronIcon(component);
   }
 
 

@@ -26,6 +26,8 @@ public class GridFactory
     {
       case "vaadin-grid":
         Grid<?> grid = new Grid<>();
+        context.readBooleanAttribute(element, "all-rows-visible", grid::setAllRowsVisible,
+            consumedAttributes);
 
         context.readChildren(grid, element, (slotName, childComponent) -> {
           throw new TemplateException(context.getTemplateId(),
@@ -37,6 +39,8 @@ public class GridFactory
       case "vaadin-tree-grid":
         // does not actually exist as a separate component
         TreeGrid<?> treeGrid = new TreeGrid<>();
+        context.readBooleanAttribute(element, "all-rows-visible", treeGrid::setAllRowsVisible,
+            consumedAttributes);
 
         context.readChildren(treeGrid, element, (slotName, childComponent) -> {
           throw new TemplateException(context.getTemplateId(),

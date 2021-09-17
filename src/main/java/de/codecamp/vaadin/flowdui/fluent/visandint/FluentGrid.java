@@ -57,9 +57,9 @@ public class FluentGrid<ITEM>
     return this;
   }
 
-  public FluentGrid<ITEM> heightByRows(boolean heightByRows)
+  public FluentGrid<ITEM> allRowsVisible(boolean allRowsVisible)
   {
-    getComponent().setHeightByRows(heightByRows);
+    getComponent().setAllRowsVisible(allRowsVisible);
     return this;
   }
 

@@ -243,19 +243,17 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | helper-text |  |
 |  |  |  |  |
 |  |  |  |  |
-| vaadin-checkbox | [Checkbox](https://vaadin.com/components/vaadin-checkbox) |  |  |
+| vaadin-checkbox | [Checkbox](https://vaadin.com/docs/latest/ds/components/checkbox) |  |  |
 |  |  | checked |  |
 |  |  | indeterminate |  |
-| vaadin-checkbox-group | CheckboxGroup |  | No children; use Java API. |
+| vaadin-checkbox-group | [CheckboxGroup](https://vaadin.com/docs/latest/ds/components/checkbox) |  | No children; use Java API. |
 |  |  | label |  |
-| vaadin-combo-box | [ComboBox](https://vaadin.com/components/vaadin-combo-box) |  | No children; use Java API. |
+| vaadin-combo-box | [ComboBox](https://vaadin.com/docs/latest/ds/components/combo-box) |  | No children; use Java API. |
 |  |  | label |  |
 |  |  | placeholder |  |
 |  |  | clear-button-visible |  |
 |  |  | allow-custom-value |  |
-| vaadin-custom-field | [CustomField](https://vaadin.com/components/vaadin-custom-field) |  | Created this way, it's only a group of individual components with a shared label. Extending CustomField yourself is completely different. |
-|  |  | label |  |
-| vaadin-date-picker | [DatePicker](https://vaadin.com/components/vaadin-date-picker) |  |  |
+| vaadin-date-picker | [DatePicker](https://vaadin.com/docs/latest/ds/components/date-picker) |  |  |
 |  |  | label |  |
 |  |  | placeholder |  |
 |  |  | show-week-numbers |  |
@@ -264,7 +262,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | step |  |
 |  |  | clear-button-visible |  |
 |  |  | initial-position |  |
-| vaadin-date-time-picker | [DateTimePicker](https://vaadin.com/components/vaadin-date-time-picker) |  |  |
+| vaadin-date-time-picker | [DateTimePicker](https://vaadin.com/docs/latest/ds/components/date-time-picker) |  |  |
 |  |  | label |  |
 |  |  | date-placeholder |  |
 |  |  | time-placeholder |  |
@@ -273,15 +271,15 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | max |  |
 |  |  | step |  |
 |  |  | clear-button-visible |  |
-| vaadin-list-box | [ListBox / MultiSelectListBox](https://vaadin.com/components/vaadin-list-box) |  | No children; use Java API. |
+| vaadin-list-box | [ListBox / MultiSelectListBox](https://vaadin.com/docs/latest/ds/components/list-box) |  | No children; use Java API. |
 |  |  | multiple | Determines which class is used. |
-| vaadin-radio-group | [RadioButtonGroup](https://vaadin.com/components/vaadin-radio-button) |  | No children; use Java API. |
+| vaadin-radio-group | [RadioButtonGroup](https://vaadin.com/docs/latest/ds/components/radio-button) |  | No children; use Java API. |
 |  |  | label |  |
 | ~~vaadin-radio-button~~ |  |  | Can't be created directly. Use Java API of RadioButtonGroup. |
-| vaadin-select | [Select](https://vaadin.com/components/vaadin-select) |  | No children; use Java API. |
+| vaadin-select | [Select](https://vaadin.com/docs/latest/ds/components/select) |  | No children; use Java API. |
 |  |  | label |  |
 |  |  | placeholder |  |
-| vaadin-text-field | [TextField](https://vaadin.com/components/vaadin-text-field) |  |  |
+| vaadin-text-field | [TextField](https://vaadin.com/docs/latest/ds/components/text-field) |  |  |
 |  |  | label |  |
 |  |  | placeholder |  |
 |  |  | autofocus |  |
@@ -291,7 +289,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | pattern |  |
 |  |  | prevent-invalid-input |  |
 |  |  | clear-button-visible |  |
-| vaadin-text-area | [TextArea](https://vaadin.com/components/vaadin-text-field) |  |  |
+| vaadin-text-area | [TextArea](https://vaadin.com/docs/latest/ds/components/text-area) |  |  |
 |  |  | label |  |
 |  |  | placeholder |  |
 |  |  | autofocus |  |
@@ -300,7 +298,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | maxlength |  |
 |  |  | prevent-invalid-input |  |
 |  |  | clear-button-visible |  |
-| vaadin-password-field | [PasswordField](https://vaadin.com/components/vaadin-text-field) |  |  |
+| vaadin-password-field | [PasswordField](https://vaadin.com/docs/latest/ds/components/password-field) |  |  |
 |  |  | label |  |
 |  |  | placeholder |  |
 |  |  | autofocus |  |
@@ -311,7 +309,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | prevent-invalid-input |  |
 |  |  | clear-button-visible |  |
 |  |  | reveal-button-hidden |  |
-| vaadin-email-field | [EmailField](https://vaadin.com/components/vaadin-text-field) |  |  |
+| vaadin-email-field | [EmailField](https://vaadin.com/docs/latest/ds/components/date-time-picker) |  |  |
 |  |  | label |  |
 |  |  | placeholder |  |
 |  |  | autofocus |  |
@@ -321,7 +319,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | pattern |  |
 |  |  | prevent-invalid-input |  |
 |  |  | clear-button-visible |  |
-| vaadin-number-field | [NumberField](https://vaadin.com/components/vaadin-text-field) |  |  |
+| vaadin-number-field | [NumberField](https://vaadin.com/docs/latest/ds/components/number-field) |  |  |
 |  |  | label |  |
 |  |  | placeholder |  |
 |  |  | autofocus |  |
@@ -331,7 +329,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | step |  |
 |  |  | has-controls |  |
 |  |  | clear-button-visible |  |
-| vaadin-integer-field | [IntegerField](https://vaadin.com/components/vaadin-text-field) |  |  |
+| vaadin-integer-field | [IntegerField](https://vaadin.com/docs/latest/ds/components/number-field) |  |  |
 |  |  | label |  |
 |  |  | placeholder |  |
 |  |  | autofocus |  |
@@ -341,7 +339,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | step |  |
 |  |  | has-controls |  |
 |  |  | clear-button-visible |  |
-| vaadin-big-decimal-field | [BigDecimalField](https://vaadin.com/components/vaadin-text-field) |  |  |
+| vaadin-big-decimal-field | [BigDecimalField](https://vaadin.com/docs/latest/ds/components/number-field) |  |  |
 |  |  | label |  |
 |  |  | placeholder |  |
 |  |  | autofocus |  |
@@ -355,7 +353,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | max |  |
 |  |  | step |  |
 |  |  | clear-button-visible |  |
-| vaadin-upload | [Upload](https://vaadin.com/components/vaadin-upload) |  | Slots: add-button, drop-label, drop-label-icon |
+| vaadin-upload | [Upload](https://vaadin.com/docs/latest/ds/components/upload) |  | Slots: add-button, drop-label, drop-label-icon |
 |  |  | nodrop |  |
 |  |  | accept |  |
 |  |  | max-files |  |
@@ -363,7 +361,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | capture |  |
 |  |  |  |  |
 |  |  |  |  |
-| vaadin-accordion | [Accordion](https://vaadin.com/components/vaadin-accordion) |  | Only vaadin-accordion-panel as child elements. |
+| vaadin-accordion | [Accordion](https://vaadin.com/docs/latest/ds/components/accordion) |  | Only vaadin-accordion-panel as child elements. |
 |  |  | ! closed |  |
 | vaadin-accordion-panel | AccordionPanel |  | Slots: summary |
 | vaadin-avatar | [Avatar](https://vaadin.com/docs/latest/ds/components/avatar) |  |  |
@@ -373,49 +371,49 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | color-index |  |
 | vaadin-avatar-group | [Avatar](https://vaadin.com/docs/latest/ds/components/avatar) |  |  |
 |  |  | max-items-visible |  |
-| vaadin-button | [Button](https://vaadin.com/components/vaadin-button) |  |  |
+| vaadin-button | [Button](https://vaadin.com/docs/latest/ds/components/button) |  |  |
 |  |  | autofocus |  |
 |  |  | disable-on-click | Slots: prefix, suffix (only one is supported; limit of the Java Component) |
-| vaadin-details | [Details](https://vaadin.com/components/vaadin-details) |  | Slots: summary |
+| vaadin-details | [Details](https://vaadin.com/docs/latest/ds/components/details) |  | Slots: summary |
 |  |  | opened |  |
-| vaadin-dialog | [Dialog](https://vaadin.com/components/vaadin-dialog) |  |  |
+| vaadin-dialog | [Dialog](https://vaadin.com/docs/latest/ds/components/dialog) |  |  |
 |  |  | no-close-on-esc |  |
 |  |  | no-close-on-outside-click |  |
-| vaadin-grid | [Grid](https://vaadin.com/components/vaadin-grid) |  | No children; use Java API. |
-| ! vaadin-tree-grid | [TreeGrid](https://vaadin.com/components/vaadin-grid) |  | No children; use Java API. |
-| iron-icon | [Icon](https://vaadin.com/components/vaadin-icons) |  |  |
+| vaadin-grid | [Grid](https://vaadin.com/docs/latest/ds/components/grid) |  | No children; use Java API. |
+| ! vaadin-tree-grid | [TreeGrid](https://vaadin.com/docs/latest/ds/components/grid) |  | No children; use Java API. |
+| vaadin-icon | [Icon](https://vaadin.com/docs/latest/ds/foundation/icons) |  |  |
 |  |  | icon |  |
 |  |  | ! color |  |
 |  |  | ! size |  |
-| vaadin-menu-bar | [MenuBar](https://vaadin.com/components/vaadin-menu-bar) |  |  |
+| vaadin-menu-bar | [MenuBar](https://vaadin.com/docs/latest/ds/components/menu-bar) |  |  |
 |  |  | open-on-hover |  |
-| vaadin-progress-bar | [ProgressBar](https://vaadin.com/components/vaadin-progress-bar) |  |  |
+| vaadin-progress-bar | [ProgressBar](https://vaadin.com/docs/latest/ds/components/progress-bar) |  |  |
 |  |  | indeterminate |  |
 |  |  | min |  |
 |  |  | max |  |
 |  |  | value |  |
-| vaadin-tabs | [Tabs](https://vaadin.com/components/vaadin-tabs) |  | Only vaadin-tab as child elements. |
+| vaadin-tabs | [Tabs](https://vaadin.com/docs/latest/ds/components/tabs) |  | Only vaadin-tab as child elements. |
 |  |  | orientation | orientation="vertical" |
 |  |  | selected |  |
 | vaadin-tab | Tab |  |  |
 |  |  |  |  |
 |  |  |  |  |
-| vaadin-app-layout | [AppLayout](https://vaadin.com/components/vaadin-app-layout) |  | Slots: navbar (touch-optimized), drawer |
+| vaadin-app-layout | [AppLayout](https://vaadin.com/docs/latest/ds/components/app-layout) |  | Slots: navbar (touch-optimized), drawer |
 |  |  | primary-section |  | navbar, drawer
-| vaadin-drawer-toggle | [DrawerToggle](https://vaadin.com/components/vaadin-app-layout) |  |  |
-| vaadin-form-layout | [FormLayout](https://vaadin.com/components/vaadin-form-layout) |  |  |
+| vaadin-drawer-toggle | [DrawerToggle](https://vaadin.com/docs/latest/ds/components/app-layout) |  |  |
+| vaadin-form-layout | [FormLayout](https://vaadin.com/docs/latest/ds/components/form-layout) |  |  |
 |  |  | ! colspan | Attribute for child elements! |
 | vaadin-form-item |  |  | Slots: label |
-| vaadin-login-form | [LoginForm](https://vaadin.com/components/vaadin-login) |  |  |
-| vaadin-login-overlay | [LoginOverlay](https://vaadin.com/components/vaadin-login) |  |  |
-| vaadin-horizontal-layout | [HorizontalLayout](https://vaadin.com/components/vaadin-ordered-layout) |  | Default spacing of the Java component is removed per default. |
-| vaadin-vertical-layout | [VerticalLayout](https://vaadin.com/components/vaadin-ordered-layout) |  | Default width, padding, spacing of the Java component is removed per default. |
+| vaadin-login-form | [LoginForm](https://vaadin.com/docs/latest/ds/components/login) |  |  |
+| vaadin-login-overlay | [LoginOverlay](https://vaadin.com/docs/latest/ds/components/login) |  |  |
+| vaadin-horizontal-layout | [HorizontalLayout](https://vaadin.com/docs/latest/ds/components/basic-layouts) |  | Default spacing of the Java component is removed per default. |
+| vaadin-vertical-layout | [VerticalLayout](https://vaadin.com/docs/latest/ds/components/basic-layouts) |  | Default width, padding, spacing of the Java component is removed per default. |
 | * | ThemableLayout |  |  |
 |  |  | ! margin | active when attribute present; attribute has no value |
 |  |  | ! padding | active when attribute present; attribute has no value |
 |  |  | ! spacing | active when attribute present; also supports **xs**, **s**, **m** (default), **l**, **xl** |
 |  |  | ! box-sizing | border-box, content-box |
-| vaadin-scroller | [Scroller](https://vaadin.com/components/vaadin-ordered-layout) |  |  |
+| vaadin-scroller | [Scroller](https://vaadin.com/docs/latest/ds/components/scroller) |  |  |
 |  |  | scroll-direction |  | both (default), horizontal, vertical, none
 | ! vaadin-flex-layout | FlexLayout |  | Doesn't exist as WebComponent. Just a div with flex box layout. [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/). Also see attributes of FlexComponent. |
 |  |  | align-content | -> setAlignContent(..) |
@@ -427,19 +425,19 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | ! expand | Attribute for child elements! The same as flex-grow="1". |
 |  |  | ! align-self | Attribute for child elements! Same as CSS property. |
 |  |  | ! flex-grow | Attribute for child elements! Same as CSS property. |
-| vaadin-split-layout | [SplitLayout](https://vaadin.com/components/vaadin-split-layout) |  |  |
+| vaadin-split-layout | [SplitLayout](https://vaadin.com/docs/latest/ds/components/split-layout) |  |  |
 |  |  | orientation | orientation="vertical" |
 |  |  |  |  |
 |  |  |  |  |
-| vaadin-board | [Board](https://vaadin.com/components/vaadin-board) |  |  |
-| vaadin-board-row | [Row](https://vaadin.com/components/vaadin-board) |  |  |
-| vaadin-chart | [Chart](https://vaadin.com/components/vaadin-charts) |  |  |
-| vaadin-cookie-consent | [CookieConsent](https://vaadin.com/components/vaadin-cookie-consent) |  |  |
+| vaadin-board | [Board](https://vaadin.com/docs/latest/ds/components/board) |  |  |
+| vaadin-board-row | [Row](https://vaadin.com/docs/latest/ds/components/board) |  |  |
+| vaadin-chart | [Chart](https://vaadin.com/docs/latest/ds/components/charts) |  |  |
+| vaadin-cookie-consent | [CookieConsent](https://vaadin.com/docs/latest/ds/components/cookie-consent) |  |  |
 |  |  | message |  |
 |  |  | dismiss |  |
 |  |  | learn-more |  |
 |  |  | learn-more-link |  |
-| vaadin-crud | [Crud](https://vaadin.com/components/vaadin-crud) |  |  |
-| vaadin-grid-pro | [GridPro](https://vaadin.com/components/vaadin-grid-pro) |  |  |
-| vaadin-rich-text-editor | [RichTextEditor](https://vaadin.com/components/vaadin-rich-text-editor) |  |  |
+| vaadin-crud | [Crud](https://vaadin.com/docs/latest/ds/components/crud) |  |  |
+| vaadin-grid-pro | [GridPro](https://vaadin.com/docs/latest/ds/components/grid-pro) |  |  |
+| vaadin-rich-text-editor | [RichTextEditor](https://vaadin.com/docs/latest/ds/components/rich-text-editor) |  |  |
 |  |  |  |  |

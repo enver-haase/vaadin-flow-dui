@@ -5,7 +5,7 @@ import com.vaadin.flow.component.HasOrderedComponents;
 
 
 @SuppressWarnings("unchecked")
-public interface FluentHasOrderedComponents<C extends Component & HasOrderedComponents<C>, F extends FluentHasOrderedComponents<C, F>>
+public interface FluentHasOrderedComponents<C extends Component & HasOrderedComponents, F extends FluentHasOrderedComponents<C, F>>
   extends
     FluentHasComponents<C, F>
 {

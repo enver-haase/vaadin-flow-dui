@@ -143,7 +143,7 @@ public class OrderedLayoutFactory
 
     if (component instanceof FlexComponent)
     {
-      FlexComponent<?> flexComponent = (FlexComponent<?>) component;
+      FlexComponent flexComponent = (FlexComponent) component;
 
       context.readChildren(component, element, (slotName, childElement) -> {
         if (slotName != null)
@@ -244,7 +244,7 @@ public class OrderedLayoutFactory
 
     if (component instanceof FlexComponent)
     {
-      FlexComponent<?> flexComponent = (FlexComponent<?>) component;
+      FlexComponent flexComponent = (FlexComponent) component;
 
       context.readEnumAttribute(element, TemplateParserContext.CUSTOM_ATTR_PREFIX + "align-items",
           ALIGNMENT::get, flexComponent::setAlignItems, consumedAttributes);

@@ -1,5 +1,8 @@
 package de.codecamp.vaadin.flowdui.util;
 
+import com.vaadin.flow.component.icon.Icon;
+
+
 /**
  * Lumo properties related to icon size.
  *
@@ -31,6 +34,12 @@ public enum LumoIconSize
   public String property()
   {
     return property;
+  }
+
+
+  public void applyTo(Icon icon)
+  {
+    icon.setSize(var());
   }
 
 }

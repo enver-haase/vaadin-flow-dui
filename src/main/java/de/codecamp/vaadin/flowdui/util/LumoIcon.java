@@ -2,8 +2,8 @@ package de.codecamp.vaadin.flowdui.util;
 
 import java.util.Locale;
 
-import com.vaadin.flow.component.icon.IronIcon;
-import com.vaadin.flow.function.SerializableSupplier;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.IconFactory;
 
 
 /**
@@ -11,7 +11,7 @@ import com.vaadin.flow.function.SerializableSupplier;
  */
 public enum LumoIcon
   implements
-    SerializableSupplier<IronIcon>
+    IconFactory
 {
 
   ALIGN_CENTER,
@@ -63,20 +63,10 @@ public enum LumoIcon
    *
    * @return new component instance of the icon
    */
-  public IronIcon create()
-  {
-    return new IronIcon("lumo", name().toLowerCase(Locale.ENGLISH).replace('_', '-'));
-  }
-
-  /**
-   * Returns new component instance of the icon.
-   *
-   * @return new component instance of the icon
-   */
   @Override
-  public IronIcon get()
+  public Icon create()
   {
-    return create();
+    return new Icon("lumo", name().toLowerCase(Locale.ENGLISH).replace('_', '-'));
   }
 
 }

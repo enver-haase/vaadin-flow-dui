@@ -11,7 +11,7 @@ import de.codecamp.vaadin.flowdui.fluent.FluentHasStyle;
 
 
 @SuppressWarnings("unchecked")
-public interface FluentFlexComponent<C extends Component & FlexComponent<C>, F extends FluentFlexComponent<C, F>>
+public interface FluentFlexComponent<C extends Component & FlexComponent, F extends FluentFlexComponent<C, F>>
   extends
     FluentHasOrderedComponents<C, F>,
     FluentHasStyle<C, F>,
