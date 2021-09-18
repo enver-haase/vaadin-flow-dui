@@ -201,7 +201,7 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  |  |  |
 | slot | - | name | If you need to create a Component manually, you can add a slot tag, like for a Web Component, and annotate the field with your component with @Slotted("slotName"). The component will be inserted into the slot. |
 | style | - |  | Copied verbatim. |
-| template | - | id | Analogous to [HTML's \<template>](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots). Define a UI fragment that is not rendered immediately, but can be created programmatically whenever and however often you need it. See the example above on how to use them. |
+| fragment | - | id | Defines a UI fragment that is not rendered immediately, but can be created programmatically whenever and however often you need it. See the example above on how to use fragments. |
 |  |  |  |  |
 |  |  |  |  |
 | * | Component |  |  |
