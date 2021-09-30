@@ -44,4 +44,10 @@ public enum ThemableLayoutSpacing
     });
   }
 
+  public static void removeFrom(ThemableLayout themableLayout)
+  {
+    Arrays.asList(ThemableLayoutSpacing.values())
+        .forEach(s -> themableLayout.getThemeList().remove(s.theme()));
+  }
+
 }

@@ -9,14 +9,16 @@ import de.codecamp.vaadin.flowdui.fluent.FluentComponent;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasSize;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasStyle;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasTheme;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasThemeVariants;
 
 
 public class FluentAvatarGroup
   extends FluentComponent<AvatarGroup, FluentAvatarGroup>
   implements
-    FluentHasStyle<AvatarGroup, FluentAvatarGroup>,
     FluentHasSize<AvatarGroup, FluentAvatarGroup>,
-    FluentHasTheme<AvatarGroup, FluentAvatarGroup>
+    FluentHasStyle<AvatarGroup, FluentAvatarGroup>,
+    FluentHasTheme<AvatarGroup, FluentAvatarGroup>,
+    FluentHasThemeVariants<AvatarGroup, FluentAvatarGroup, AvatarGroupVariant>
 {
 
   public FluentAvatarGroup()
@@ -60,23 +62,52 @@ public class FluentAvatarGroup
     return this;
   }
 
-  public FluentAvatarGroup themeVariants(AvatarGroupVariant variants)
-  {
-    getComponent().removeThemeVariants(AvatarGroupVariant.values());
-    getComponent().addThemeVariants(variants);
-    return this;
-  }
-
+  @Override
   public FluentAvatarGroup addThemeVariants(AvatarGroupVariant... variants)
   {
     getComponent().addThemeVariants(variants);
     return this;
   }
 
+  @Override
   public FluentAvatarGroup removeThemeVariants(AvatarGroupVariant... variants)
   {
     getComponent().removeThemeVariants(variants);
     return this;
+  }
+
+  public FluentAvatarGroup xsmall()
+  {
+    removeThemeVariants(AvatarGroupVariant.LUMO_SMALL, AvatarGroupVariant.LUMO_LARGE,
+        AvatarGroupVariant.LUMO_XLARGE);
+    return addThemeVariants(AvatarGroupVariant.LUMO_XSMALL);
+  }
+
+  public FluentAvatarGroup small()
+  {
+    removeThemeVariants(AvatarGroupVariant.LUMO_XSMALL, AvatarGroupVariant.LUMO_LARGE,
+        AvatarGroupVariant.LUMO_XLARGE);
+    return addThemeVariants(AvatarGroupVariant.LUMO_SMALL);
+  }
+
+  public FluentAvatarGroup medium()
+  {
+    return removeThemeVariants(AvatarGroupVariant.LUMO_XSMALL, AvatarGroupVariant.LUMO_SMALL,
+        AvatarGroupVariant.LUMO_LARGE, AvatarGroupVariant.LUMO_XLARGE);
+  }
+
+  public FluentAvatarGroup large()
+  {
+    removeThemeVariants(AvatarGroupVariant.LUMO_XSMALL, AvatarGroupVariant.LUMO_SMALL,
+        AvatarGroupVariant.LUMO_XLARGE);
+    return addThemeVariants(AvatarGroupVariant.LUMO_LARGE);
+  }
+
+  public FluentAvatarGroup xlarge()
+  {
+    removeThemeVariants(AvatarGroupVariant.LUMO_XSMALL, AvatarGroupVariant.LUMO_SMALL,
+        AvatarGroupVariant.LUMO_LARGE);
+    return addThemeVariants(AvatarGroupVariant.LUMO_XLARGE);
   }
 
 }

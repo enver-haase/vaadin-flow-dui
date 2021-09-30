@@ -8,6 +8,9 @@ import com.vaadin.flow.function.SerializablePredicate;
 import de.codecamp.vaadin.flowdui.fluent.FluentComponent;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasHelper;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasSize;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasStyle;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasTheme;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasThemeVariants;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasValidation;
 import de.codecamp.vaadin.flowdui.fluent.FluentMultiSelect;
 
@@ -18,7 +21,10 @@ public class FluentCheckboxGroup<ITEM>
     FluentHasSize<CheckboxGroup<ITEM>, FluentCheckboxGroup<ITEM>>,
     FluentHasValidation<CheckboxGroup<ITEM>, FluentCheckboxGroup<ITEM>>,
     FluentMultiSelect<CheckboxGroup<ITEM>, FluentCheckboxGroup<ITEM>, ITEM>,
-    FluentHasHelper<CheckboxGroup<ITEM>, FluentCheckboxGroup<ITEM>>
+    FluentHasHelper<CheckboxGroup<ITEM>, FluentCheckboxGroup<ITEM>>,
+    FluentHasStyle<CheckboxGroup<ITEM>, FluentCheckboxGroup<ITEM>>,
+    FluentHasTheme<CheckboxGroup<ITEM>, FluentCheckboxGroup<ITEM>>,
+    FluentHasThemeVariants<CheckboxGroup<ITEM>, FluentCheckboxGroup<ITEM>, CheckboxGroupVariant>
 {
 
   public FluentCheckboxGroup()
@@ -51,23 +57,29 @@ public class FluentCheckboxGroup<ITEM>
     return this;
   }
 
-  public FluentCheckboxGroup<ITEM> themeVariants(CheckboxGroupVariant... variants)
-  {
-    getComponent().removeThemeVariants(CheckboxGroupVariant.values());
-    getComponent().addThemeVariants(variants);
-    return this;
-  }
-
+  @Override
   public FluentCheckboxGroup<ITEM> addThemeVariants(CheckboxGroupVariant... variants)
   {
     getComponent().addThemeVariants(variants);
     return this;
   }
 
+  @Override
   public FluentCheckboxGroup<ITEM> removeThemeVariants(CheckboxGroupVariant... variants)
   {
     getComponent().removeThemeVariants(variants);
     return this;
+  }
+
+  public FluentCheckboxGroup<ITEM> vertical(boolean enabled)
+  {
+    return themeVariant(CheckboxGroupVariant.LUMO_VERTICAL, enabled);
+  }
+
+  @Override
+  public FluentCheckboxGroup<ITEM> helperAboveField(boolean enabled)
+  {
+    return themeVariant(CheckboxGroupVariant.LUMO_HELPER_ABOVE_FIELD, enabled);
   }
 
 }

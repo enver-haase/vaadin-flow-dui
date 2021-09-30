@@ -23,10 +23,14 @@ public interface FluentHasHelper<C extends HasHelper, F extends FluentHasHelper<
     return (F) this;
   }
 
-  default F helperAbove(boolean helperAbove)
+  default F helperAboveField(boolean enabled)
   {
+    /*
+     * The "helper-above-field" variant is supported by components implementing HasHelper. So using
+     * the constant from any component should to the trick.
+     */
     getComponent().getElement().getThemeList()
-        .set(TextFieldVariant.LUMO_HELPER_ABOVE_FIELD.getVariantName(), helperAbove);
+        .set(TextFieldVariant.LUMO_HELPER_ABOVE_FIELD.getVariantName(), enabled);
     return (F) this;
   }
 

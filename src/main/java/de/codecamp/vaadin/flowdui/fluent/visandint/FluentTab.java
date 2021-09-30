@@ -7,14 +7,16 @@ import de.codecamp.vaadin.flowdui.fluent.FluentComponent;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasComponents;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasStyle;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasTheme;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasThemeVariants;
 
 
 public class FluentTab
   extends FluentComponent<Tab, FluentTab>
   implements
+    FluentHasComponents<Tab, FluentTab>,
     FluentHasStyle<Tab, FluentTab>,
     FluentHasTheme<Tab, FluentTab>,
-    FluentHasComponents<Tab, FluentTab>
+    FluentHasThemeVariants<Tab, FluentTab, TabVariant>
 {
 
   public FluentTab()
@@ -47,23 +49,23 @@ public class FluentTab
   }
 
 
-  public FluentTab themeVariants(TabVariant... variants)
-  {
-    getComponent().removeThemeVariants(TabVariant.values());
-    getComponent().addThemeVariants(variants);
-    return this;
-  }
-
+  @Override
   public FluentTab addThemeVariants(TabVariant... variants)
   {
     getComponent().addThemeVariants(variants);
     return this;
   }
 
+  @Override
   public FluentTab removeThemeVariants(TabVariant... variants)
   {
     getComponent().removeThemeVariants(variants);
     return this;
+  }
+
+  public FluentTab iconOnTop(boolean enabled)
+  {
+    return themeVariant(TabVariant.LUMO_ICON_ON_TOP, enabled);
   }
 
 }

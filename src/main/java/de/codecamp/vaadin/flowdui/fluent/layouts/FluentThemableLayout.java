@@ -13,28 +13,60 @@ public interface FluentThemableLayout<C extends ThemableLayout, F extends Fluent
     FluentHasElement<C, F>
 {
 
-  default F margin(boolean margin)
+  default F margin(boolean enabled)
   {
-    getComponent().setMargin(margin);
+    getComponent().setMargin(enabled);
     return (F) this;
   }
 
-  default F padding(boolean padding)
+  default F padding(boolean enabled)
   {
-    getComponent().setPadding(padding);
+    getComponent().setPadding(enabled);
     return (F) this;
   }
 
-  default F spacing(boolean spacing)
+  default F spacing(boolean enabled)
   {
-    getComponent().setSpacing(spacing);
-    return (F) this;
+    if (enabled)
+    {
+      return spacing(ThemableLayoutSpacing.M);
+    }
+    else
+    {
+      ThemableLayoutSpacing.removeFrom(getComponent());
+      return (F) this;
+    }
   }
 
   default F spacing(ThemableLayoutSpacing spacing)
   {
     spacing.applyTo(getComponent());
     return (F) this;
+  }
+
+  default F spacingXS()
+  {
+    return spacing(ThemableLayoutSpacing.XS);
+  }
+
+  default F spacingS()
+  {
+    return spacing(ThemableLayoutSpacing.S);
+  }
+
+  default F spacingM()
+  {
+    return spacing(ThemableLayoutSpacing.M);
+  }
+
+  default F spacingL()
+  {
+    return spacing(ThemableLayoutSpacing.L);
+  }
+
+  default F spacingXL()
+  {
+    return spacing(ThemableLayoutSpacing.XL);
   }
 
   default F boxSizing(BoxSizing boxSizing)

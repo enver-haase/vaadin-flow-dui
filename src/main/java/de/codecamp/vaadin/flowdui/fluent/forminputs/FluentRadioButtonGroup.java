@@ -10,6 +10,7 @@ import de.codecamp.vaadin.flowdui.fluent.FluentAbstractField;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasHelper;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasStyle;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasTheme;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasThemeVariants;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasValidation;
 import de.codecamp.vaadin.flowdui.fluent.FluentSingleSelect;
 
@@ -21,7 +22,8 @@ public class FluentRadioButtonGroup<ITEM>
     FluentHasValidation<RadioButtonGroup<ITEM>, FluentRadioButtonGroup<ITEM>>,
     FluentHasHelper<RadioButtonGroup<ITEM>, FluentRadioButtonGroup<ITEM>>,
     FluentHasStyle<RadioButtonGroup<ITEM>, FluentRadioButtonGroup<ITEM>>,
-    FluentHasTheme<RadioButtonGroup<ITEM>, FluentRadioButtonGroup<ITEM>>
+    FluentHasTheme<RadioButtonGroup<ITEM>, FluentRadioButtonGroup<ITEM>>,
+    FluentHasThemeVariants<RadioButtonGroup<ITEM>, FluentRadioButtonGroup<ITEM>, RadioGroupVariant>
 {
 
   public FluentRadioButtonGroup()
@@ -61,23 +63,29 @@ public class FluentRadioButtonGroup<ITEM>
     return this;
   }
 
-  public FluentRadioButtonGroup<ITEM> themeVariants(RadioGroupVariant... variants)
-  {
-    getComponent().removeThemeVariants(RadioGroupVariant.values());
-    getComponent().addThemeVariants(variants);
-    return this;
-  }
-
+  @Override
   public FluentRadioButtonGroup<ITEM> addThemeVariants(RadioGroupVariant... variants)
   {
     getComponent().addThemeVariants(variants);
     return this;
   }
 
+  @Override
   public FluentRadioButtonGroup<ITEM> removeThemeVariants(RadioGroupVariant... variants)
   {
     getComponent().removeThemeVariants(variants);
     return this;
+  }
+
+  public FluentRadioButtonGroup<ITEM> vertical(boolean enabled)
+  {
+    return themeVariant(RadioGroupVariant.LUMO_VERTICAL, enabled);
+  }
+
+  @Override
+  public FluentRadioButtonGroup<ITEM> helperAboveField(boolean enabled)
+  {
+    return themeVariant(RadioGroupVariant.LUMO_HELPER_ABOVE_FIELD, enabled);
   }
 
 }

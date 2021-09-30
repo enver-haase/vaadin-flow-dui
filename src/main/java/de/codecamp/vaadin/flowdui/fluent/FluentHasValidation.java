@@ -1,7 +1,5 @@
 package de.codecamp.vaadin.flowdui.fluent;
 
-import java.io.Serializable;
-
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasValidation;
 
@@ -9,8 +7,7 @@ import com.vaadin.flow.component.HasValidation;
 @SuppressWarnings("unchecked")
 public interface FluentHasValidation<C extends Component & HasValidation, F extends FluentHasValidation<C, F>>
   extends
-    FluentHasElement<C, F>,
-    Serializable
+    FluentHasElement<C, F>
 {
 
   default F errorMessage(String errorMessage)

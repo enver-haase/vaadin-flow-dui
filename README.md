@@ -130,11 +130,11 @@ import static de.codecamp.vaadin.flowdui.fluent.Fluent.*;
 
 ...
 
-FluentButton button1 = button().text("Label").themeVariants(ButtonVariant.LUMO_PRIMARY).addClickListener(event -> {
+FluentButton button1 = button().text("Label").primary().addClickListener(event -> {
   Notification.show("Clicked.")
 });
 
-fluent(someButton).text("Label").themeVariants(ButtonVariant.LUMO_PRIMARY);
+fluent(someButton).text("Label").primary();
 ```
 
 But components from the template can also be automatically wrapped in the fluent API simply when mapping them to a field via `@Mapped` by using the fluent type instead of the regular component type.
@@ -154,7 +154,7 @@ public class FluentDemoView
   {
     Component content = super.initContent();
 
-    button.text("Label").themeVariants(ButtonVariant.LUMO_PRIMARY).addClickListener(event -> {
+    button.text("Label").primary().addClickListener(event -> {
       Notification.show("Clicked.");
     });
 

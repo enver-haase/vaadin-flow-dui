@@ -12,15 +12,17 @@ import de.codecamp.vaadin.flowdui.fluent.FluentComponent;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasSize;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasStyle;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasTheme;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasThemeVariants;
 
 
 public class FluentSplitLayout
   extends FluentComponent<SplitLayout, FluentSplitLayout>
   implements
     FluentHasSize<SplitLayout, FluentSplitLayout>,
-    FluentHasStyle<SplitLayout, FluentSplitLayout>,
     FluentClickNotifier<SplitLayout, FluentSplitLayout>,
-    FluentHasTheme<SplitLayout, FluentSplitLayout>
+    FluentHasStyle<SplitLayout, FluentSplitLayout>,
+    FluentHasTheme<SplitLayout, FluentSplitLayout>,
+    FluentHasThemeVariants<SplitLayout, FluentSplitLayout, SplitLayoutVariant>
 {
 
   public FluentSplitLayout()
@@ -65,23 +67,35 @@ public class FluentSplitLayout
     return this;
   }
 
-  public FluentSplitLayout themeVariants(SplitLayoutVariant variants)
-  {
-    getComponent().removeThemeVariants(SplitLayoutVariant.values());
-    getComponent().addThemeVariants(variants);
-    return this;
-  }
-
+  @Override
   public FluentSplitLayout addThemeVariants(SplitLayoutVariant... variants)
   {
     getComponent().addThemeVariants(variants);
     return this;
   }
 
+  @Override
   public FluentSplitLayout removeThemeVariants(SplitLayoutVariant... variants)
   {
     getComponent().removeThemeVariants(variants);
     return this;
+  }
+
+  public FluentSplitLayout minimal()
+  {
+    removeThemeVariants(SplitLayoutVariant.LUMO_SMALL);
+    return addThemeVariants(SplitLayoutVariant.LUMO_MINIMAL);
+  }
+
+  public FluentSplitLayout small()
+  {
+    removeThemeVariants(SplitLayoutVariant.LUMO_MINIMAL);
+    return addThemeVariants(SplitLayoutVariant.LUMO_SMALL);
+  }
+
+  public FluentSplitLayout medium()
+  {
+    return removeThemeVariants(SplitLayoutVariant.LUMO_MINIMAL, SplitLayoutVariant.LUMO_SMALL);
   }
 
 }

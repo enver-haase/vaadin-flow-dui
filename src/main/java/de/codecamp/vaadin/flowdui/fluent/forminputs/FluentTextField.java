@@ -10,6 +10,7 @@ import de.codecamp.vaadin.flowdui.fluent.FluentHasHelper;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasSize;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasStyle;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasTheme;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasThemeVariants;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasValidation;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasValueChangeMode;
 import de.codecamp.vaadin.flowdui.fluent.FluentInputNotifier;
@@ -32,7 +33,8 @@ public class FluentTextField
     FluentHasHelper<TextField, FluentTextField>,
     FluentHasStyle<TextField, FluentTextField>,
     FluentFocusable<TextField, FluentTextField>,
-    FluentHasTheme<TextField, FluentTextField>
+    FluentHasTheme<TextField, FluentTextField>,
+    FluentHasThemeVariants<TextField, FluentTextField, TextFieldVariant>
 {
 
   public FluentTextField()
@@ -106,23 +108,52 @@ public class FluentTextField
     return this;
   }
 
-  public FluentTextField themeVariants(TextFieldVariant... variants)
-  {
-    getComponent().removeThemeVariants(TextFieldVariant.values());
-    getComponent().addThemeVariants(variants);
-    return this;
-  }
-
+  @Override
   public FluentTextField addThemeVariants(TextFieldVariant... variants)
   {
     getComponent().addThemeVariants(variants);
     return this;
   }
 
+  @Override
   public FluentTextField removeThemeVariants(TextFieldVariant... variants)
   {
     getComponent().removeThemeVariants(variants);
     return this;
+  }
+
+  public FluentTextField small()
+  {
+    return addThemeVariants(TextFieldVariant.LUMO_SMALL);
+  }
+
+  public FluentTextField medium()
+  {
+    return removeThemeVariants(TextFieldVariant.LUMO_SMALL);
+  }
+
+  public FluentTextField alignLeft()
+  {
+    return removeThemeVariants(TextFieldVariant.LUMO_ALIGN_CENTER,
+        TextFieldVariant.LUMO_ALIGN_RIGHT);
+  }
+
+  public FluentTextField alignCenter()
+  {
+    removeThemeVariants(TextFieldVariant.LUMO_ALIGN_RIGHT);
+    return addThemeVariants(TextFieldVariant.LUMO_ALIGN_CENTER);
+  }
+
+  public FluentTextField alignRight()
+  {
+    removeThemeVariants(TextFieldVariant.LUMO_ALIGN_CENTER);
+    return addThemeVariants(TextFieldVariant.LUMO_ALIGN_RIGHT);
+  }
+
+  @Override
+  public FluentTextField helperAboveField(boolean enabled)
+  {
+    return themeVariant(TextFieldVariant.LUMO_HELPER_ABOVE_FIELD, enabled);
   }
 
 }

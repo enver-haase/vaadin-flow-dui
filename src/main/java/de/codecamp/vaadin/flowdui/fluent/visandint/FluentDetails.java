@@ -6,14 +6,18 @@ import com.vaadin.flow.component.details.DetailsVariant;
 
 import de.codecamp.vaadin.flowdui.fluent.FluentComponent;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasEnabled;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasStyle;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasTheme;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasThemeVariants;
 
 
 public class FluentDetails
   extends FluentComponent<Details, FluentDetails>
   implements
     FluentHasEnabled<Details, FluentDetails>,
-    FluentHasTheme<Details, FluentDetails>
+    FluentHasStyle<Details, FluentDetails>,
+    FluentHasTheme<Details, FluentDetails>,
+    FluentHasThemeVariants<Details, FluentDetails, DetailsVariant>
 {
 
   public FluentDetails()
@@ -52,23 +56,38 @@ public class FluentDetails
   }
 
 
-  public FluentDetails themeVariants(DetailsVariant variants)
-  {
-    getComponent().removeThemeVariants(DetailsVariant.values());
-    getComponent().addThemeVariants(variants);
-    return this;
-  }
-
+  @Override
   public FluentDetails addThemeVariants(DetailsVariant... variants)
   {
     getComponent().addThemeVariants(variants);
     return this;
   }
 
+  @Override
   public FluentDetails removeThemeVariants(DetailsVariant... variants)
   {
     getComponent().removeThemeVariants(variants);
     return this;
+  }
+
+  public FluentDetails filled(boolean enabled)
+  {
+    return themeVariant(DetailsVariant.FILLED, enabled);
+  }
+
+  public FluentDetails reverse(boolean enabled)
+  {
+    return themeVariant(DetailsVariant.REVERSE, enabled);
+  }
+
+  public FluentDetails small()
+  {
+    return addThemeVariants(DetailsVariant.SMALL);
+  }
+
+  public FluentDetails medium()
+  {
+    return removeThemeVariants(DetailsVariant.SMALL);
   }
 
 }

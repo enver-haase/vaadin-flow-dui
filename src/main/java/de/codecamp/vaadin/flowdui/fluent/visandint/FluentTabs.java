@@ -10,15 +10,17 @@ import de.codecamp.vaadin.flowdui.fluent.FluentHasOrderedComponents;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasSize;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasStyle;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasTheme;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasThemeVariants;
 
 
 public class FluentTabs
   extends FluentComponent<Tabs, FluentTabs>
   implements
+    FluentHasOrderedComponents<Tabs, FluentTabs>,
+    FluentHasSize<Tabs, FluentTabs>,
     FluentHasStyle<Tabs, FluentTabs>,
     FluentHasTheme<Tabs, FluentTabs>,
-    FluentHasOrderedComponents<Tabs, FluentTabs>,
-    FluentHasSize<Tabs, FluentTabs>
+    FluentHasThemeVariants<Tabs, FluentTabs, TabsVariant>
 {
 
   public FluentTabs()
@@ -69,23 +71,55 @@ public class FluentTabs
   }
 
 
-  public FluentTabs themeVariants(TabsVariant... variants)
-  {
-    getComponent().removeThemeVariants(TabsVariant.values());
-    getComponent().addThemeVariants(variants);
-    return this;
-  }
-
+  @Override
   public FluentTabs addThemeVariants(TabsVariant... variants)
   {
     getComponent().addThemeVariants(variants);
     return this;
   }
 
+  @Override
   public FluentTabs removeThemeVariants(TabsVariant... variants)
   {
     getComponent().removeThemeVariants(variants);
     return this;
+  }
+
+  public FluentTabs iconOnTop(boolean enabled)
+  {
+    return themeVariant(TabsVariant.LUMO_ICON_ON_TOP, enabled);
+  }
+
+  public FluentTabs centered(boolean enabled)
+  {
+    return themeVariant(TabsVariant.LUMO_CENTERED, enabled);
+  }
+
+  public FluentTabs minimal()
+  {
+    removeThemeVariants(TabsVariant.LUMO_SMALL);
+    return addThemeVariants(TabsVariant.LUMO_MINIMAL);
+  }
+
+  public FluentTabs small()
+  {
+    removeThemeVariants(TabsVariant.LUMO_MINIMAL);
+    return addThemeVariants(TabsVariant.LUMO_SMALL);
+  }
+
+  public FluentTabs medium()
+  {
+    return removeThemeVariants(TabsVariant.LUMO_MINIMAL, TabsVariant.LUMO_SMALL);
+  }
+
+  public FluentTabs hideScrollButtons(boolean enabled)
+  {
+    return themeVariant(TabsVariant.LUMO_HIDE_SCROLL_BUTTONS, enabled);
+  }
+
+  public FluentTabs equalWidthTabs(boolean enabled)
+  {
+    return themeVariant(TabsVariant.LUMO_EQUAL_WIDTH_TABS, enabled);
   }
 
 }

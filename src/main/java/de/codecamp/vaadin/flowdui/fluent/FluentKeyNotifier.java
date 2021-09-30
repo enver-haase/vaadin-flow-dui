@@ -1,7 +1,5 @@
 package de.codecamp.vaadin.flowdui.fluent;
 
-import java.io.Serializable;
-
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
@@ -16,8 +14,7 @@ import com.vaadin.flow.component.KeyUpEvent;
 @SuppressWarnings("unchecked")
 public interface FluentKeyNotifier<C extends Component & KeyNotifier, F extends FluentKeyNotifier<C, F>>
   extends
-    FluentHasElement<C, F>,
-    Serializable
+    FluentHasElement<C, F>
 {
 
   default F addKeyDownListener(ComponentEventListener<KeyDownEvent> listener)

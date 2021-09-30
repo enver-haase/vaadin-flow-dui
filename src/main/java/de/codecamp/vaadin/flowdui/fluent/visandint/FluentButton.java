@@ -12,6 +12,7 @@ import de.codecamp.vaadin.flowdui.fluent.FluentHasSize;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasStyle;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasText;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasTheme;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasThemeVariants;
 
 
 public class FluentButton
@@ -23,7 +24,8 @@ public class FluentButton
     FluentClickNotifier<Button, FluentButton>,
     FluentHasText<Button, FluentButton>,
     FluentFocusable<Button, FluentButton>,
-    FluentHasTheme<Button, FluentButton>
+    FluentHasTheme<Button, FluentButton>,
+    FluentHasThemeVariants<Button, FluentButton, ButtonVariant>
 {
 
   public FluentButton()
@@ -74,23 +76,91 @@ public class FluentButton
   }
 
 
-  public FluentButton themeVariants(ButtonVariant... variants)
-  {
-    getComponent().removeThemeVariants(ButtonVariant.values());
-    getComponent().addThemeVariants(variants);
-    return this;
-  }
-
+  @Override
   public FluentButton addThemeVariants(ButtonVariant... variants)
   {
     getComponent().addThemeVariants(variants);
     return this;
   }
 
+  @Override
   public FluentButton removeThemeVariants(ButtonVariant... variants)
   {
     getComponent().removeThemeVariants(variants);
     return this;
+  }
+
+  public FluentButton iconOnly(boolean enabled)
+  {
+    return themeVariant(ButtonVariant.LUMO_ICON, enabled);
+  }
+
+
+  public FluentButton small()
+  {
+    removeThemeVariants(ButtonVariant.LUMO_LARGE);
+    return addThemeVariants(ButtonVariant.LUMO_SMALL);
+  }
+
+  public FluentButton medium()
+  {
+    return removeThemeVariants(ButtonVariant.LUMO_SMALL, ButtonVariant.LUMO_LARGE);
+  }
+
+  public FluentButton large()
+  {
+    removeThemeVariants(ButtonVariant.LUMO_SMALL);
+    return addThemeVariants(ButtonVariant.LUMO_LARGE);
+  }
+
+
+  public FluentButton primary()
+  {
+    removeThemeVariants(ButtonVariant.LUMO_TERTIARY, ButtonVariant.LUMO_TERTIARY_INLINE);
+    return addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+  }
+
+  public FluentButton secondary()
+  {
+    return removeThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_TERTIARY,
+        ButtonVariant.LUMO_TERTIARY_INLINE);
+  }
+
+  public FluentButton tertiary()
+  {
+    removeThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_TERTIARY_INLINE);
+    return addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+  }
+
+  public FluentButton tertiaryInline()
+  {
+    removeThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_TERTIARY);
+    return addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+  }
+
+
+  public FluentButton standard()
+  {
+    return removeThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_ERROR,
+        ButtonVariant.LUMO_CONTRAST);
+  }
+
+  public FluentButton success()
+  {
+    removeThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_CONTRAST);
+    return addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+  }
+
+  public FluentButton error()
+  {
+    removeThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_CONTRAST);
+    return addThemeVariants(ButtonVariant.LUMO_ERROR);
+  }
+
+  public FluentButton contrast()
+  {
+    removeThemeVariants(ButtonVariant.LUMO_SUCCESS, ButtonVariant.LUMO_ERROR);
+    return addThemeVariants(ButtonVariant.LUMO_CONTRAST);
   }
 
 }

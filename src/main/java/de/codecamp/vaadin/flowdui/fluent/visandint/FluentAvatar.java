@@ -9,14 +9,16 @@ import de.codecamp.vaadin.flowdui.fluent.FluentComponent;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasSize;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasStyle;
 import de.codecamp.vaadin.flowdui.fluent.FluentHasTheme;
+import de.codecamp.vaadin.flowdui.fluent.FluentHasThemeVariants;
 
 
 public class FluentAvatar
   extends FluentComponent<Avatar, FluentAvatar>
   implements
-    FluentHasStyle<Avatar, FluentAvatar>,
     FluentHasSize<Avatar, FluentAvatar>,
-    FluentHasTheme<Avatar, FluentAvatar>
+    FluentHasStyle<Avatar, FluentAvatar>,
+    FluentHasTheme<Avatar, FluentAvatar>,
+    FluentHasThemeVariants<Avatar, FluentAvatar, AvatarVariant>
 {
 
   public FluentAvatar()
@@ -66,23 +68,52 @@ public class FluentAvatar
     return this;
   }
 
-  public FluentAvatar themeVariants(AvatarVariant variants)
-  {
-    getComponent().removeThemeVariants(AvatarVariant.values());
-    getComponent().addThemeVariants(variants);
-    return this;
-  }
-
+  @Override
   public FluentAvatar addThemeVariants(AvatarVariant... variants)
   {
     getComponent().addThemeVariants(variants);
     return this;
   }
 
+  @Override
   public FluentAvatar removeThemeVariants(AvatarVariant... variants)
   {
     getComponent().removeThemeVariants(variants);
     return this;
+  }
+
+  public FluentAvatar xsmall()
+  {
+    removeThemeVariants(AvatarVariant.LUMO_SMALL, AvatarVariant.LUMO_LARGE,
+        AvatarVariant.LUMO_XLARGE);
+    return addThemeVariants(AvatarVariant.LUMO_XSMALL);
+  }
+
+  public FluentAvatar small()
+  {
+    removeThemeVariants(AvatarVariant.LUMO_XSMALL, AvatarVariant.LUMO_LARGE,
+        AvatarVariant.LUMO_XLARGE);
+    return addThemeVariants(AvatarVariant.LUMO_SMALL);
+  }
+
+  public FluentAvatar medium()
+  {
+    return removeThemeVariants(AvatarVariant.LUMO_XSMALL, AvatarVariant.LUMO_SMALL,
+        AvatarVariant.LUMO_LARGE, AvatarVariant.LUMO_XLARGE);
+  }
+
+  public FluentAvatar large()
+  {
+    removeThemeVariants(AvatarVariant.LUMO_XSMALL, AvatarVariant.LUMO_SMALL,
+        AvatarVariant.LUMO_XLARGE);
+    return addThemeVariants(AvatarVariant.LUMO_LARGE);
+  }
+
+  public FluentAvatar xlarge()
+  {
+    removeThemeVariants(AvatarVariant.LUMO_XSMALL, AvatarVariant.LUMO_SMALL,
+        AvatarVariant.LUMO_LARGE);
+    return addThemeVariants(AvatarVariant.LUMO_XLARGE);
   }
 
 }
