@@ -18,31 +18,31 @@ public interface FluentFlexComponent<C extends Component & FlexComponent<C>, F e
     FluentHasSize<C, F>
 {
 
-  default public F alignItems(Alignment alignment)
+  default F alignItems(Alignment alignment)
   {
     getComponent().setAlignItems(alignment);
     return (F) this;
   }
 
-  default public F alignSelf(Alignment alignment, Component... components)
+  default F alignSelf(Alignment alignment, Component... components)
   {
     getComponent().setAlignSelf(alignment, components);
     return (F) this;
   }
 
-  default public F flexGrow(double flexGrow, Component... components)
+  default F flexGrow(double flexGrow, Component... components)
   {
     getComponent().setFlexGrow(flexGrow, components);
     return (F) this;
   }
 
-  default public F justifyContentMode(JustifyContentMode justifyContentMode)
+  default F justifyContentMode(JustifyContentMode justifyContentMode)
   {
     getComponent().setJustifyContentMode(justifyContentMode);
     return (F) this;
   }
 
-  default public F expand(Component... components)
+  default F expand(Component... components)
   {
     getComponent().expand(components);
     return (F) this;

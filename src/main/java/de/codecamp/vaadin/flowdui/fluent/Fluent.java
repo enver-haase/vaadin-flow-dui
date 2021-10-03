@@ -82,182 +82,182 @@ public interface Fluent
    * Form Inputs
    */
 
-  public static FluentBigDecimalField bigDecimalField()
+  static FluentBigDecimalField bigDecimalField()
   {
     return new FluentBigDecimalField();
   }
 
-  public static FluentBigDecimalField fluent(BigDecimalField component)
+  static FluentBigDecimalField fluent(BigDecimalField component)
   {
     return new FluentBigDecimalField(component);
   }
 
-  public static FluentCheckbox checkbox()
+  static FluentCheckbox checkbox()
   {
     return new FluentCheckbox();
   }
 
-  public static FluentCheckbox fluent(Checkbox component)
+  static FluentCheckbox fluent(Checkbox component)
   {
     return new FluentCheckbox(component);
   }
 
-  public static <ITEM> FluentCheckboxGroup<ITEM> checkboxGroup()
+  static <ITEM> FluentCheckboxGroup<ITEM> checkboxGroup()
   {
     return new FluentCheckboxGroup<>();
   }
 
-  public static <ITEM> FluentCheckboxGroup<ITEM> fluent(CheckboxGroup<ITEM> component)
+  static <ITEM> FluentCheckboxGroup<ITEM> fluent(CheckboxGroup<ITEM> component)
   {
     return new FluentCheckboxGroup<>(component);
   }
 
-  public static <ITEM> FluentComboBox<ITEM> comboBox()
+  static <ITEM> FluentComboBox<ITEM> comboBox()
   {
     return new FluentComboBox<>();
   }
 
-  public static <ITEM> FluentComboBox<ITEM> fluent(ComboBox<ITEM> component)
+  static <ITEM> FluentComboBox<ITEM> fluent(ComboBox<ITEM> component)
   {
     return new FluentComboBox<>(component);
   }
 
-  public static FluentDatePicker datePicker()
+  static FluentDatePicker datePicker()
   {
     return new FluentDatePicker();
   }
 
-  public static FluentDatePicker fluent(DatePicker component)
+  static FluentDatePicker fluent(DatePicker component)
   {
     return new FluentDatePicker(component);
   }
 
-  public static FluentDateTimePicker dateTimePicker()
+  static FluentDateTimePicker dateTimePicker()
   {
     return new FluentDateTimePicker();
   }
 
-  public static FluentDateTimePicker fluent(DateTimePicker component)
+  static FluentDateTimePicker fluent(DateTimePicker component)
   {
     return new FluentDateTimePicker(component);
   }
 
-  public static FluentEmailField emailField()
+  static FluentEmailField emailField()
   {
     return new FluentEmailField();
   }
 
-  public static FluentEmailField fluent(EmailField component)
+  static FluentEmailField fluent(EmailField component)
   {
     return new FluentEmailField(component);
   }
 
-  public static FluentIntegerField integerField()
+  static FluentIntegerField integerField()
   {
     return new FluentIntegerField();
   }
 
-  public static FluentIntegerField fluent(IntegerField component)
+  static FluentIntegerField fluent(IntegerField component)
   {
     return new FluentIntegerField(component);
   }
 
-  public static <ITEM> FluentListBox<ITEM> listBox()
+  static <ITEM> FluentListBox<ITEM> listBox()
   {
     return new FluentListBox<>();
   }
 
-  public static <ITEM> FluentListBox<ITEM> fluent(ListBox<ITEM> component)
+  static <ITEM> FluentListBox<ITEM> fluent(ListBox<ITEM> component)
   {
     return new FluentListBox<>(component);
   }
 
-  public static <ITEM> FluentMultiSelectListBox<ITEM> multiSelectListBox()
+  static <ITEM> FluentMultiSelectListBox<ITEM> multiSelectListBox()
   {
     return new FluentMultiSelectListBox<>();
   }
 
-  public static <ITEM> FluentMultiSelectListBox<ITEM> fluent(MultiSelectListBox<ITEM> component)
+  static <ITEM> FluentMultiSelectListBox<ITEM> fluent(MultiSelectListBox<ITEM> component)
   {
     return new FluentMultiSelectListBox<>(component);
   }
 
-  public static FluentNumberField numberField()
+  static FluentNumberField numberField()
   {
     return new FluentNumberField();
   }
 
-  public static FluentNumberField fluent(NumberField component)
+  static FluentNumberField fluent(NumberField component)
   {
     return new FluentNumberField(component);
   }
 
-  public static FluentPasswordField passwordField()
+  static FluentPasswordField passwordField()
   {
     return new FluentPasswordField();
   }
 
-  public static FluentPasswordField fluent(PasswordField component)
+  static FluentPasswordField fluent(PasswordField component)
   {
     return new FluentPasswordField(component);
   }
 
-  public static <ITEM> FluentRadioButtonGroup<ITEM> radioButtonGroup()
+  static <ITEM> FluentRadioButtonGroup<ITEM> radioButtonGroup()
   {
     return new FluentRadioButtonGroup<>();
   }
 
-  public static <ITEM> FluentRadioButtonGroup<ITEM> fluent(RadioButtonGroup<ITEM> component)
+  static <ITEM> FluentRadioButtonGroup<ITEM> fluent(RadioButtonGroup<ITEM> component)
   {
     return new FluentRadioButtonGroup<>(component);
   }
 
-  public static <ITEM> FluentSelect<ITEM> select()
+  static <ITEM> FluentSelect<ITEM> select()
   {
     return new FluentSelect<>();
   }
 
-  public static <ITEM> FluentSelect<ITEM> fluent(Select<ITEM> component)
+  static <ITEM> FluentSelect<ITEM> fluent(Select<ITEM> component)
   {
     return new FluentSelect<>(component);
   }
 
-  public static FluentTextArea textArea()
+  static FluentTextArea textArea()
   {
     return new FluentTextArea();
   }
 
-  public static FluentTextArea fluent(TextArea component)
+  static FluentTextArea fluent(TextArea component)
   {
     return new FluentTextArea(component);
   }
 
-  public static FluentTextField textField()
+  static FluentTextField textField()
   {
     return new FluentTextField();
   }
 
-  public static FluentTextField fluent(TextField component)
+  static FluentTextField fluent(TextField component)
   {
     return new FluentTextField(component);
   }
 
-  public static FluentTimePicker timePicker()
+  static FluentTimePicker timePicker()
   {
     return new FluentTimePicker();
   }
 
-  public static FluentTimePicker fluent(TimePicker component)
+  static FluentTimePicker fluent(TimePicker component)
   {
     return new FluentTimePicker(component);
   }
 
-  public static FluentUpload upload()
+  static FluentUpload upload()
   {
     return new FluentUpload();
   }
 
-  public static FluentUpload fluent(Upload component)
+  static FluentUpload fluent(Upload component)
   {
     return new FluentUpload(component);
   }
@@ -268,124 +268,124 @@ public interface Fluent
    * Visualization & Interaction
    */
 
-  public static FluentAccordion accordion()
+  static FluentAccordion accordion()
   {
     return new FluentAccordion();
   }
 
-  public static FluentAccordion fluent(Accordion component)
+  static FluentAccordion fluent(Accordion component)
   {
     return new FluentAccordion(component);
   }
 
-  public static FluentAvatar avatar()
+  static FluentAvatar avatar()
   {
     return new FluentAvatar();
   }
 
-  public static FluentAvatar fluent(Avatar component)
+  static FluentAvatar fluent(Avatar component)
   {
     return new FluentAvatar(component);
   }
 
-  public static FluentAvatarGroup avatarGroup()
+  static FluentAvatarGroup avatarGroup()
   {
     return new FluentAvatarGroup();
   }
 
-  public static FluentAvatarGroup fluent(AvatarGroup component)
+  static FluentAvatarGroup fluent(AvatarGroup component)
   {
     return new FluentAvatarGroup(component);
   }
 
-  public static FluentButton button()
+  static FluentButton button()
   {
     return new FluentButton();
   }
 
-  public static FluentButton fluent(Button component)
+  static FluentButton fluent(Button component)
   {
     return new FluentButton(component);
   }
 
-  public static FluentDetails details()
+  static FluentDetails details()
   {
     return new FluentDetails();
   }
 
-  public static FluentDetails fluent(Details component)
+  static FluentDetails fluent(Details component)
   {
     return new FluentDetails(component);
   }
 
-  public static <ITEM> FluentGrid<ITEM> grid()
+  static <ITEM> FluentGrid<ITEM> grid()
   {
     return new FluentGrid<>();
   }
 
-  public static <ITEM> FluentGrid<ITEM> fluent(Grid<ITEM> component)
+  static <ITEM> FluentGrid<ITEM> fluent(Grid<ITEM> component)
   {
     return new FluentGrid<>(component);
   }
 
-  public static FluentMenuBar menuBar()
+  static FluentMenuBar menuBar()
   {
     return new FluentMenuBar();
   }
 
-  public static FluentMenuBar fluent(MenuBar component)
+  static FluentMenuBar fluent(MenuBar component)
   {
     return new FluentMenuBar(component);
   }
 
-  public static FluentProgressBar progressBar()
+  static FluentProgressBar progressBar()
   {
     return new FluentProgressBar();
   }
 
-  public static FluentProgressBar fluent(ProgressBar component)
+  static FluentProgressBar fluent(ProgressBar component)
   {
     return new FluentProgressBar(component);
   }
 
-  public static FluentTabs tabs()
+  static FluentTabs tabs()
   {
     return new FluentTabs();
   }
 
-  public static FluentTabs fluent(Tabs component)
+  static FluentTabs fluent(Tabs component)
   {
     return new FluentTabs(component);
   }
 
-  public static FluentTab tab()
+  static FluentTab tab()
   {
     return new FluentTab();
   }
 
-  public static FluentTab fluent(Tab component)
+  static FluentTab fluent(Tab component)
   {
     return new FluentTab(component);
   }
 
-  public static FluentScroller scroller()
+  static FluentScroller scroller()
   {
     return new FluentScroller();
   }
 
-  public static FluentScroller fluent(Scroller component)
+  static FluentScroller fluent(Scroller component)
   {
     return new FluentScroller(component);
   }
 
 
 
-  public static FluentIcon fluent(VaadinIcon component)
+  static FluentIcon fluent(VaadinIcon component)
   {
     return new FluentIcon(component);
   }
 
-  public static FluentIcon fluent(Icon component)
+  static FluentIcon fluent(Icon component)
   {
     return new FluentIcon(component);
   }
@@ -401,42 +401,42 @@ public interface Fluent
    * Layouts
    */
 
-  public static FluentHorizontalLayout horizontalLayout()
+  static FluentHorizontalLayout horizontalLayout()
   {
     return new FluentHorizontalLayout();
   }
 
-  public static FluentHorizontalLayout fluent(HorizontalLayout component)
+  static FluentHorizontalLayout fluent(HorizontalLayout component)
   {
     return new FluentHorizontalLayout(component);
   }
 
-  public static FluentVerticalLayout verticalLayout()
+  static FluentVerticalLayout verticalLayout()
   {
     return new FluentVerticalLayout();
   }
 
-  public static FluentVerticalLayout fluent(VerticalLayout component)
+  static FluentVerticalLayout fluent(VerticalLayout component)
   {
     return new FluentVerticalLayout(component);
   }
 
-  public static FluentFlexLayout flexLayout()
+  static FluentFlexLayout flexLayout()
   {
     return new FluentFlexLayout();
   }
 
-  public static FluentFlexLayout fluent(FlexLayout component)
+  static FluentFlexLayout fluent(FlexLayout component)
   {
     return new FluentFlexLayout(component);
   }
 
-  public static FluentSplitLayout splitLayout()
+  static FluentSplitLayout splitLayout()
   {
     return new FluentSplitLayout();
   }
 
-  public static FluentSplitLayout fluent(SplitLayout component)
+  static FluentSplitLayout fluent(SplitLayout component)
   {
     return new FluentSplitLayout(component);
   }
