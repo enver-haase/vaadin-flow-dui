@@ -36,15 +36,23 @@ public interface FluentFlexComponent<C extends Component & FlexComponent<C>, F e
     return (F) this;
   }
 
-  default F justifyContentMode(JustifyContentMode justifyContentMode)
+  default F justifyContent(JustifyContentMode justifyContent)
   {
-    getComponent().setJustifyContentMode(justifyContentMode);
+    getComponent().setJustifyContentMode(justifyContent);
     return (F) this;
   }
 
   default F expand(Component... components)
   {
     getComponent().expand(components);
+    return (F) this;
+  }
+
+  default F add(Component component, Alignment alignSelf, double flexGrow)
+  {
+    getComponent().add(component);
+    getComponent().setAlignSelf(alignSelf, component);
+    getComponent().setFlexGrow(flexGrow, component);
     return (F) this;
   }
 
