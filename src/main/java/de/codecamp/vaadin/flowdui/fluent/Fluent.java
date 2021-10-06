@@ -36,6 +36,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.upload.Upload;
 
+import de.codecamp.vaadin.flowdui.components.Badge;
 import de.codecamp.vaadin.flowdui.fluent.forminputs.FluentBigDecimalField;
 import de.codecamp.vaadin.flowdui.fluent.forminputs.FluentCheckbox;
 import de.codecamp.vaadin.flowdui.fluent.forminputs.FluentCheckboxGroup;
@@ -62,6 +63,7 @@ import de.codecamp.vaadin.flowdui.fluent.layouts.FluentVerticalLayout;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentAccordion;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentAvatar;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentAvatarGroup;
+import de.codecamp.vaadin.flowdui.fluent.visandint.FluentBadge;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentButton;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentDetails;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentGrid;
@@ -294,6 +296,16 @@ public interface Fluent
   static FluentAvatarGroup fluent(AvatarGroup component)
   {
     return new FluentAvatarGroup(component);
+  }
+
+  static FluentBadge badge()
+  {
+    return new FluentBadge();
+  }
+
+  static FluentBadge fluent(Badge component)
+  {
+    return new FluentBadge(component);
   }
 
   static FluentButton button()
