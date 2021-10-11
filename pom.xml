@@ -6,7 +6,7 @@
 
   <groupId>de.codecamp.vaadin</groupId>
   <artifactId>vaadin-flow-dui</artifactId>
-  <version>0.9.5-SNAPSHOT</version>
+  <version>2.0.0</version>
 
   <name>Declarative UI for Vaadin Flow</name>
   <description>Declarative UI in the style of Vaadin 8 implemented for Vaadin Flow.</description>
