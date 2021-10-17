@@ -16,6 +16,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.listbox.MultiSelectListBox;
 import com.vaadin.flow.component.menubar.MenuBar;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
@@ -69,6 +70,7 @@ import de.codecamp.vaadin.flowdui.fluent.visandint.FluentDetails;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentGrid;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentIcon;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentMenuBar;
+import de.codecamp.vaadin.flowdui.fluent.visandint.FluentNotification;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentProgressBar;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentTab;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentTabs;
@@ -180,6 +182,16 @@ public interface Fluent
   static <ITEM> FluentMultiSelectListBox<ITEM> fluent(MultiSelectListBox<ITEM> component)
   {
     return new FluentMultiSelectListBox<>(component);
+  }
+
+  static FluentNotification notification()
+  {
+    return new FluentNotification();
+  }
+
+  static FluentNotification fluent(Notification component)
+  {
+    return new FluentNotification(component);
   }
 
   static FluentNumberField numberField()
