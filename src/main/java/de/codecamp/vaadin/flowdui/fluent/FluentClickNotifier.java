@@ -14,13 +14,13 @@ public interface FluentClickNotifier<C extends Component & ClickNotifier<C>, F e
     FluentHasElement<C, F>
 {
 
-  default F addClickListener(ComponentEventListener<ClickEvent<C>> listener)
+  default F onClick(ComponentEventListener<ClickEvent<C>> listener)
   {
     getComponent().addClickListener(listener);
     return (F) this;
   }
 
-  default F addClickShortcut(Key key, KeyModifier... keyModifiers)
+  default F clickShortcut(Key key, KeyModifier... keyModifiers)
   {
     getComponent().addClickShortcut(key, keyModifiers);
     return (F) this;

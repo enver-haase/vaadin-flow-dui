@@ -12,7 +12,7 @@ public interface FluentDetachNotifier<C extends Component & DetachNotifier, F ex
     FluentHasElement<C, F>
 {
 
-  default F addDetachListener(ComponentEventListener<DetachEvent> listener)
+  default F onDetach(ComponentEventListener<DetachEvent> listener)
   {
     getComponent().addDetachListener(listener);
     return (F) this;

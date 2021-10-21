@@ -88,7 +88,7 @@ public class FluentNotification
     return this;
   }
 
-  public FluentNotification addOpenedChangeListener(
+  public FluentNotification onOpenedChange(
       ComponentEventListener<OpenedChangeEvent<Notification>> listener)
   {
     getComponent().addOpenedChangeListener(listener);

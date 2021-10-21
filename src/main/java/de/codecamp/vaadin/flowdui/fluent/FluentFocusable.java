@@ -34,19 +34,19 @@ public interface FluentFocusable<C extends Component & Focusable<C>, F extends F
     return (F) this;
   }
 
-  default F addFocusShortcut(Key key, KeyModifier... keyModifiers)
+  default F focusShortcut(Key key, KeyModifier... keyModifiers)
   {
     getComponent().addFocusShortcut(key, keyModifiers);
     return (F) this;
   }
 
-  default F addBlurListener(ComponentEventListener<BlurEvent<C>> listener)
+  default F onBlur(ComponentEventListener<BlurEvent<C>> listener)
   {
     getComponent().addBlurListener(listener);
     return (F) this;
   }
 
-  default F addFocusListener(ComponentEventListener<FocusEvent<C>> listener)
+  default F onFocus(ComponentEventListener<FocusEvent<C>> listener)
   {
     getComponent().addFocusListener(listener);
     return (F) this;

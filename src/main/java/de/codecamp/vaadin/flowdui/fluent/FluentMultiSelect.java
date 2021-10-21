@@ -50,7 +50,7 @@ public interface FluentMultiSelect<C extends Component & MultiSelect<C, I>, F ex
     return (F) this;
   }
 
-  default F addSelectionListener(MultiSelectionListener<C, I> listener)
+  default F onSelection(MultiSelectionListener<C, I> listener)
   {
     getComponent().addSelectionListener(listener);
     return (F) this;

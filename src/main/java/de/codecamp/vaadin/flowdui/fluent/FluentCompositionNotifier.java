@@ -14,19 +14,19 @@ public interface FluentCompositionNotifier<C extends Component & CompositionNoti
     FluentHasElement<C, F>
 {
 
-  default F addCompositionStartListener(ComponentEventListener<CompositionStartEvent> listener)
+  default F onCompositionStart(ComponentEventListener<CompositionStartEvent> listener)
   {
     getComponent().addCompositionStartListener(listener);
     return (F) this;
   }
 
-  default F addCompositionUpdateListener(ComponentEventListener<CompositionUpdateEvent> listener)
+  default F onCompositionUpdate(ComponentEventListener<CompositionUpdateEvent> listener)
   {
     getComponent().addCompositionUpdateListener(listener);
     return (F) this;
   }
 
-  default F addCompositionEndListener(ComponentEventListener<CompositionEndEvent> listener)
+  default F onCompositionEnd(ComponentEventListener<CompositionEndEvent> listener)
   {
     getComponent().addCompositionEndListener(listener);
     return (F) this;

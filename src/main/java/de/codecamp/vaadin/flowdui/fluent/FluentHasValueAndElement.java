@@ -18,7 +18,7 @@ public interface FluentHasValueAndElement<C extends HasValueAndElement<E, VALUE>
     return (F) this;
   }
 
-  default F addValueChangeListener(ValueChangeListener<? super E> listener)
+  default F onValueChange(ValueChangeListener<? super E> listener)
   {
     getComponent().addValueChangeListener(listener);
     return (F) this;

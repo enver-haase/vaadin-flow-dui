@@ -109,7 +109,7 @@ public class FluentComboBox<ITEM>
     return this;
   }
 
-  public FluentComboBox<ITEM> addCustomValueSetListener(
+  public FluentComboBox<ITEM> onCustomValueSet(
       ComponentEventListener<CustomValueSetEvent<ComboBox<ITEM>>> listener)
   {
     getComponent().addCustomValueSetListener(listener);

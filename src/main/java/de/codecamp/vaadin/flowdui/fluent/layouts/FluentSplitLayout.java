@@ -60,7 +60,7 @@ public class FluentSplitLayout
     return this;
   }
 
-  public FluentSplitLayout addSplitterDragendListener(
+  public FluentSplitLayout onSplitterDragend(
       ComponentEventListener<SplitterDragendEvent<SplitLayout>> listener)
   {
     getComponent().addSplitterDragendListener(listener);

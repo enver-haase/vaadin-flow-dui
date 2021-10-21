@@ -12,7 +12,7 @@ public interface FluentInputNotifier<C extends Component & InputNotifier, F exte
     FluentHasElement<C, F>
 {
 
-  default F addInputListener(ComponentEventListener<InputEvent> listener)
+  default F onInput(ComponentEventListener<InputEvent> listener)
   {
     getComponent().addInputListener(listener);
     return (F) this;

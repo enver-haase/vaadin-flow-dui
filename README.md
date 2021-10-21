@@ -122,15 +122,25 @@ public class DemoView
 
 ## Fluent-Style API
 
-For an additional bit of convenience, there's also an experimental fluent-style API as a complementary way to further configure the components from the template. For most Vaadin components there is an equivalent wrapper class prefixed with `Fluent`. So e.g. there's a `FluentButton` for `Button`.  
-The static methods of `de.codecamp.vaadin.flowdui.fluent.Fluent` serve as a manual entry point to creating new or wrapping existing components in a fluent wrapper.
+For an additional bit of convenience, there's also an experimental fluent-style API as a complementary way to configure components. It's not suited or intended to compose hierarchical layouts; not more than the regular Java API anyway. Here's a few hints on how the fluent API is designed in general:
+- For most Vaadin components (and mix-in interfaces) there is an equivalent wrapper class prefixed with `Fluent`. So e.g. there's a `FluentButton` for `Button`.
+- The wrapped `Component` can be accessed directly using `get()` or `getComponent()`. For short-term access the following can be convenient:
+
+```
+fluentComponent.apply(c -> {
+})`.
+```
+- For setters the `set` has been omitted from the fluent equivalent. E.g.: `setId(...)` -> `id(...)`.
+- For event listener registration methods the `add` has been replaced with `on` and `Listener` has been omitted. E.g.: `addClickListener(...)` -> `onClick(...)`. If you need the `Registration` you need to access the `Component` and register the listener there the regular way.
+- The Lumo-related theme variants are a simple method call in the fluent API. E.g.: `ButtonVariant#LUMO_PRIMARY` -> `primary()`. Where the variants are mutually exclusive the other variants are transparently removed. Some gaps in the variants have been filled. E.g. for buttons there's `LUMO_PRIMARY`, `LUMO_TERTIARY` and `LUMO_TERTIARY_INLINE`, but no `LUMO_SECONDARY` because it's the default and defined by the absence of all others. `secondary()` takes care of that.
+- The static methods of `de.codecamp.vaadin.flowdui.fluent.Fluent` serve as a manual entry point to creating new or wrapping existing components in a fluent wrapper.
 
 ```java
 import static de.codecamp.vaadin.flowdui.fluent.Fluent.*;
 
 ...
 
-FluentButton button1 = button().text("Label").primary().addClickListener(event -> {
+FluentButton button1 = button().text("Label").primary().onClick(event -> {
   Notification.show("Clicked.")
 });
 
@@ -154,7 +164,7 @@ public class FluentDemoView
   {
     Component content = super.initContent();
 
-    button.text("Label").primary().addClickListener(event -> {
+    button.text("Label").primary().onClick(event -> {
       Notification.show("Clicked.");
     });
 

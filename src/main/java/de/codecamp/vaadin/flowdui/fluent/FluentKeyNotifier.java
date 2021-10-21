@@ -17,40 +17,40 @@ public interface FluentKeyNotifier<C extends Component & KeyNotifier, F extends 
     FluentHasElement<C, F>
 {
 
-  default F addKeyDownListener(ComponentEventListener<KeyDownEvent> listener)
+  default F onKeyDown(ComponentEventListener<KeyDownEvent> listener)
   {
     getComponent().addKeyDownListener(listener);
     return (F) this;
   }
 
-  default F addKeyDownListener(Key key, ComponentEventListener<KeyDownEvent> listener,
+  default F onKeyDown(Key key, ComponentEventListener<KeyDownEvent> listener,
       KeyModifier... modifiers)
   {
-    return addKeyDownListener(new KeyEventListener<>(listener, key, modifiers));
+    return onKeyDown(new KeyEventListener<>(listener, key, modifiers));
   }
 
-  default F addKeyUpListener(ComponentEventListener<KeyUpEvent> listener)
+  default F onKeyUp(ComponentEventListener<KeyUpEvent> listener)
   {
     getComponent().addKeyUpListener(listener);
     return (F) this;
   }
 
-  default F addKeyUpListener(Key key, ComponentEventListener<KeyUpEvent> listener,
+  default F onKeyUp(Key key, ComponentEventListener<KeyUpEvent> listener,
       KeyModifier... modifiers)
   {
-    return addKeyUpListener(new KeyEventListener<>(listener, key, modifiers));
+    return onKeyUp(new KeyEventListener<>(listener, key, modifiers));
   }
 
-  default F addKeyPressListener(ComponentEventListener<KeyPressEvent> listener)
+  default F onKeyPress(ComponentEventListener<KeyPressEvent> listener)
   {
     getComponent().addKeyPressListener(listener);
     return (F) this;
   }
 
-  default F addKeyPressListener(Key key, ComponentEventListener<KeyPressEvent> listener,
+  default F onKeyPress(Key key, ComponentEventListener<KeyPressEvent> listener,
       KeyModifier... modifiers)
   {
-    return addKeyPressListener(new KeyEventListener<>(listener, key, modifiers));
+    return onKeyPress(new KeyEventListener<>(listener, key, modifiers));
   }
 
 }

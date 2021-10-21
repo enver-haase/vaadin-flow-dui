@@ -12,7 +12,7 @@ public interface FluentAttachNotifier<C extends Component & AttachNotifier, F ex
     FluentHasElement<C, F>
 {
 
-  default F addAttachListener(ComponentEventListener<AttachEvent> listener)
+  default F onAttach(ComponentEventListener<AttachEvent> listener)
   {
     getComponent().addAttachListener(listener);
     return (F) this;

@@ -69,7 +69,7 @@ public class FluentAccordion
     return this;
   }
 
-  public FluentAccordion openedChangeListener(ComponentEventListener<OpenedChangeEvent> listener)
+  public FluentAccordion onOpenedChange(ComponentEventListener<OpenedChangeEvent> listener)
   {
     getComponent().addOpenedChangeListener(listener);
     return this;
