@@ -3,7 +3,6 @@ package de.codecamp.vaadin.flowdui.util;
 /**
  * Lumo properties related to color.
  *
- * @see <a href="https://vaadin.com/docs/current/themes/lumo/lumo-overview.html">Lumo Theme</a>
  * @see <a href="https://vaadin.com/docs/latest/ds/foundation/color">Lumo Color</a>
  */
 public enum LumoColor

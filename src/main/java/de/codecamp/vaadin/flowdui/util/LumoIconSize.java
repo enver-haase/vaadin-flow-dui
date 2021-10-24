@@ -6,7 +6,6 @@ import com.vaadin.flow.component.icon.Icon;
 /**
  * Lumo properties related to icon size.
  *
- * @see <a href="https://vaadin.com/docs/current/themes/lumo/lumo-overview.html">Lumo Theme</a>
  * @see <a href="https://vaadin.com/docs/latest/ds/foundation/icons">Lumo Icons</a>
  */
 public enum LumoIconSize

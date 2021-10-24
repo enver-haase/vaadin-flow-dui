@@ -3,7 +3,6 @@ package de.codecamp.vaadin.flowdui.util;
 /**
  * Lumo properties related to font size.
  *
- * @see <a href="https://vaadin.com/docs/current/themes/lumo/lumo-overview.html">Lumo Theme</a>
  * @see <a href="https://vaadin.com/docs/latest/ds/foundation/typography">Lumo Typography</a>
  */
 public enum LumoFontSize

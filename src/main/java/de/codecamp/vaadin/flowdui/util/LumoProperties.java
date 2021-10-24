@@ -4,7 +4,7 @@ package de.codecamp.vaadin.flowdui.util;
  * The official CSS variables / custom properties provided by the Lumo theme. Where appropriate
  * there's also enums for certain groups of properties.
  *
- * @see <a href="https://vaadin.com/docs/current/themes/lumo/lumo-overview.html">Lumo</a>
+ * @see <a href="https://vaadin.com/docs/latest/ds/foundation">Foundation</a>
  * @see LumoBorderRadius
  * @see LumoBoxShadow
  * @see LumoColor
