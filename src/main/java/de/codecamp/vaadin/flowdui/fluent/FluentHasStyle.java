@@ -25,26 +25,26 @@ public interface FluentHasStyle<C extends HasStyle, F extends FluentHasStyle<C, 
 
   default F className(String className, boolean set)
   {
-    getComponent().setClassName(className, set);
+    get().setClassName(className, set);
     return (F) this;
   }
 
   default F classNames(String... classNames)
   {
-    getComponent().setClassName(null);
-    getComponent().addClassNames(classNames);
+    get().setClassName(null);
+    get().addClassNames(classNames);
     return (F) this;
   }
 
   default F addClassNames(String... classNames)
   {
-    getComponent().addClassNames(classNames);
+    get().addClassNames(classNames);
     return (F) this;
   }
 
   default F removeClassNames(String... classNames)
   {
-    getComponent().removeClassNames(classNames);
+    get().removeClassNames(classNames);
     return (F) this;
   }
 

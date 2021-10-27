@@ -14,31 +14,31 @@ public interface FluentHasValueAndElement<C extends HasValueAndElement<E, VALUE>
 
   default F value(VALUE value)
   {
-    getComponent().setValue(value);
+    get().setValue(value);
     return (F) this;
   }
 
   default F onValueChange(ValueChangeListener<? super E> listener)
   {
-    getComponent().addValueChangeListener(listener);
+    get().addValueChangeListener(listener);
     return (F) this;
   }
 
   default F clear()
   {
-    getComponent().clear();
+    get().clear();
     return (F) this;
   }
 
   default F requiredIndicatorVisible(boolean requiredIndicatorVisible)
   {
-    getComponent().setRequiredIndicatorVisible(requiredIndicatorVisible);
+    get().setRequiredIndicatorVisible(requiredIndicatorVisible);
     return (F) this;
   }
 
   default F readOnly(boolean readOnly)
   {
-    getComponent().setReadOnly(readOnly);
+    get().setReadOnly(readOnly);
     return (F) this;
   }
 

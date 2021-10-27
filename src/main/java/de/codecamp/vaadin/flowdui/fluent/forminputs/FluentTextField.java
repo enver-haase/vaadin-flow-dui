@@ -50,75 +50,75 @@ public class FluentTextField
 
   public FluentTextField label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentTextField placeholder(String placeholder)
   {
-    getComponent().setPlaceholder(placeholder);
+    get().setPlaceholder(placeholder);
     return this;
   }
 
   public FluentTextField autoselect(boolean autoselect)
   {
-    getComponent().setAutoselect(autoselect);
+    get().setAutoselect(autoselect);
     return this;
   }
 
   public FluentTextField autofocus(boolean autofocus)
   {
-    getComponent().setAutofocus(autofocus);
+    get().setAutofocus(autofocus);
     return this;
   }
 
   public FluentTextField clearButtonVisible(boolean clearButtonVisible)
   {
-    getComponent().setClearButtonVisible(clearButtonVisible);
+    get().setClearButtonVisible(clearButtonVisible);
     return this;
   }
 
   public FluentTextField maxLength(int maxLength)
   {
-    getComponent().setMaxLength(maxLength);
+    get().setMaxLength(maxLength);
     return this;
   }
 
   public FluentTextField minLength(int minLength)
   {
-    getComponent().setMinLength(minLength);
+    get().setMinLength(minLength);
     return this;
   }
 
   public FluentTextField pattern(String pattern)
   {
-    getComponent().setPattern(pattern);
+    get().setPattern(pattern);
     return this;
   }
 
   public FluentTextField preventInvalidInput(boolean preventInvalidInput)
   {
-    getComponent().setPreventInvalidInput(preventInvalidInput);
+    get().setPreventInvalidInput(preventInvalidInput);
     return this;
   }
 
   public FluentTextField required(boolean required)
   {
-    getComponent().setRequired(required);
+    get().setRequired(required);
     return this;
   }
 
   @Override
   public FluentTextField addThemeVariants(TextFieldVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentTextField removeThemeVariants(TextFieldVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

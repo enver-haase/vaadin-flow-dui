@@ -50,69 +50,69 @@ public class FluentTextArea
 
   public FluentTextArea label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentTextArea placeholder(String placeholder)
   {
-    getComponent().setPlaceholder(placeholder);
+    get().setPlaceholder(placeholder);
     return this;
   }
 
   public FluentTextArea autoselect(boolean autoselect)
   {
-    getComponent().setAutoselect(autoselect);
+    get().setAutoselect(autoselect);
     return this;
   }
 
   public FluentTextArea autofocus(boolean autofocus)
   {
-    getComponent().setAutofocus(autofocus);
+    get().setAutofocus(autofocus);
     return this;
   }
 
   public FluentTextArea clearButtonVisible(boolean clearButtonVisible)
   {
-    getComponent().setClearButtonVisible(clearButtonVisible);
+    get().setClearButtonVisible(clearButtonVisible);
     return this;
   }
 
   public FluentTextArea maxLength(int maxLength)
   {
-    getComponent().setMaxLength(maxLength);
+    get().setMaxLength(maxLength);
     return this;
   }
 
   public FluentTextArea minLength(int minLength)
   {
-    getComponent().setMinLength(minLength);
+    get().setMinLength(minLength);
     return this;
   }
 
   public FluentTextArea preventInvalidInput(boolean preventInvalidInput)
   {
-    getComponent().setPreventInvalidInput(preventInvalidInput);
+    get().setPreventInvalidInput(preventInvalidInput);
     return this;
   }
 
   public FluentTextArea required(boolean required)
   {
-    getComponent().setRequired(required);
+    get().setRequired(required);
     return this;
   }
 
   @Override
   public FluentTextArea addThemeVariants(TextAreaVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentTextArea removeThemeVariants(TextAreaVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

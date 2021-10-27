@@ -37,88 +37,88 @@ public class FluentComboBox<ITEM>
 
   public FluentComboBox<ITEM> label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentComboBox<ITEM> placeholder(String placeholder)
   {
-    getComponent().setPlaceholder(placeholder);
+    get().setPlaceholder(placeholder);
     return this;
   }
 
   public FluentComboBox<ITEM> pattern(String pattern)
   {
-    getComponent().setPattern(pattern);
+    get().setPattern(pattern);
     return this;
 
   }
 
   public FluentComboBox<ITEM> itemLabelGenerator(ItemLabelGenerator<ITEM> itemLabelGenerator)
   {
-    getComponent().setItemLabelGenerator(itemLabelGenerator);
+    get().setItemLabelGenerator(itemLabelGenerator);
     return this;
   }
 
   public FluentComboBox<ITEM> renderer(Renderer<ITEM> renderer)
   {
-    getComponent().setRenderer(renderer);
+    get().setRenderer(renderer);
     return this;
   }
 
   public FluentComboBox<ITEM> pageSize(int pageSize)
   {
-    getComponent().setPageSize(pageSize);
+    get().setPageSize(pageSize);
     return this;
   }
 
   public FluentComboBox<ITEM> opened(boolean opened)
   {
-    getComponent().setOpened(opened);
+    get().setOpened(opened);
     return this;
   }
 
   public FluentComboBox<ITEM> autoOpen(boolean autoOpen)
   {
-    getComponent().setAutoOpen(autoOpen);
+    get().setAutoOpen(autoOpen);
     return this;
   }
 
   public FluentComboBox<ITEM> autofocus(boolean autofocus)
   {
-    getComponent().setAutofocus(autofocus);
+    get().setAutofocus(autofocus);
     return this;
   }
 
   public FluentComboBox<ITEM> preventInvalidInput(boolean preventInvalidInput)
   {
-    getComponent().setPreventInvalidInput(preventInvalidInput);
+    get().setPreventInvalidInput(preventInvalidInput);
     return this;
   }
 
 
   public FluentComboBox<ITEM> required(boolean required)
   {
-    getComponent().setRequired(required);
+    get().setRequired(required);
     return this;
   }
 
   public FluentComboBox<ITEM> allowCustomValue(boolean allowCustomValue)
   {
-    getComponent().setAllowCustomValue(allowCustomValue);
+    get().setAllowCustomValue(allowCustomValue);
     return this;
   }
 
   public FluentComboBox<ITEM> onCustomValueSet(
       ComponentEventListener<CustomValueSetEvent<ComboBox<ITEM>>> listener)
   {
-    getComponent().addCustomValueSetListener(listener);
+    get().addCustomValueSetListener(listener);
     return this;
   }
 
   public FluentComboBox<ITEM> clearButtonVisible(boolean clearButtonVisible)
   {
-    getComponent().setClearButtonVisible(clearButtonVisible);
+    get().setClearButtonVisible(clearButtonVisible);
     return this;
   }
 

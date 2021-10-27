@@ -14,7 +14,7 @@ public interface FluentHasAutocomplete<C extends HasAutocomplete, F extends Flue
 
   default F autocomplete(Autocomplete autocomplete)
   {
-    getComponent().setAutocomplete(autocomplete);
+    get().setAutocomplete(autocomplete);
     return (F) this;
   }
 

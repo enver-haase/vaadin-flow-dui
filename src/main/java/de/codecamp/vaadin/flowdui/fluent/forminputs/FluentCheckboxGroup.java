@@ -40,34 +40,34 @@ public class FluentCheckboxGroup<ITEM>
 
   public FluentCheckboxGroup<ITEM> label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentCheckboxGroup<ITEM> itemLabelGenerator(ItemLabelGenerator<ITEM> itemLabelGenerator)
   {
-    getComponent().setItemLabelGenerator(itemLabelGenerator);
+    get().setItemLabelGenerator(itemLabelGenerator);
     return this;
   }
 
   public FluentCheckboxGroup<ITEM> itemEnabledProvider(
       SerializablePredicate<ITEM> itemEnabledProvider)
   {
-    getComponent().setItemEnabledProvider(itemEnabledProvider);
+    get().setItemEnabledProvider(itemEnabledProvider);
     return this;
   }
 
   @Override
   public FluentCheckboxGroup<ITEM> addThemeVariants(CheckboxGroupVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentCheckboxGroup<ITEM> removeThemeVariants(CheckboxGroupVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

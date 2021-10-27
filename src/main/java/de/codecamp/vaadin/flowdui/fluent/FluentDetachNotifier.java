@@ -14,7 +14,7 @@ public interface FluentDetachNotifier<C extends Component & DetachNotifier, F ex
 
   default F onDetach(ComponentEventListener<DetachEvent> listener)
   {
-    getComponent().addDetachListener(listener);
+    get().addDetachListener(listener);
     return (F) this;
   }
 

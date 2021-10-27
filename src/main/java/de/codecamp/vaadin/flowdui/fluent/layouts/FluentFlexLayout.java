@@ -30,37 +30,37 @@ public class FluentFlexLayout
 
   public FluentFlexLayout flexWrap(FlexWrap flexWrap)
   {
-    getComponent().setFlexWrap(flexWrap);
+    get().setFlexWrap(flexWrap);
     return this;
   }
 
   public FluentFlexLayout alignContent(ContentAlignment alignment)
   {
-    getComponent().setAlignContent(alignment);
+    get().setAlignContent(alignment);
     return this;
   }
 
   public FluentFlexLayout flexBasis(String width, Component... components)
   {
-    getComponent().setFlexBasis(width, components);
+    get().setFlexBasis(width, components);
     return this;
   }
 
   public FluentFlexLayout flexDirection(FlexDirection flexDirection)
   {
-    getComponent().setFlexDirection(flexDirection);
+    get().setFlexDirection(flexDirection);
     return this;
   }
 
   public FluentFlexLayout flexShrink(double flexShrink, Component... components)
   {
-    getComponent().setFlexShrink(flexShrink, components);
+    get().setFlexShrink(flexShrink, components);
     return this;
   }
 
   public FluentFlexLayout order(int order, Component component)
   {
-    getComponent().setOrder(order, component);
+    get().setOrder(order, component);
     return this;
   }
 

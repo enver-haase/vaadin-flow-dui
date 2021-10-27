@@ -38,49 +38,49 @@ public class FluentDateTimePicker
 
   public FluentDateTimePicker label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentDateTimePicker datePlaceholder(String placeholder)
   {
-    getComponent().setDatePlaceholder(placeholder);
+    get().setDatePlaceholder(placeholder);
     return this;
   }
 
   public FluentDateTimePicker timePlaceholder(String placeholder)
   {
-    getComponent().setTimePlaceholder(placeholder);
+    get().setTimePlaceholder(placeholder);
     return this;
   }
 
   public FluentDateTimePicker autoOpen(boolean autoOpen)
   {
-    getComponent().setAutoOpen(autoOpen);
+    get().setAutoOpen(autoOpen);
     return this;
   }
 
   public FluentDateTimePicker weekNumbersVisible(boolean weekNumbersVisible)
   {
-    getComponent().setWeekNumbersVisible(weekNumbersVisible);
+    get().setWeekNumbersVisible(weekNumbersVisible);
     return this;
   }
 
   public FluentDateTimePicker max(LocalDateTime max)
   {
-    getComponent().setMax(max);
+    get().setMax(max);
     return this;
   }
 
   public FluentDateTimePicker min(LocalDateTime min)
   {
-    getComponent().setMin(min);
+    get().setMin(min);
     return this;
   }
 
   public FluentDateTimePicker step(Duration step)
   {
-    getComponent().setStep(step);
+    get().setStep(step);
     return this;
   }
 

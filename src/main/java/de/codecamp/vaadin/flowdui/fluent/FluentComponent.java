@@ -1,9 +1,8 @@
 package de.codecamp.vaadin.flowdui.fluent;
 
-import java.util.Objects;
+import static java.util.Objects.requireNonNull;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.function.SerializableSupplier;
 
 
 @SuppressWarnings("unchecked")
@@ -11,8 +10,7 @@ public abstract class FluentComponent<C extends Component, F extends FluentCompo
   implements
     FluentHasElement<C, F>,
     FluentAttachNotifier<C, F>,
-    FluentDetachNotifier<C, F>,
-    SerializableSupplier<C>
+    FluentDetachNotifier<C, F>
 {
 
   private final C component;
@@ -20,16 +18,9 @@ public abstract class FluentComponent<C extends Component, F extends FluentCompo
 
   protected FluentComponent(C component)
   {
-    Objects.requireNonNull(component, "component must not be null");
-    this.component = component;
+    this.component = requireNonNull(component, "component must not be null");
   }
 
-
-  @Override
-  public C getComponent()
-  {
-    return component;
-  }
 
   @Override
   public C get()
@@ -40,7 +31,7 @@ public abstract class FluentComponent<C extends Component, F extends FluentCompo
 
   public F visible(boolean visible)
   {
-    getComponent().setVisible(visible);
+    get().setVisible(visible);
     return (F) this;
   }
 

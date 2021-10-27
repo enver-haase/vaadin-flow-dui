@@ -14,7 +14,7 @@ public interface FluentInputNotifier<C extends Component & InputNotifier, F exte
 
   default F onInput(ComponentEventListener<InputEvent> listener)
   {
-    getComponent().addInputListener(listener);
+    get().addInputListener(listener);
     return (F) this;
   }
 

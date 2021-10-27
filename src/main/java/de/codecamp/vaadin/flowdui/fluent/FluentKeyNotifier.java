@@ -19,7 +19,7 @@ public interface FluentKeyNotifier<C extends Component & KeyNotifier, F extends 
 
   default F onKeyDown(ComponentEventListener<KeyDownEvent> listener)
   {
-    getComponent().addKeyDownListener(listener);
+    get().addKeyDownListener(listener);
     return (F) this;
   }
 
@@ -31,7 +31,7 @@ public interface FluentKeyNotifier<C extends Component & KeyNotifier, F extends 
 
   default F onKeyUp(ComponentEventListener<KeyUpEvent> listener)
   {
-    getComponent().addKeyUpListener(listener);
+    get().addKeyUpListener(listener);
     return (F) this;
   }
 
@@ -43,7 +43,7 @@ public interface FluentKeyNotifier<C extends Component & KeyNotifier, F extends 
 
   default F onKeyPress(ComponentEventListener<KeyPressEvent> listener)
   {
-    getComponent().addKeyPressListener(listener);
+    get().addKeyPressListener(listener);
     return (F) this;
   }
 

@@ -35,13 +35,13 @@ public class FluentIcon
 
   public FluentIcon size(String size)
   {
-    getComponent().setSize(size);
+    get().setSize(size);
     return this;
   }
 
   public FluentIcon size(LumoIconSize size)
   {
-    getComponent().setSize(size.var());
+    get().setSize(size.var());
     return this;
   }
 
@@ -63,13 +63,13 @@ public class FluentIcon
 
   public FluentIcon color(String color)
   {
-    getComponent().setColor(color);
+    get().setColor(color);
     return this;
   }
 
   public FluentIcon color(LumoColor color)
   {
-    getComponent().setColor(color.var());
+    get().setColor(color.var());
     return this;
   }
 

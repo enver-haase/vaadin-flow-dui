@@ -30,13 +30,13 @@ public class FluentListBox<ITEM>
 
   public FluentListBox<ITEM> renderer(ComponentRenderer<? extends Component, ITEM> itemRenderer)
   {
-    getComponent().setRenderer(itemRenderer);
+    get().setRenderer(itemRenderer);
     return this;
   }
 
   public FluentListBox<ITEM> itemEnabledProvider(SerializablePredicate<ITEM> itemEnabledProvider)
   {
-    getComponent().setItemEnabledProvider(itemEnabledProvider);
+    get().setItemEnabledProvider(itemEnabledProvider);
     return this;
   }
 

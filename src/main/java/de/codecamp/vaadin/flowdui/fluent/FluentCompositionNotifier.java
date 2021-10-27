@@ -16,19 +16,19 @@ public interface FluentCompositionNotifier<C extends Component & CompositionNoti
 
   default F onCompositionStart(ComponentEventListener<CompositionStartEvent> listener)
   {
-    getComponent().addCompositionStartListener(listener);
+    get().addCompositionStartListener(listener);
     return (F) this;
   }
 
   default F onCompositionUpdate(ComponentEventListener<CompositionUpdateEvent> listener)
   {
-    getComponent().addCompositionUpdateListener(listener);
+    get().addCompositionUpdateListener(listener);
     return (F) this;
   }
 
   default F onCompositionEnd(ComponentEventListener<CompositionEndEvent> listener)
   {
-    getComponent().addCompositionEndListener(listener);
+    get().addCompositionEndListener(listener);
     return (F) this;
   }
 

@@ -29,49 +29,49 @@ public class FluentAccordion
 
   public FluentAccordion add(String summary, Component content)
   {
-    getComponent().add(summary, content);
+    get().add(summary, content);
     return this;
   }
 
   public FluentAccordion add(AccordionPanel panel)
   {
-    getComponent().add(panel);
+    get().add(panel);
     return this;
   }
 
   public FluentAccordion remove(AccordionPanel panel)
   {
-    getComponent().remove(panel);
+    get().remove(panel);
     return this;
   }
 
   public FluentAccordion remove(Component content)
   {
-    getComponent().remove(content);
+    get().remove(content);
     return this;
   }
 
   public FluentAccordion close()
   {
-    getComponent().close();
+    get().close();
     return this;
   }
 
   public FluentAccordion open(int index)
   {
-    getComponent().open(index);
+    get().open(index);
     return this;
   }
 
   public FluentAccordion open(AccordionPanel panel)
   {
-    getComponent().open(panel);
+    get().open(panel);
     return this;
   }
 
   public FluentAccordion onOpenedChange(ComponentEventListener<OpenedChangeEvent> listener)
   {
-    getComponent().addOpenedChangeListener(listener);
+    get().addOpenedChangeListener(listener);
     return this;
   }
 

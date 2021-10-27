@@ -16,43 +16,43 @@ public interface FluentMultiSelect<C extends Component & MultiSelect<C, I>, F ex
 
   default F select(I... items)
   {
-    getComponent().select(items);
+    get().select(items);
     return (F) this;
   }
 
   default F deselect(I... items)
   {
-    getComponent().deselect(items);
+    get().deselect(items);
     return (F) this;
   }
 
   default F select(Iterable<I> items)
   {
-    getComponent().select(items);
+    get().select(items);
     return (F) this;
   }
 
   default F deselect(Iterable<I> items)
   {
-    getComponent().deselect(items);
+    get().deselect(items);
     return (F) this;
   }
 
   default F updateSelection(Set<I> addedItems, Set<I> removedItems)
   {
-    getComponent().updateSelection(addedItems, removedItems);
+    get().updateSelection(addedItems, removedItems);
     return (F) this;
   }
 
   default F deselectAll()
   {
-    getComponent().deselectAll();
+    get().deselectAll();
     return (F) this;
   }
 
   default F onSelection(MultiSelectionListener<C, I> listener)
   {
-    getComponent().addSelectionListener(listener);
+    get().addSelectionListener(listener);
     return (F) this;
   }
 

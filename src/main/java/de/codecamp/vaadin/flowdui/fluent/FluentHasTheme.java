@@ -13,7 +13,7 @@ public interface FluentHasTheme<C extends HasTheme, F extends FluentHasTheme<C, 
 
   default ThemeList getThemes()
   {
-    return getComponent().getThemeNames();
+    return get().getThemeNames();
   }
 
   default F applyToThemes(SerializableConsumer<ThemeList> configurator)
@@ -25,26 +25,26 @@ public interface FluentHasTheme<C extends HasTheme, F extends FluentHasTheme<C, 
 
   default F themeName(String themeName, boolean set)
   {
-    getComponent().setThemeName(themeName, set);
+    get().setThemeName(themeName, set);
     return (F) this;
   }
 
   default F themeNames(String... themeNames)
   {
-    getComponent().setThemeName("");
-    getComponent().addThemeNames(themeNames);
+    get().setThemeName("");
+    get().addThemeNames(themeNames);
     return (F) this;
   }
 
   default F addThemeNames(String... themeNames)
   {
-    getComponent().addThemeNames(themeNames);
+    get().addThemeNames(themeNames);
     return (F) this;
   }
 
   default F removeThemeNames(String... themeNames)
   {
-    getComponent().removeThemeNames(themeNames);
+    get().removeThemeNames(themeNames);
     return (F) this;
   }
 

@@ -124,7 +124,7 @@ public class DemoView
 
 For an additional bit of convenience, there's also an experimental fluent-style API as a complementary way to configure components. It's not suited or intended to compose hierarchical layouts; not more than the regular Java API anyway. Here's a few hints on how the fluent API is designed in general:
 - For most Vaadin components (and mix-in interfaces) there is an equivalent wrapper class prefixed with `Fluent`. So e.g. there's a `FluentButton` for `Button`.
-- The wrapped `Component` can be accessed directly using `get()` or `getComponent()`. For short-term access the following can be convenient:
+- The wrapped `Component` can be accessed directly using `get()`. For short-term access the following can be convenient:
 
 ```
 fluentComponent.apply(c -> {

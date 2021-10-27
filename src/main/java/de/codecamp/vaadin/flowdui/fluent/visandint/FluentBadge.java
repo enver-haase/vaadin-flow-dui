@@ -34,14 +34,14 @@ public class FluentBadge
   @Override
   public FluentBadge addThemeVariants(BadgeVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentBadge removeThemeVariants(BadgeVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

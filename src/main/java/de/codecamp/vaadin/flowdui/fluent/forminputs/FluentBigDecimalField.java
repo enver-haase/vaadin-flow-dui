@@ -50,37 +50,37 @@ public class FluentBigDecimalField
 
   public FluentBigDecimalField label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentBigDecimalField placeholder(String placeholder)
   {
-    getComponent().setPlaceholder(placeholder);
+    get().setPlaceholder(placeholder);
     return this;
   }
 
   public FluentBigDecimalField autoselect(boolean autoselect)
   {
-    getComponent().setAutoselect(autoselect);
+    get().setAutoselect(autoselect);
     return this;
   }
 
   public FluentBigDecimalField autofocus(boolean autofocus)
   {
-    getComponent().setAutofocus(autofocus);
+    get().setAutofocus(autofocus);
     return this;
   }
 
   public FluentBigDecimalField clearButtonVisible(boolean clearButtonVisible)
   {
-    getComponent().setClearButtonVisible(clearButtonVisible);
+    get().setClearButtonVisible(clearButtonVisible);
     return this;
   }
 
   public FluentBigDecimalField setLocale(Locale locale)
   {
-    getComponent().setLocale(locale);
+    get().setLocale(locale);
     return this;
   }
 

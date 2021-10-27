@@ -14,13 +14,13 @@ public interface FluentHasPrefixAndSuffix<C extends HasPrefixAndSuffix, F extend
 
   default F prefixComponent(Component component)
   {
-    getComponent().setPrefixComponent(component);
+    get().setPrefixComponent(component);
     return (F) this;
   }
 
   default F suffixComponent(Component component)
   {
-    getComponent().setSuffixComponent(component);
+    get().setSuffixComponent(component);
     return (F) this;
   }
 

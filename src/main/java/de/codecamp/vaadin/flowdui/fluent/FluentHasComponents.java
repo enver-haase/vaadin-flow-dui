@@ -13,37 +13,37 @@ public interface FluentHasComponents<C extends HasComponents, F extends FluentHa
 
   default F add(Component... components)
   {
-    getComponent().add(components);
+    get().add(components);
     return (F) this;
   }
 
   default F add(String text)
   {
-    getComponent().add(text);
+    get().add(text);
     return (F) this;
   }
 
   default F remove(Component... components)
   {
-    getComponent().remove(components);
+    get().remove(components);
     return (F) this;
   }
 
   default F removeAll()
   {
-    getComponent().removeAll();
+    get().removeAll();
     return (F) this;
   }
 
   default F addAt(int index, Component component)
   {
-    getComponent().addComponentAtIndex(index, component);
+    get().addComponentAtIndex(index, component);
     return (F) this;
   }
 
   default F addAsFirst(Component component)
   {
-    getComponent().addComponentAsFirst(component);
+    get().addComponentAsFirst(component);
     return (F) this;
   }
 

@@ -34,31 +34,31 @@ public class FluentCheckbox
 
   public FluentCheckbox label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentCheckbox labelAsHtml(String htmlContent)
   {
-    getComponent().setLabelAsHtml(htmlContent);
+    get().setLabelAsHtml(htmlContent);
     return this;
   }
 
   public FluentCheckbox ariaLabel(String ariaLabel)
   {
-    getComponent().setAriaLabel(ariaLabel);
+    get().setAriaLabel(ariaLabel);
     return this;
   }
 
   public FluentCheckbox autofocus(boolean autofocus)
   {
-    getComponent().setAutofocus(autofocus);
+    get().setAutofocus(autofocus);
     return this;
   }
 
   public FluentCheckbox indeterminate(boolean indeterminate)
   {
-    getComponent().setIndeterminate(indeterminate);
+    get().setIndeterminate(indeterminate);
     return this;
   }
 

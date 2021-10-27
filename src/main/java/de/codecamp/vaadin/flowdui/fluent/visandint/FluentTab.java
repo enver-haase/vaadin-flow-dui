@@ -32,19 +32,19 @@ public class FluentTab
 
   public FluentTab label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentTab selected(boolean selected)
   {
-    getComponent().setSelected(selected);
+    get().setSelected(selected);
     return this;
   }
 
   public FluentTab flexGrow(double flexGrow)
   {
-    getComponent().setFlexGrow(flexGrow);
+    get().setFlexGrow(flexGrow);
     return this;
   }
 
@@ -52,14 +52,14 @@ public class FluentTab
   @Override
   public FluentTab addThemeVariants(TabVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentTab removeThemeVariants(TabVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

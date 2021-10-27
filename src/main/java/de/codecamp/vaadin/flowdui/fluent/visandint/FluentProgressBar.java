@@ -32,25 +32,25 @@ public class FluentProgressBar
 
   public FluentProgressBar value(double value)
   {
-    getComponent().setValue(value);
+    get().setValue(value);
     return this;
   }
 
   public FluentProgressBar max(double max)
   {
-    getComponent().setMax(max);
+    get().setMax(max);
     return this;
   }
 
   public FluentProgressBar min(double min)
   {
-    getComponent().setMin(min);
+    get().setMin(min);
     return this;
   }
 
   public FluentProgressBar indeterminate(boolean indeterminate)
   {
-    getComponent().setIndeterminate(indeterminate);
+    get().setIndeterminate(indeterminate);
     return this;
   }
 
@@ -58,14 +58,14 @@ public class FluentProgressBar
   @Override
   public FluentProgressBar addThemeVariants(ProgressBarVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentProgressBar removeThemeVariants(ProgressBarVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

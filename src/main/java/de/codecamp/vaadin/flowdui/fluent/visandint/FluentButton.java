@@ -41,37 +41,37 @@ public class FluentButton
 
   public FluentButton icon(Component icon)
   {
-    getComponent().setIcon(icon);
+    get().setIcon(icon);
     return this;
   }
 
   public FluentButton iconAfterText(boolean iconAfterText)
   {
-    getComponent().setIconAfterText(iconAfterText);
+    get().setIconAfterText(iconAfterText);
     return this;
   }
 
   public FluentButton click()
   {
-    getComponent().click();
+    get().click();
     return this;
   }
 
   public FluentButton clickInClient()
   {
-    getComponent().clickInClient();
+    get().clickInClient();
     return this;
   }
 
   public FluentButton autofocus(boolean autofocus)
   {
-    getComponent().setAutofocus(autofocus);
+    get().setAutofocus(autofocus);
     return this;
   }
 
   public FluentButton disableOnClick(boolean disableOnClick)
   {
-    getComponent().setDisableOnClick(disableOnClick);
+    get().setDisableOnClick(disableOnClick);
     return this;
   }
 
@@ -79,14 +79,14 @@ public class FluentButton
   @Override
   public FluentButton addThemeVariants(ButtonVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentButton removeThemeVariants(ButtonVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

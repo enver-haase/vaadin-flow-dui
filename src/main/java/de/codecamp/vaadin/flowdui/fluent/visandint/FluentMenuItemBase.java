@@ -29,24 +29,24 @@ abstract class FluentMenuItemBase<C extends MenuItemBase<CMB, C, SMB>, F extends
   // FIXME return FluentSubMenu
   public SMB subMenu()
   {
-    return getComponent().getSubMenu();
+    return get().getSubMenu();
   }
 
   public F applyToSubMenu(SerializableConsumer<SMB> configurator)
   {
-    configurator.accept(getComponent().getSubMenu());
+    configurator.accept(get().getSubMenu());
     return (F) this;
   }
 
   public F checkable(boolean checkable)
   {
-    getComponent().setCheckable(checkable);
+    get().setCheckable(checkable);
     return (F) this;
   }
 
   public F checked(boolean checked)
   {
-    getComponent().setChecked(checked);
+    get().setChecked(checked);
     return (F) this;
   }
 

@@ -11,7 +11,7 @@ public interface FluentHasEnabled<C extends HasEnabled, F extends FluentHasEnabl
 
   default F enabled(boolean enabled)
   {
-    getComponent().setEnabled(enabled);
+    get().setEnabled(enabled);
     return (F) this;
   }
 

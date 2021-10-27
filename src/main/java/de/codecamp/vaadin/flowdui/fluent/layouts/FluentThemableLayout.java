@@ -15,13 +15,13 @@ public interface FluentThemableLayout<C extends ThemableLayout, F extends Fluent
 
   default F margin(boolean enabled)
   {
-    getComponent().setMargin(enabled);
+    get().setMargin(enabled);
     return (F) this;
   }
 
   default F padding(boolean enabled)
   {
-    getComponent().setPadding(enabled);
+    get().setPadding(enabled);
     return (F) this;
   }
 
@@ -33,14 +33,14 @@ public interface FluentThemableLayout<C extends ThemableLayout, F extends Fluent
     }
     else
     {
-      ThemableLayoutSpacing.removeFrom(getComponent());
+      ThemableLayoutSpacing.removeFrom(get());
       return (F) this;
     }
   }
 
   default F spacing(ThemableLayoutSpacing spacing)
   {
-    spacing.applyTo(getComponent());
+    spacing.applyTo(get());
     return (F) this;
   }
 
@@ -71,7 +71,7 @@ public interface FluentThemableLayout<C extends ThemableLayout, F extends Fluent
 
   default F boxSizing(BoxSizing boxSizing)
   {
-    getComponent().setBoxSizing(boxSizing);
+    get().setBoxSizing(boxSizing);
     return (F) this;
   }
 

@@ -47,55 +47,55 @@ public class FluentEmailField
 
   public FluentEmailField label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentEmailField placeholder(String placeholder)
   {
-    getComponent().setPlaceholder(placeholder);
+    get().setPlaceholder(placeholder);
     return this;
   }
 
   public FluentEmailField autoselect(boolean autoselect)
   {
-    getComponent().setAutoselect(autoselect);
+    get().setAutoselect(autoselect);
     return this;
   }
 
   public FluentEmailField autofocus(boolean autofocus)
   {
-    getComponent().setAutofocus(autofocus);
+    get().setAutofocus(autofocus);
     return this;
   }
 
   public FluentEmailField clearButtonVisible(boolean clearButtonVisible)
   {
-    getComponent().setClearButtonVisible(clearButtonVisible);
+    get().setClearButtonVisible(clearButtonVisible);
     return this;
   }
 
   public FluentEmailField maxLength(int maxLength)
   {
-    getComponent().setMaxLength(maxLength);
+    get().setMaxLength(maxLength);
     return this;
   }
 
   public FluentEmailField minLength(int minLength)
   {
-    getComponent().setMinLength(minLength);
+    get().setMinLength(minLength);
     return this;
   }
 
   public FluentEmailField pattern(String pattern)
   {
-    getComponent().setPattern(pattern);
+    get().setPattern(pattern);
     return this;
   }
 
   public FluentEmailField preventInvalidInput(boolean preventInvalidInput)
   {
-    getComponent().setPreventInvalidInput(preventInvalidInput);
+    get().setPreventInvalidInput(preventInvalidInput);
     return this;
   }
 

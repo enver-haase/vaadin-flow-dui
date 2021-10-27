@@ -14,7 +14,7 @@ public interface FluentHasAutocapitalize<C extends HasAutocapitalize, F extends 
 
   default F autocapitalize(Autocapitalize autocapitalize)
   {
-    getComponent().setAutocapitalize(autocapitalize);
+    get().setAutocapitalize(autocapitalize);
     return (F) this;
   }
 

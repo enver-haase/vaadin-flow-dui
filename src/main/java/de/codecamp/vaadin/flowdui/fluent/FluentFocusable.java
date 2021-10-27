@@ -18,37 +18,37 @@ public interface FluentFocusable<C extends Component & Focusable<C>, F extends F
 
   default F tabIndex(int tabIndex)
   {
-    getComponent().setTabIndex(tabIndex);
+    get().setTabIndex(tabIndex);
     return (F) this;
   }
 
   default F focus()
   {
-    getComponent().focus();
+    get().focus();
     return (F) this;
   }
 
   default F blur()
   {
-    getComponent().blur();
+    get().blur();
     return (F) this;
   }
 
   default F focusShortcut(Key key, KeyModifier... keyModifiers)
   {
-    getComponent().addFocusShortcut(key, keyModifiers);
+    get().addFocusShortcut(key, keyModifiers);
     return (F) this;
   }
 
   default F onBlur(ComponentEventListener<BlurEvent<C>> listener)
   {
-    getComponent().addBlurListener(listener);
+    get().addBlurListener(listener);
     return (F) this;
   }
 
   default F onFocus(ComponentEventListener<FocusEvent<C>> listener)
   {
-    getComponent().addFocusListener(listener);
+    get().addFocusListener(listener);
     return (F) this;
   }
 

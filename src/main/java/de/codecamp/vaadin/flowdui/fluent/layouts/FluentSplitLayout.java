@@ -38,46 +38,46 @@ public class FluentSplitLayout
 
   public FluentSplitLayout setOrientation(Orientation orientation)
   {
-    getComponent().setOrientation(orientation);
+    get().setOrientation(orientation);
     return this;
   }
 
   public FluentSplitLayout setSplitterPosition(double position)
   {
-    getComponent().setSplitterPosition(position);
+    get().setSplitterPosition(position);
     return this;
   }
 
   public FluentSplitLayout primaryComponent(Component component)
   {
-    getComponent().addToPrimary(component);
+    get().addToPrimary(component);
     return this;
   }
 
   public FluentSplitLayout secondaryComponent(Component component)
   {
-    getComponent().addToSecondary(component);
+    get().addToSecondary(component);
     return this;
   }
 
   public FluentSplitLayout onSplitterDragend(
       ComponentEventListener<SplitterDragendEvent<SplitLayout>> listener)
   {
-    getComponent().addSplitterDragendListener(listener);
+    get().addSplitterDragendListener(listener);
     return this;
   }
 
   @Override
   public FluentSplitLayout addThemeVariants(SplitLayoutVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentSplitLayout removeThemeVariants(SplitLayoutVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

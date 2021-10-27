@@ -11,7 +11,7 @@ public interface FluentHasText<C extends HasText, F extends FluentHasText<C, F>>
 
   default F text(String text)
   {
-    getComponent().setText(text);
+    get().setText(text);
     return (F) this;
   }
 

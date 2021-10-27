@@ -14,7 +14,7 @@ public interface FluentAttachNotifier<C extends Component & AttachNotifier, F ex
 
   default F onAttach(ComponentEventListener<AttachEvent> listener)
   {
-    getComponent().addAttachListener(listener);
+    get().addAttachListener(listener);
     return (F) this;
   }
 

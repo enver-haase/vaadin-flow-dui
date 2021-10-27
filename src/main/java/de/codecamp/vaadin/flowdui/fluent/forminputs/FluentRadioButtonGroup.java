@@ -39,41 +39,41 @@ public class FluentRadioButtonGroup<ITEM>
 
   public FluentRadioButtonGroup<ITEM> label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentRadioButtonGroup<ITEM> required(boolean required)
   {
-    getComponent().setRequired(required);
+    get().setRequired(required);
     return this;
   }
 
   public FluentRadioButtonGroup<ITEM> renderer(
       ComponentRenderer<? extends Component, ITEM> itemRenderer)
   {
-    getComponent().setRenderer(itemRenderer);
+    get().setRenderer(itemRenderer);
     return this;
   }
 
   public FluentRadioButtonGroup<ITEM> itemEnabledProvider(
       SerializablePredicate<ITEM> itemEnabledProvider)
   {
-    getComponent().setItemEnabledProvider(itemEnabledProvider);
+    get().setItemEnabledProvider(itemEnabledProvider);
     return this;
   }
 
   @Override
   public FluentRadioButtonGroup<ITEM> addThemeVariants(RadioGroupVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentRadioButtonGroup<ITEM> removeThemeVariants(RadioGroupVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

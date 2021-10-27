@@ -37,61 +37,61 @@ public class FluentDatePicker
 
   public FluentDatePicker label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentDatePicker placeholder(String placeholder)
   {
-    getComponent().setPlaceholder(placeholder);
+    get().setPlaceholder(placeholder);
     return this;
   }
 
   public FluentDatePicker autoOpen(boolean autoOpen)
   {
-    getComponent().setAutoOpen(autoOpen);
+    get().setAutoOpen(autoOpen);
     return this;
   }
 
   public FluentDatePicker opened(boolean opened)
   {
-    getComponent().setOpened(opened);
+    get().setOpened(opened);
     return this;
   }
 
   public FluentDatePicker clearButtonVisible(boolean clearButtonVisible)
   {
-    getComponent().setClearButtonVisible(clearButtonVisible);
+    get().setClearButtonVisible(clearButtonVisible);
     return this;
   }
 
   public FluentDatePicker weekNumbersVisible(boolean weekNumbersVisible)
   {
-    getComponent().setWeekNumbersVisible(weekNumbersVisible);
+    get().setWeekNumbersVisible(weekNumbersVisible);
     return this;
   }
 
   public FluentDatePicker initialPosition(LocalDate initialPosition)
   {
-    getComponent().setInitialPosition(initialPosition);
+    get().setInitialPosition(initialPosition);
     return this;
   }
 
   public FluentDatePicker max(LocalDate max)
   {
-    getComponent().setMax(max);
+    get().setMax(max);
     return this;
   }
 
   public FluentDatePicker min(LocalDate min)
   {
-    getComponent().setMin(min);
+    get().setMin(min);
     return this;
   }
 
   public FluentDatePicker required(boolean required)
   {
-    getComponent().setRequired(required);
+    get().setRequired(required);
     return this;
   }
 

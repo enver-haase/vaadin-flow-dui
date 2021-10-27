@@ -20,39 +20,39 @@ public interface FluentFlexComponent<C extends Component & FlexComponent, F exte
 
   default F alignItems(Alignment alignment)
   {
-    getComponent().setAlignItems(alignment);
+    get().setAlignItems(alignment);
     return (F) this;
   }
 
   default F alignSelf(Alignment alignment, Component... components)
   {
-    getComponent().setAlignSelf(alignment, components);
+    get().setAlignSelf(alignment, components);
     return (F) this;
   }
 
   default F flexGrow(double flexGrow, Component... components)
   {
-    getComponent().setFlexGrow(flexGrow, components);
+    get().setFlexGrow(flexGrow, components);
     return (F) this;
   }
 
   default F justifyContent(JustifyContentMode justifyContent)
   {
-    getComponent().setJustifyContentMode(justifyContent);
+    get().setJustifyContentMode(justifyContent);
     return (F) this;
   }
 
   default F expand(Component... components)
   {
-    getComponent().expand(components);
+    get().expand(components);
     return (F) this;
   }
 
   default F add(Component component, Alignment alignSelf, double flexGrow)
   {
-    getComponent().add(component);
-    getComponent().setAlignSelf(alignSelf, component);
-    getComponent().setFlexGrow(flexGrow, component);
+    get().add(component);
+    get().setAlignSelf(alignSelf, component);
+    get().setFlexGrow(flexGrow, component);
     return (F) this;
   }
 

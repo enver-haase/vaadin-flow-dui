@@ -21,9 +21,9 @@ public class FluentVerticalLayout
     super(new VerticalLayout());
 
     // remove defaults that only exist in the Java API to be consistent with Web Component
-    getComponent().setWidth(null);
-    getComponent().setPadding(false);
-    getComponent().setSpacing(false);
+    get().setWidth(null);
+    get().setPadding(false);
+    get().setSpacing(false);
   }
 
   public FluentVerticalLayout(VerticalLayout component)
@@ -34,19 +34,19 @@ public class FluentVerticalLayout
 
   public FluentVerticalLayout horizontalAlignment(Alignment alignment, Component... components)
   {
-    getComponent().setHorizontalComponentAlignment(alignment, components);
+    get().setHorizontalComponentAlignment(alignment, components);
     return this;
   }
 
   public FluentVerticalLayout defaultHorizontalAlignment(Alignment alignment)
   {
-    getComponent().setDefaultHorizontalComponentAlignment(alignment);
+    get().setDefaultHorizontalComponentAlignment(alignment);
     return this;
   }
 
   public FluentVerticalLayout addAndExpand(Component... components)
   {
-    getComponent().addAndExpand(components);
+    get().addAndExpand(components);
     return this;
   }
 

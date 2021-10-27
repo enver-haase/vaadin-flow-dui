@@ -5,26 +5,26 @@ import java.io.Serializable;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.function.SerializableConsumer;
+import com.vaadin.flow.function.SerializableSupplier;
 
 
 @SuppressWarnings("unchecked")
 public interface FluentHasElement<C extends HasElement, F extends FluentHasElement<C, F>>
   extends
+    SerializableSupplier<C>,
     Serializable
 {
 
-  C getComponent();
-
   default F apply(SerializableConsumer<C> configurator)
   {
-    configurator.accept(getComponent());
+    configurator.accept(get());
     return (F) this;
   }
 
 
   default Element getElement()
   {
-    return ((HasElement) getComponent()).getElement();
+    return ((HasElement) get()).getElement();
   }
 
   default F applyToElement(SerializableConsumer<Element> configurator)

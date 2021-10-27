@@ -12,7 +12,7 @@ public interface FluentHasOrderedComponents<C extends Component & HasOrderedComp
 
   default F replace(Component oldComponent, Component newComponent)
   {
-    getComponent().replace(oldComponent, newComponent);
+    get().replace(oldComponent, newComponent);
     return (F) this;
   }
 

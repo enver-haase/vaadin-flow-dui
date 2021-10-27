@@ -35,49 +35,49 @@ public class FluentGrid<ITEM>
 
   public FluentGrid<ITEM> pageSize(int pageSize)
   {
-    getComponent().setPageSize(pageSize);
+    get().setPageSize(pageSize);
     return this;
   }
 
   public FluentGrid<ITEM> columnReorderingAllowed(boolean columnReorderingAllowed)
   {
-    getComponent().setColumnReorderingAllowed(columnReorderingAllowed);
+    get().setColumnReorderingAllowed(columnReorderingAllowed);
     return this;
   }
 
   public FluentGrid<ITEM> detailsVisibleOnClick(boolean detailsVisibleOnClick)
   {
-    getComponent().setDetailsVisibleOnClick(detailsVisibleOnClick);
+    get().setDetailsVisibleOnClick(detailsVisibleOnClick);
     return this;
   }
 
   public FluentGrid<ITEM> multiSort(boolean multiSort)
   {
-    getComponent().setMultiSort(multiSort);
+    get().setMultiSort(multiSort);
     return this;
   }
 
   public FluentGrid<ITEM> allRowsVisible(boolean allRowsVisible)
   {
-    getComponent().setAllRowsVisible(allRowsVisible);
+    get().setAllRowsVisible(allRowsVisible);
     return this;
   }
 
   public FluentGrid<ITEM> verticalScrollingEnabled(boolean enabled)
   {
-    getComponent().setVerticalScrollingEnabled(enabled);
+    get().setVerticalScrollingEnabled(enabled);
     return this;
   }
 
   public FluentGrid<ITEM> dropMode(GridDropMode dropMode)
   {
-    getComponent().setDropMode(dropMode);
+    get().setDropMode(dropMode);
     return this;
   }
 
   public FluentGrid<ITEM> rowsDraggable(boolean rowsDraggable)
   {
-    getComponent().setRowsDraggable(rowsDraggable);
+    get().setRowsDraggable(rowsDraggable);
     return this;
   }
 
@@ -85,14 +85,14 @@ public class FluentGrid<ITEM>
   @Override
   public FluentGrid<ITEM> addThemeVariants(GridVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentGrid<ITEM> removeThemeVariants(GridVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

@@ -29,13 +29,13 @@ public class FluentScroller
 
   public FluentScroller setScrollDirection(ScrollDirection scrollDirection)
   {
-    getComponent().setScrollDirection(scrollDirection);
+    get().setScrollDirection(scrollDirection);
     return this;
   }
 
   public FluentScroller setContent(Component content)
   {
-    getComponent().setContent(content);
+    get().setContent(content);
     return this;
   }
 

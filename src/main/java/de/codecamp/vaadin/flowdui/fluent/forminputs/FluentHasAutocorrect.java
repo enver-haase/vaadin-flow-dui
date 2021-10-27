@@ -13,7 +13,7 @@ public interface FluentHasAutocorrect<C extends HasAutocorrect, F extends Fluent
 
   default F autocorrect(boolean autocorrect)
   {
-    getComponent().setAutocorrect(autocorrect);
+    get().setAutocorrect(autocorrect);
     return (F) this;
   }
 

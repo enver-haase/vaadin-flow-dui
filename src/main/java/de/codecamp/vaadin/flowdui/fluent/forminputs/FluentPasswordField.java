@@ -47,61 +47,61 @@ public class FluentPasswordField
 
   public FluentPasswordField label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentPasswordField placeholder(String placeholder)
   {
-    getComponent().setPlaceholder(placeholder);
+    get().setPlaceholder(placeholder);
     return this;
   }
 
   public FluentPasswordField autoselect(boolean autoselect)
   {
-    getComponent().setAutoselect(autoselect);
+    get().setAutoselect(autoselect);
     return this;
   }
 
   public FluentPasswordField autofocus(boolean autofocus)
   {
-    getComponent().setAutofocus(autofocus);
+    get().setAutofocus(autofocus);
     return this;
   }
 
   public FluentPasswordField clearButtonVisible(boolean clearButtonVisible)
   {
-    getComponent().setClearButtonVisible(clearButtonVisible);
+    get().setClearButtonVisible(clearButtonVisible);
     return this;
   }
 
   public FluentPasswordField maxLength(int maxLength)
   {
-    getComponent().setMaxLength(maxLength);
+    get().setMaxLength(maxLength);
     return this;
   }
 
   public FluentPasswordField minLength(int minLength)
   {
-    getComponent().setMinLength(minLength);
+    get().setMinLength(minLength);
     return this;
   }
 
   public FluentPasswordField pattern(String pattern)
   {
-    getComponent().setPattern(pattern);
+    get().setPattern(pattern);
     return this;
   }
 
   public FluentPasswordField preventInvalidInput(boolean preventInvalidInput)
   {
-    getComponent().setPreventInvalidInput(preventInvalidInput);
+    get().setPreventInvalidInput(preventInvalidInput);
     return this;
   }
 
   public FluentPasswordField required(boolean required)
   {
-    getComponent().setRequired(required);
+    get().setRequired(required);
     return this;
   }
 

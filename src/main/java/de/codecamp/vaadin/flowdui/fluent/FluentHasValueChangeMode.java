@@ -13,13 +13,13 @@ public interface FluentHasValueChangeMode<C extends Component & HasValueChangeMo
 
   default F setValueChangeMode(ValueChangeMode valueChangeMode)
   {
-    getComponent().setValueChangeMode(valueChangeMode);
+    get().setValueChangeMode(valueChangeMode);
     return (F) this;
   }
 
   default F setValueChangeTimeout(int valueChangeTimeout)
   {
-    getComponent().setValueChangeTimeout(valueChangeTimeout);
+    get().setValueChangeTimeout(valueChangeTimeout);
     return (F) this;
   }
 

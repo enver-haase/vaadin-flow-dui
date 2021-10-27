@@ -33,25 +33,25 @@ public class FluentDetails
 
   public FluentDetails summary(Component summary)
   {
-    getComponent().setSummary(summary);
+    get().setSummary(summary);
     return this;
   }
 
   public FluentDetails summaryText(String summary)
   {
-    getComponent().setSummaryText(summary);
+    get().setSummaryText(summary);
     return this;
   }
 
   public FluentDetails content(Component content)
   {
-    getComponent().setContent(content);
+    get().setContent(content);
     return this;
   }
 
   public FluentDetails opened(boolean opened)
   {
-    getComponent().setOpened(opened);
+    get().setOpened(opened);
     return this;
   }
 
@@ -59,14 +59,14 @@ public class FluentDetails
   @Override
   public FluentDetails addThemeVariants(DetailsVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentDetails removeThemeVariants(DetailsVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

@@ -29,55 +29,55 @@ public class FluentUpload
 
   public FluentUpload autoUpload(boolean autoUpload)
   {
-    getComponent().setAutoUpload(autoUpload);
+    get().setAutoUpload(autoUpload);
     return this;
   }
 
   public FluentUpload dropAllowed(boolean dropAllowed)
   {
-    getComponent().setDropAllowed(dropAllowed);
+    get().setDropAllowed(dropAllowed);
     return this;
   }
 
   public FluentUpload dropLabel(Component dropLabel)
   {
-    getComponent().setDropLabel(dropLabel);
+    get().setDropLabel(dropLabel);
     return this;
   }
 
   public FluentUpload dropLabelIcon(Component dropLabelIcon)
   {
-    getComponent().setDropLabelIcon(dropLabelIcon);
+    get().setDropLabelIcon(dropLabelIcon);
     return this;
   }
 
   public FluentUpload uploadButton(Component uploadButton)
   {
-    getComponent().setUploadButton(uploadButton);
+    get().setUploadButton(uploadButton);
     return this;
   }
 
   public FluentUpload acceptedFileTypes(String... acceptedFileTypes)
   {
-    getComponent().setAcceptedFileTypes(acceptedFileTypes);
+    get().setAcceptedFileTypes(acceptedFileTypes);
     return this;
   }
 
   public FluentUpload maxFiles(int maxFiles)
   {
-    getComponent().setMaxFiles(maxFiles);
+    get().setMaxFiles(maxFiles);
     return this;
   }
 
   public FluentUpload maxFileSize(int maxFileSize)
   {
-    getComponent().setMaxFileSize(maxFileSize);
+    get().setMaxFileSize(maxFileSize);
     return this;
   }
 
   public FluentUpload receiver(Receiver receiver)
   {
-    getComponent().setReceiver(receiver);
+    get().setReceiver(receiver);
     return this;
   }
 

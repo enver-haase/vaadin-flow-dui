@@ -21,7 +21,7 @@ public class FluentHorizontalLayout
     this(new HorizontalLayout());
 
     // remove defaults that only exist in the Java API to be consistent with Web Component
-    getComponent().setSpacing(false);
+    get().setSpacing(false);
   }
 
   public FluentHorizontalLayout(HorizontalLayout component)
@@ -32,19 +32,19 @@ public class FluentHorizontalLayout
 
   public FluentHorizontalLayout verticalAlignment(Alignment alignment, Component... components)
   {
-    getComponent().setVerticalComponentAlignment(alignment, components);
+    get().setVerticalComponentAlignment(alignment, components);
     return this;
   }
 
   public FluentHorizontalLayout defaultVerticalAlignment(Alignment alignment)
   {
-    getComponent().setDefaultVerticalComponentAlignment(alignment);
+    get().setDefaultVerticalComponentAlignment(alignment);
     return this;
   }
 
   public FluentHorizontalLayout addAndExpand(Component... components)
   {
-    getComponent().addAndExpand(components);
+    get().addAndExpand(components);
     return this;
   }
 

@@ -34,45 +34,45 @@ public class FluentAvatarGroup
 
   public FluentAvatarGroup maxItemsVisible(Integer max)
   {
-    getComponent().setMaxItemsVisible(max);
+    get().setMaxItemsVisible(max);
     return this;
   }
 
   public FluentAvatarGroup items(AvatarGroupItem... items)
   {
-    getComponent().setItems(items);
+    get().setItems(items);
     return this;
   }
 
   public FluentAvatarGroup add(AvatarGroupItem... items)
   {
-    getComponent().add(items);
+    get().add(items);
     return this;
   }
 
   public FluentAvatarGroup remove(AvatarGroupItem... items)
   {
-    getComponent().remove(items);
+    get().remove(items);
     return this;
   }
 
   public FluentAvatarGroup i18n(AvatarGroupI18n i18n)
   {
-    getComponent().setI18n(i18n);
+    get().setI18n(i18n);
     return this;
   }
 
   @Override
   public FluentAvatarGroup addThemeVariants(AvatarGroupVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentAvatarGroup removeThemeVariants(AvatarGroupVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

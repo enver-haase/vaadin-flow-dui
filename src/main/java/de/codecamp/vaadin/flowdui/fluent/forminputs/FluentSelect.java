@@ -40,43 +40,43 @@ public class FluentSelect<ITEM>
 
   public FluentSelect<ITEM> label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentSelect<ITEM> placeholder(String placeholder)
   {
-    getComponent().setPlaceholder(placeholder);
+    get().setPlaceholder(placeholder);
     return this;
   }
 
   public FluentSelect<ITEM> autofocus(boolean autofocus)
   {
-    getComponent().setAutofocus(autofocus);
+    get().setAutofocus(autofocus);
     return this;
   }
 
   public FluentSelect<ITEM> itemLabelGenerator(ItemLabelGenerator<ITEM> itemLabelGenerator)
   {
-    getComponent().setItemLabelGenerator(itemLabelGenerator);
+    get().setItemLabelGenerator(itemLabelGenerator);
     return this;
   }
 
   public FluentSelect<ITEM> itemEnabledProvider(SerializablePredicate<ITEM> itemEnabledProvider)
   {
-    getComponent().setItemEnabledProvider(itemEnabledProvider);
+    get().setItemEnabledProvider(itemEnabledProvider);
     return this;
   }
 
   public FluentSelect<ITEM> renderer(ComponentRenderer<? extends Component, ITEM> renderer)
   {
-    getComponent().setRenderer(renderer);
+    get().setRenderer(renderer);
     return this;
   }
 
   public FluentSelect<ITEM> textRenderer(ItemLabelGenerator<ITEM> itemLabelGenerator)
   {
-    getComponent().setTextRenderer(itemLabelGenerator);
+    get().setTextRenderer(itemLabelGenerator);
     return this;
   }
 

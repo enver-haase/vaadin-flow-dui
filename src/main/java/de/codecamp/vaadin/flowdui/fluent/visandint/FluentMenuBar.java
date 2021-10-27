@@ -35,7 +35,7 @@ public class FluentMenuBar
   @Override
   public FluentMenuItem addItem(String text)
   {
-    return new FluentMenuItem(getComponent().addItem(text));
+    return new FluentMenuItem(get().addItem(text));
   }
 
   public FluentMenuBar addItem(String text, SerializableConsumer<FluentMenuItem> configurator)
@@ -47,7 +47,7 @@ public class FluentMenuBar
   @Override
   public FluentMenuItem addItem(Component component)
   {
-    return new FluentMenuItem(getComponent().addItem(component));
+    return new FluentMenuItem(get().addItem(component));
   }
 
   public FluentMenuBar addItem(Component component,

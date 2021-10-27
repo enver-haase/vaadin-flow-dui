@@ -38,49 +38,49 @@ public class FluentTimePicker
 
   public FluentTimePicker label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentTimePicker placeholder(String placeholder)
   {
-    getComponent().setPlaceholder(placeholder);
+    get().setPlaceholder(placeholder);
     return this;
   }
 
   public FluentTimePicker autoOpen(boolean autoOpen)
   {
-    getComponent().setAutoOpen(autoOpen);
+    get().setAutoOpen(autoOpen);
     return this;
   }
 
   public FluentTimePicker clearButtonVisible(boolean clearButtonVisible)
   {
-    getComponent().setClearButtonVisible(clearButtonVisible);
+    get().setClearButtonVisible(clearButtonVisible);
     return this;
   }
 
   public FluentTimePicker maxTime(LocalTime max)
   {
-    getComponent().setMaxTime(max);
+    get().setMaxTime(max);
     return this;
   }
 
   public FluentTimePicker minTime(LocalTime min)
   {
-    getComponent().setMinTime(min);
+    get().setMinTime(min);
     return this;
   }
 
   public FluentTimePicker step(Duration step)
   {
-    getComponent().setStep(step);
+    get().setStep(step);
     return this;
   }
 
   public FluentTimePicker required(boolean required)
   {
-    getComponent().setRequired(required);
+    get().setRequired(required);
     return this;
   }
 

@@ -34,7 +34,7 @@ public class FluentNotification
   public FluentNotification()
   {
     this(new Notification());
-    getComponent().setDuration(DEFAULT_DURATION);
+    get().setDuration(DEFAULT_DURATION);
   }
 
   public FluentNotification(Notification component)
@@ -45,22 +45,22 @@ public class FluentNotification
 
   public FluentNotification text(String text)
   {
-    getComponent().setText(text);
+    get().setText(text);
     return this;
   }
 
   public FluentNotification duration(int duration)
   {
-    getComponent().setDuration(duration);
+    get().setDuration(duration);
     return this;
   }
 
   public FluentNotification duration(Duration duration)
   {
     if (duration == null)
-      getComponent().setDuration(0);
+      get().setDuration(0);
     else
-      getComponent().setDuration(Math.toIntExact(duration.toMillis()));
+      get().setDuration(Math.toIntExact(duration.toMillis()));
     return this;
   }
 
@@ -72,87 +72,87 @@ public class FluentNotification
 
   public FluentNotification opened(boolean opened)
   {
-    getComponent().setOpened(opened);
+    get().setOpened(opened);
     return this;
   }
 
   public FluentNotification open()
   {
-    getComponent().open();
+    get().open();
     return this;
   }
 
   public FluentNotification close()
   {
-    getComponent().close();
+    get().close();
     return this;
   }
 
   public FluentNotification onOpenedChange(
       ComponentEventListener<OpenedChangeEvent<Notification>> listener)
   {
-    getComponent().addOpenedChangeListener(listener);
+    get().addOpenedChangeListener(listener);
     return this;
   }
 
 
   public FluentNotification position(Position position)
   {
-    getComponent().setPosition(position);
+    get().setPosition(position);
     return this;
   }
 
   public FluentNotification positionTopStretch()
   {
-    getComponent().setPosition(Position.TOP_STRETCH);
+    get().setPosition(Position.TOP_STRETCH);
     return this;
   }
 
   public FluentNotification positionTopStart()
   {
-    getComponent().setPosition(Position.TOP_START);
+    get().setPosition(Position.TOP_START);
     return this;
   }
 
   public FluentNotification positionTopCenter()
   {
-    getComponent().setPosition(Position.TOP_CENTER);
+    get().setPosition(Position.TOP_CENTER);
     return this;
   }
 
   public FluentNotification positionTopEnd()
   {
-    getComponent().setPosition(Position.TOP_END);
+    get().setPosition(Position.TOP_END);
     return this;
   }
 
   public FluentNotification positionTopMiddle()
   {
-    getComponent().setPosition(Position.MIDDLE);
+    get().setPosition(Position.MIDDLE);
     return this;
   }
 
   public FluentNotification positionBottomStart()
   {
-    getComponent().setPosition(Position.BOTTOM_START);
+    get().setPosition(Position.BOTTOM_START);
     return this;
   }
 
   public FluentNotification positionBottomCenter()
   {
-    getComponent().setPosition(Position.BOTTOM_CENTER);
+    get().setPosition(Position.BOTTOM_CENTER);
     return this;
   }
 
   public FluentNotification positionBottomEnd()
   {
-    getComponent().setPosition(Position.BOTTOM_END);
+    get().setPosition(Position.BOTTOM_END);
     return this;
   }
 
   public FluentNotification positionBottomStretch()
   {
-    getComponent().setPosition(Position.BOTTOM_STRETCH);
+    get().setPosition(Position.BOTTOM_STRETCH);
     return this;
   }
 
@@ -160,14 +160,14 @@ public class FluentNotification
   @Override
   public FluentNotification addThemeVariants(NotificationVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentNotification removeThemeVariants(NotificationVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

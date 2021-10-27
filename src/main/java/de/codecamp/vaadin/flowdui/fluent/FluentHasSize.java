@@ -11,61 +11,61 @@ public interface FluentHasSize<C extends HasSize, F extends FluentHasSize<C, F>>
 
   default F width(String width)
   {
-    getComponent().setWidth(width);
+    get().setWidth(width);
     return (F) this;
   }
 
   default F minWidth(String minWidth)
   {
-    getComponent().setMinWidth(minWidth);
+    get().setMinWidth(minWidth);
     return (F) this;
   }
 
   default F maxWidth(String maxWidth)
   {
-    getComponent().setMaxWidth(maxWidth);
+    get().setMaxWidth(maxWidth);
     return (F) this;
   }
 
   default F height(String height)
   {
-    getComponent().setHeight(height);
+    get().setHeight(height);
     return (F) this;
   }
 
   default F minHeight(String minHeight)
   {
-    getComponent().setMinHeight(minHeight);
+    get().setMinHeight(minHeight);
     return (F) this;
   }
 
   default F maxHeight(String maxHeight)
   {
-    getComponent().setMaxHeight(maxHeight);
+    get().setMaxHeight(maxHeight);
     return (F) this;
   }
 
   default F sizeFull()
   {
-    getComponent().setSizeFull();
+    get().setSizeFull();
     return (F) this;
   }
 
   default F widthFull()
   {
-    getComponent().setWidthFull();
+    get().setWidthFull();
     return (F) this;
   }
 
   default F heightFull()
   {
-    getComponent().setHeightFull();
+    get().setHeightFull();
     return (F) this;
   }
 
   default F sizeUndefined()
   {
-    getComponent().setSizeUndefined();
+    get().setSizeUndefined();
     return (F) this;
   }
 

@@ -47,55 +47,55 @@ public class FluentNumberField
 
   public FluentNumberField label(String label)
   {
-    getComponent().setLabel(label);
+    get().setLabel(label);
     return this;
   }
 
   public FluentNumberField placeholder(String placeholder)
   {
-    getComponent().setPlaceholder(placeholder);
+    get().setPlaceholder(placeholder);
     return this;
   }
 
   public FluentNumberField autoselect(boolean autoselect)
   {
-    getComponent().setAutoselect(autoselect);
+    get().setAutoselect(autoselect);
     return this;
   }
 
   public FluentNumberField autofocus(boolean autofocus)
   {
-    getComponent().setAutofocus(autofocus);
+    get().setAutofocus(autofocus);
     return this;
   }
 
   public FluentNumberField clearButtonVisible(boolean clearButtonVisible)
   {
-    getComponent().setClearButtonVisible(clearButtonVisible);
+    get().setClearButtonVisible(clearButtonVisible);
     return this;
   }
 
   public FluentNumberField setHasControls(boolean hasControls)
   {
-    getComponent().setHasControls(hasControls);
+    get().setHasControls(hasControls);
     return this;
   }
 
   public FluentNumberField setMin(double min)
   {
-    getComponent().setMin(min);
+    get().setMin(min);
     return this;
   }
 
   public FluentNumberField setMax(double max)
   {
-    getComponent().setMax(max);
+    get().setMax(max);
     return this;
   }
 
   public FluentNumberField setStep(double step)
   {
-    getComponent().setStep(step);
+    get().setStep(step);
     return this;
   }
 

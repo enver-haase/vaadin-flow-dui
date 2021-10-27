@@ -36,37 +36,37 @@ public class FluentTabs
 
   public FluentTabs autoselect(boolean autoselect)
   {
-    getComponent().setAutoselect(autoselect);
+    get().setAutoselect(autoselect);
     return this;
   }
 
   public FluentTabs flexGrowForEnclosedTabs(double flexGrow)
   {
-    getComponent().setFlexGrowForEnclosedTabs(flexGrow);
+    get().setFlexGrowForEnclosedTabs(flexGrow);
     return this;
   }
 
   public FluentTabs orientation(Orientation orientation)
   {
-    getComponent().setOrientation(orientation);
+    get().setOrientation(orientation);
     return this;
   }
 
   public FluentTabs selectedIndex(int selectedIndex)
   {
-    getComponent().setSelectedIndex(selectedIndex);
+    get().setSelectedIndex(selectedIndex);
     return this;
   }
 
   public FluentTabs selectedTab(Tab selectedTab)
   {
-    getComponent().setSelectedTab(selectedTab);
+    get().setSelectedTab(selectedTab);
     return this;
   }
 
   public FluentTabs add(Tab... tabs)
   {
-    getComponent().add(tabs);
+    get().add(tabs);
     return this;
   }
 
@@ -74,14 +74,14 @@ public class FluentTabs
   @Override
   public FluentTabs addThemeVariants(TabsVariant... variants)
   {
-    getComponent().addThemeVariants(variants);
+    get().addThemeVariants(variants);
     return this;
   }
 
   @Override
   public FluentTabs removeThemeVariants(TabsVariant... variants)
   {
-    getComponent().removeThemeVariants(variants);
+    get().removeThemeVariants(variants);
     return this;
   }
 

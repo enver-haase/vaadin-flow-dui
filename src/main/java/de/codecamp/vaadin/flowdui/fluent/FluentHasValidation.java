@@ -12,13 +12,13 @@ public interface FluentHasValidation<C extends Component & HasValidation, F exte
 
   default F errorMessage(String errorMessage)
   {
-    getComponent().setErrorMessage(errorMessage);
+    get().setErrorMessage(errorMessage);
     return (F) this;
   }
 
   default F invalid(boolean invalid)
   {
-    getComponent().setInvalid(invalid);
+    get().setInvalid(invalid);
     return (F) this;
   }
 
