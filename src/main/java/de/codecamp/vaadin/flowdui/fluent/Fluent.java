@@ -38,6 +38,7 @@ import com.vaadin.flow.component.timepicker.TimePicker;
 import com.vaadin.flow.component.upload.Upload;
 
 import de.codecamp.vaadin.flowdui.components.Badge;
+import de.codecamp.vaadin.flowdui.dialogs.MessageDialog;
 import de.codecamp.vaadin.flowdui.fluent.forminputs.FluentBigDecimalField;
 import de.codecamp.vaadin.flowdui.fluent.forminputs.FluentCheckbox;
 import de.codecamp.vaadin.flowdui.fluent.forminputs.FluentCheckboxGroup;
@@ -70,6 +71,7 @@ import de.codecamp.vaadin.flowdui.fluent.visandint.FluentDetails;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentGrid;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentIcon;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentMenuBar;
+import de.codecamp.vaadin.flowdui.fluent.visandint.FluentMessageDialog;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentNotification;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentProgressBar;
 import de.codecamp.vaadin.flowdui.fluent.visandint.FluentTab;
@@ -358,6 +360,16 @@ public interface Fluent
   static FluentMenuBar fluent(MenuBar component)
   {
     return new FluentMenuBar(component);
+  }
+
+  static FluentMessageDialog messageDialog()
+  {
+    return new FluentMessageDialog();
+  }
+
+  static FluentMessageDialog fluent(MessageDialog component)
+  {
+    return new FluentMessageDialog(component);
   }
 
   static FluentProgressBar progressBar()
