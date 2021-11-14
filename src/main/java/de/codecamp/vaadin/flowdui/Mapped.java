@@ -10,8 +10,8 @@ import java.lang.annotation.Target;
 /**
  * Used to mark fields to which components from the template should be mapped.
  */
-@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Mapped
 {

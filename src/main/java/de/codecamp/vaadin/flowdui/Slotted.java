@@ -10,8 +10,8 @@ import java.lang.annotation.Target;
 /**
  * Used to mark fields that should be inserted into a {@code <slot>} in the template.
  */
-@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Slotted
 {

@@ -12,8 +12,8 @@ import java.lang.annotation.Target;
  * Used to annotate template hosts in order to override the default template ID. The default
  * template ID is the fully qualified name of the class.
  */
-@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
 public @interface TemplateId

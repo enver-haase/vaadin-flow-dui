@@ -12,8 +12,8 @@ import java.lang.annotation.Target;
  * Used to annotate fragment hosts in order to override the default fragment ID. The default
  * fragment ID is the simple name of the class.
  */
-@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
 public @interface FragmentId
