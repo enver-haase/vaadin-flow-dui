@@ -40,28 +40,45 @@ public class FluentFlexLayout
     return this;
   }
 
-  public FluentFlexLayout flexBasis(String width, Component... components)
-  {
-    get().setFlexBasis(width, components);
-    return this;
-  }
-
   public FluentFlexLayout flexDirection(FlexDirection flexDirection)
   {
     get().setFlexDirection(flexDirection);
     return this;
   }
 
-  public FluentFlexLayout flexShrink(double flexShrink, Component... components)
+
+  @Override
+  public FluentFlexLayoutConfig configLayoutFor(Component... children)
   {
-    get().setFlexShrink(flexShrink, components);
-    return this;
+    return new FluentFlexLayoutConfig(get(), children);
   }
 
-  public FluentFlexLayout order(int order, Component component)
+  @Override
+  public FluentFlexLayoutConfig add(Component... children)
   {
-    get().setOrder(order, component);
-    return this;
+    get().add(children);
+    return new FluentFlexLayoutConfig(get(), children);
+  }
+
+  @Override
+  public FluentFlexLayoutConfig addAsFirst(Component... children)
+  {
+    return addAt(0, children);
+  }
+
+  @Override
+  public FluentFlexLayoutConfig addAt(int index, Component... children)
+  {
+    for (int i = 0; i < children.length; i++)
+      get().addComponentAtIndex(index + i, children[i]);
+    return new FluentFlexLayoutConfig(get(), children);
+  }
+
+  @Override
+  public FluentFlexLayoutConfig replace(Component oldChild, Component newChild)
+  {
+    get().replace(oldChild, newChild);
+    return new FluentFlexLayoutConfig(get(), newChild);
   }
 
 }

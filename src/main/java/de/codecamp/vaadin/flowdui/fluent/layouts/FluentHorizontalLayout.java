@@ -42,10 +42,4 @@ public class FluentHorizontalLayout
     return this;
   }
 
-  public FluentHorizontalLayout addAndExpand(Component... components)
-  {
-    get().addAndExpand(components);
-    return this;
-  }
-
 }

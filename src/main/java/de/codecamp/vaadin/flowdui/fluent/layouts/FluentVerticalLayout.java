@@ -44,10 +44,4 @@ public class FluentVerticalLayout
     return this;
   }
 
-  public FluentVerticalLayout addAndExpand(Component... components)
-  {
-    get().addAndExpand(components);
-    return this;
-  }
-
 }

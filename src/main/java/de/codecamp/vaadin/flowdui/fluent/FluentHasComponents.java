@@ -11,16 +11,28 @@ public interface FluentHasComponents<C extends HasComponents, F extends FluentHa
     FluentHasEnabled<C, F>
 {
 
-  default F add(Component... components)
+  default FluentLayoutConfig add(Component... components)
   {
     get().add(components);
-    return (F) this;
+    return null;
   }
 
-  default F add(String text)
+  default FluentLayoutConfig addAsFirst(Component... children)
+  {
+    return addAt(0, children);
+  }
+
+  default FluentLayoutConfig addAt(int index, Component... children)
+  {
+    for (int i = 0; i < children.length; i++)
+      get().addComponentAtIndex(index + i, children[i]);
+    return null;
+  }
+
+  default FluentLayoutConfig add(String text)
   {
     get().add(text);
-    return (F) this;
+    return null;
   }
 
   default F remove(Component... components)
@@ -32,18 +44,6 @@ public interface FluentHasComponents<C extends HasComponents, F extends FluentHa
   default F removeAll()
   {
     get().removeAll();
-    return (F) this;
-  }
-
-  default F addAt(int index, Component component)
-  {
-    get().addComponentAtIndex(index, component);
-    return (F) this;
-  }
-
-  default F addAsFirst(Component component)
-  {
-    get().addComponentAsFirst(component);
     return (F) this;
   }
 

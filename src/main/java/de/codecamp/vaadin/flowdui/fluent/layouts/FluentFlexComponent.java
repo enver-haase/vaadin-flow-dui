@@ -24,36 +24,44 @@ public interface FluentFlexComponent<C extends Component & FlexComponent, F exte
     return (F) this;
   }
 
-  default F alignSelf(Alignment alignment, Component... components)
-  {
-    get().setAlignSelf(alignment, components);
-    return (F) this;
-  }
-
-  default F flexGrow(double flexGrow, Component... components)
-  {
-    get().setFlexGrow(flexGrow, components);
-    return (F) this;
-  }
-
   default F justifyContent(JustifyContentMode justifyContent)
   {
     get().setJustifyContentMode(justifyContent);
     return (F) this;
   }
 
-  default F expand(Component... components)
+
+  default FluentFlexComponentLayoutConfig configLayoutFor(Component... children)
   {
-    get().expand(components);
-    return (F) this;
+    return new FluentFlexComponentLayoutConfig(get(), children);
   }
 
-  default F add(Component component, Alignment alignSelf, double flexGrow)
+  @Override
+  default FluentFlexComponentLayoutConfig add(Component... children)
   {
-    get().add(component);
-    get().setAlignSelf(alignSelf, component);
-    get().setFlexGrow(flexGrow, component);
-    return (F) this;
+    get().add(children);
+    return new FluentFlexComponentLayoutConfig(get(), children);
+  }
+
+  @Override
+  default FluentFlexComponentLayoutConfig addAsFirst(Component... children)
+  {
+    return addAt(0, children);
+  }
+
+  @Override
+  default FluentFlexComponentLayoutConfig addAt(int index, Component... children)
+  {
+    for (int i = 0; i < children.length; i++)
+      get().addComponentAtIndex(index + i, children[i]);
+    return new FluentFlexComponentLayoutConfig(get(), children);
+  }
+
+  @Override
+  default FluentFlexComponentLayoutConfig replace(Component oldChild, Component newChild)
+  {
+    get().replace(oldChild, newChild);
+    return new FluentFlexComponentLayoutConfig(get(), newChild);
   }
 
 }
