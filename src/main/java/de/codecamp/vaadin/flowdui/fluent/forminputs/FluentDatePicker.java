@@ -1,8 +1,10 @@
 package de.codecamp.vaadin.flowdui.fluent.forminputs;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.datepicker.DatePicker.DatePickerI18n;
 
 import de.codecamp.vaadin.flowdui.fluent.FluentAbstractField;
 import de.codecamp.vaadin.flowdui.fluent.FluentFocusable;
@@ -77,15 +79,27 @@ public class FluentDatePicker
     return this;
   }
 
+  public FluentDatePicker min(LocalDate min)
+  {
+    get().setMin(min);
+    return this;
+  }
+
   public FluentDatePicker max(LocalDate max)
   {
     get().setMax(max);
     return this;
   }
 
-  public FluentDatePicker min(LocalDate min)
+  public FluentDatePicker locale(Locale locale)
   {
-    get().setMin(min);
+    get().setLocale(locale);
+    return this;
+  }
+
+  public FluentDatePicker i18n(DatePickerI18n i18n)
+  {
+    get().setI18n(i18n);
     return this;
   }
 

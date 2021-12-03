@@ -2,6 +2,7 @@ package de.codecamp.vaadin.flowdui.fluent.forminputs;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.Locale;
 
 import com.vaadin.flow.component.timepicker.TimePicker;
 
@@ -60,15 +61,21 @@ public class FluentTimePicker
     return this;
   }
 
-  public FluentTimePicker maxTime(LocalTime max)
+  public FluentTimePicker min(LocalTime min)
   {
-    get().setMaxTime(max);
+    get().setMin(min);
     return this;
   }
 
-  public FluentTimePicker minTime(LocalTime min)
+  public FluentTimePicker max(LocalTime max)
   {
-    get().setMinTime(min);
+    get().setMax(max);
+    return this;
+  }
+
+  public FluentTimePicker locale(Locale locale)
+  {
+    get().setLocale(locale);
     return this;
   }
 

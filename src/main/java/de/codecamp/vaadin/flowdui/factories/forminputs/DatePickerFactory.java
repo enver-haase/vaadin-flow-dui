@@ -35,6 +35,7 @@ public class DatePickerFactory
         context.readLocalDateAttribute(element, "max", datePicker::setMax, consumedAttributes);
         context.readLocalDateAttribute(element, "initial-position", datePicker::setInitialPosition,
             consumedAttributes);
+        context.readLocaleAttribute(element, "locale", datePicker::setLocale, consumedAttributes);
         context.readChildren(datePicker, element, null, null);
         return datePicker;
     }

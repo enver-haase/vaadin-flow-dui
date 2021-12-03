@@ -267,8 +267,9 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | label |  |
 |  |  | placeholder |  |
 |  |  | show-week-numbers |  |
-|  |  | min |  |
-|  |  | max |  |
+|  |  | min | ISO-8601 formatted local date, e.g. 2007-12-03 |
+|  |  | max | ISO-8601 formatted local date, e.g. 2007-12-03 |
+|  |  | locale | IETF BCP 47 language tag, e.g. en-US |
 |  |  | step |  |
 |  |  | clear-button-visible |  |
 |  |  | initial-position |  |
@@ -277,8 +278,9 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 |  |  | date-placeholder |  |
 |  |  | time-placeholder |  |
 |  |  | show-week-numbers |  |
-|  |  | min |  |
-|  |  | max |  |
+|  |  | min | ISO-8601 formatted local date-time, e.g. 2007-12-03T10:15:30 |
+|  |  | max | ISO-8601 formatted local date-time, e.g. 2007-12-03T10:15:30 |
+|  |  | locale | IETF BCP 47 language tag, e.g. en-US |
 |  |  | step |  |
 |  |  | clear-button-visible |  |
 | vaadin-list-box | [ListBox / MultiSelectListBox](https://vaadin.com/docs/latest/ds/components/list-box) |  | No children; use Java API. |
@@ -359,8 +361,8 @@ Tags or attributes prefixed with "! " (**not part of their actual name!**) aren'
 | vaadin-time-picker | [TimePicker](https://vaadin.com/components/vaadin-text-field) |  |  |
 |  |  | label |  |
 |  |  | placeholder |  |
-|  |  | min |  |
-|  |  | max |  |
+|  |  | min | ISO-8601 formatted local time, e.g. 10:15 10:15:30 |
+|  |  | max | ISO-8601 formatted local time, e.g. 10:15 10:15:30 |
 |  |  | step |  |
 |  |  | clear-button-visible |  |
 | vaadin-upload | [Upload](https://vaadin.com/docs/latest/ds/components/upload) |  | Slots: add-button, drop-label, drop-label-icon |

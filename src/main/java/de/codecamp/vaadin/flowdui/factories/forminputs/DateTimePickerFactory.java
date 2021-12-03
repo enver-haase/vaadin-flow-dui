@@ -34,6 +34,7 @@ public class DateTimePickerFactory
             datePicker::setWeekNumbersVisible, consumedAttributes);
         context.readLocalDateTimeAttribute(element, "min", datePicker::setMin, consumedAttributes);
         context.readLocalDateTimeAttribute(element, "max", datePicker::setMax, consumedAttributes);
+        context.readLocaleAttribute(element, "locale", datePicker::setLocale, consumedAttributes);
         context.readDoubleAttribute(element, "step",
             v -> datePicker.setStep(Duration.ofMillis((long) (v * 1000))), consumedAttributes);
         context.readChildren(datePicker, element, null, null);

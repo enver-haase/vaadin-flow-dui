@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -359,6 +360,13 @@ public class TemplateParserContext
       Consumer<LocalDateTime> setter, Set<String> consumedAttributes)
   {
     return readAttribute(element, attrName, setter, v -> LocalDateTime.parse(v),
+        consumedAttributes);
+  }
+
+  public Locale readLocaleAttribute(Element element, String attrName, Consumer<Locale> setter,
+      Set<String> consumedAttributes)
+  {
+    return readAttribute(element, attrName, setter, v -> Locale.forLanguageTag(v),
         consumedAttributes);
   }
 
