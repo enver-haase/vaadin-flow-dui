@@ -1,8 +1,10 @@
 package de.codecamp.vaadin.flowdui.fluent.visandint;
 
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.Tabs.Orientation;
+import com.vaadin.flow.component.tabs.Tabs.SelectedChangeEvent;
 import com.vaadin.flow.component.tabs.TabsVariant;
 
 import de.codecamp.vaadin.flowdui.fluent.FluentComponent;
@@ -52,15 +54,21 @@ public class FluentTabs
     return this;
   }
 
-  public FluentTabs selectedIndex(int selectedIndex)
+  public FluentTabs selectIndex(int selectedIndex)
   {
     get().setSelectedIndex(selectedIndex);
     return this;
   }
 
-  public FluentTabs selectedTab(Tab selectedTab)
+  public FluentTabs selectTab(Tab selectedTab)
   {
     get().setSelectedTab(selectedTab);
+    return this;
+  }
+
+  public FluentTabs onSelectedChange(ComponentEventListener<SelectedChangeEvent> listener)
+  {
+    get().addSelectedChangeListener(listener);
     return this;
   }
 
