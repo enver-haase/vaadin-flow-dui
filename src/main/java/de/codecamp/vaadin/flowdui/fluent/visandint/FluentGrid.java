@@ -1,8 +1,20 @@
 package de.codecamp.vaadin.flowdui.fluent.visandint;
 
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.grid.CellFocusEvent;
+import com.vaadin.flow.component.grid.ColumnReorderEvent;
+import com.vaadin.flow.component.grid.ColumnResizeEvent;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridSortOrder;
 import com.vaadin.flow.component.grid.GridVariant;
+import com.vaadin.flow.component.grid.ItemClickEvent;
+import com.vaadin.flow.component.grid.ItemDoubleClickEvent;
+import com.vaadin.flow.component.grid.dnd.GridDragEndEvent;
+import com.vaadin.flow.component.grid.dnd.GridDragStartEvent;
+import com.vaadin.flow.component.grid.dnd.GridDropEvent;
 import com.vaadin.flow.component.grid.dnd.GridDropMode;
+import com.vaadin.flow.data.event.SortEvent;
+import com.vaadin.flow.data.selection.SelectionListener;
 
 import de.codecamp.vaadin.flowdui.fluent.FluentComponent;
 import de.codecamp.vaadin.flowdui.fluent.FluentFocusable;
@@ -78,6 +90,68 @@ public class FluentGrid<ITEM>
   public FluentGrid<ITEM> rowsDraggable(boolean rowsDraggable)
   {
     get().setRowsDraggable(rowsDraggable);
+    return this;
+  }
+
+  public FluentGrid<ITEM> onCellFocus(ComponentEventListener<CellFocusEvent<ITEM>> listener)
+  {
+    get().addCellFocusListener(listener);
+    return this;
+  }
+
+  public FluentGrid<ITEM> onColumnReorder(ComponentEventListener<ColumnReorderEvent<ITEM>> listener)
+  {
+    get().addColumnReorderListener(listener);
+    return this;
+  }
+
+  public FluentGrid<ITEM> onColumnResize(ComponentEventListener<ColumnResizeEvent<ITEM>> listener)
+  {
+    get().addColumnResizeListener(listener);
+    return this;
+  }
+
+  public FluentGrid<ITEM> onDragStart(ComponentEventListener<GridDragStartEvent<ITEM>> listener)
+  {
+    get().addDragStartListener(listener);
+    return this;
+  }
+
+  public FluentGrid<ITEM> onDragEnd(ComponentEventListener<GridDragEndEvent<ITEM>> listener)
+  {
+    get().addDragEndListener(listener);
+    return this;
+  }
+
+  public FluentGrid<ITEM> onDrop(ComponentEventListener<GridDropEvent<ITEM>> listener)
+  {
+    get().addDropListener(listener);
+    return this;
+  }
+
+  public FluentGrid<ITEM> onItemClick(ComponentEventListener<ItemClickEvent<ITEM>> listener)
+  {
+    get().addItemClickListener(listener);
+    return this;
+  }
+
+  public FluentGrid<ITEM> onDoubleItemClick(
+      ComponentEventListener<ItemDoubleClickEvent<ITEM>> listener)
+  {
+    get().addItemDoubleClickListener(listener);
+    return this;
+  }
+
+  public FluentGrid<ITEM> onSelection(SelectionListener<Grid<ITEM>, ITEM> listener)
+  {
+    get().addSelectionListener(listener);
+    return this;
+  }
+
+  public FluentGrid<ITEM> onSort(
+      ComponentEventListener<SortEvent<Grid<ITEM>, GridSortOrder<ITEM>>> listener)
+  {
+    get().addSortListener(listener);
     return this;
   }
 
