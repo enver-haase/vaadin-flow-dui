@@ -18,7 +18,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <vaadin.version>22.0.0</vaadin.version>
-    <spring-boot.version>2.4.10</spring-boot.version>
+    <spring-boot.version>2.4.13</spring-boot.version>
 
     <m2e.apt.activation>jdt_apt</m2e.apt.activation>
   </properties>
