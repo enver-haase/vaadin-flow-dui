@@ -118,13 +118,20 @@ public class MessageDialog
       Div iconFrame = new Div(icon);
       iconFrame.getElement().getStyle() //
           .set(CssProperties.margin, LumoSpace.L.var()) //
-          .set(CssProperties.marginRight, "0") //
           .set(CssProperties.padding, LumoSpace.M.var());
+
+      getContent().getElement().getStyle() //
+          .set(CssProperties.paddingLeft, "0");
 
       iconFrame.getStyle() //
           .set(CssProperties.borderRadius, "50%");
       getSidebar().add(iconFrame);
       updateColors();
+    }
+    else
+    {
+      getContent().getElement().getStyle() //
+          .remove(CssProperties.paddingLeft);
     }
   }
 
