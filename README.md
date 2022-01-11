@@ -3,6 +3,12 @@
 
 This is basically Vaadin-8-style Declarative UI for Vaadin Flow. The goal is to externalize the layout of views (or parts of views) in an application and have it as much more readable HTML/XML instead of cluttering up the Java code. For some added convenience there's also an experimental fluent-style API for most Vaadin components.  
 
+## Source code JAR
+
+```
+mvn source:jar install
+```
+
 ## DUI vs Lit
 
 There is some overlap with [Lit-based templates](https://vaadin.com/docs/latest/flow/templates/overview), but the goals and approach are different.
